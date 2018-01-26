@@ -1,0 +1,37 @@
+[
+  {
+    "Name": "Crafting",
+    "Decription": "Add Crafting Slot",
+    "ResearchEffect": "AddCraftingSlot",
+    "Value": 1000000,
+    "Coefficent": 10
+  },
+  {
+    "Name": "Research 2",
+    "Decription": "Decription",
+    "ResearchEffect": "ReduceGlobalCraftTime",
+    "Value": 5,
+    "Coefficent": 3
+  },
+  {
+    "Name": "Research 3",
+    "Decription": "Decription",
+    "ResearchEffect": "DrillMultiplyer",
+    "Value": 10,
+    "Coefficent": 2
+  },
+  {
+    "Name": "Research 4",
+    "Decription": "Decription",
+    "ResearchEffect": "ScavangerMultiplyer",
+    "Value": 10,
+    "Coefficent": 2
+  },
+  {
+    "Name": "Next Age",
+    "Decription": "Progress to the next map",
+    "ResearchEffect": "UnlockNextMap",
+    "Value": 1000000,
+    "Coefficent": 1
+  }
+]

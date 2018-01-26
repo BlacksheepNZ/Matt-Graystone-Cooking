@@ -1,0 +1,102 @@
+[
+  {
+    "Name": "Scavanger 1",
+    "BaseCost": "3.738",
+    "SpriteName": "Ruby Gem_1",
+    "Coefficent": "1.07",
+    "Count": 1,
+    "ResourceType": "Empty",
+    "CurrencyReward": "1",
+    "TimeToCompleteTask": "0.6"
+  },
+  {
+    "Name": "Scavanger 2",
+    "BaseCost": "60",
+    "SpriteName": "Ruby Gem_1",
+    "Coefficent": "1.15",
+    "Count": 1,
+    "ResourceType": "Empty",
+    "CurrencyReward": "60",
+    "TimeToCompleteTask": "3"
+  },
+  {
+    "Name": "Scavanger 3",
+    "BaseCost": "720",
+    "SpriteName": "Ruby Gem_1",
+    "Coefficent": "1.14",
+    "Count": 1,
+    "ResourceType": "Empty",
+    "CurrencyReward": "540",
+    "TimeToCompleteTask": "6"
+  },
+  {
+    "Name": "Scavanger 4",
+    "BaseCost": "8640",
+    "SpriteName": "Ruby Gem_1",
+    "Coefficent": "1.13",
+    "Count": 1,
+    "ResourceType": "Empty",
+    "CurrencyReward": "4320",
+    "TimeToCompleteTask": "12"
+  },
+  {
+    "Name": "Scavanger 5",
+    "BaseCost": "103680",
+    "SpriteName": "Ruby Gem_1",
+    "Coefficent": "1.12",
+    "Count": 1,
+    "ResourceType": "Empty",
+    "CurrencyReward": "51840",
+    "TimeToCompleteTask": "24"
+  },
+  {
+    "Name": "Scavanger 6",
+    "BaseCost": "1244160",
+    "SpriteName": "Ruby Gem_1",
+    "Coefficent": "1.11",
+    "Count": 1,
+    "ResourceType": "Empty",
+    "CurrencyReward": "622080",
+    "TimeToCompleteTask": "96"
+  },
+  {
+    "Name": "Scavanger 7",
+    "BaseCost": "14929920",
+    "SpriteName": "Ruby Gem_1",
+    "Coefficent": "1.10",
+    "Count": 1,
+    "ResourceType": "Empty",
+    "CurrencyReward": "7464960",
+    "TimeToCompleteTask": "384"
+  },
+  {
+    "Name": "Scavanger 8",
+    "BaseCost": "179159040",
+    "SpriteName": "Ruby Gem_1",
+    "Coefficent": "1.09",
+    "Count": 1,
+    "ResourceType": "Empty",
+    "CurrencyReward": "89579520",
+    "TimeToCompleteTask": "1536"
+  },
+  {
+    "Name": "Scavanger 9",
+    "BaseCost": "2149908480",
+    "SpriteName": "Ruby Gem_1",
+    "Coefficent": "1.08",
+    "Count": 1,
+    "ResourceType": "Empty",
+    "CurrencyReward": "1074954240",
+    "TimeToCompleteTask": "6144"
+  },
+  {
+    "Name": "Scavanger 10",
+    "BaseCost": "25798901760",
+    "SpriteName": "Ruby Gem_1",
+    "Coefficent": "1.07",
+    "Count": 1,
+    "ResourceType": "Empty",
+    "CurrencyReward": "296687370240",
+    "TimeToCompleteTask": "36864"
+  }
+]

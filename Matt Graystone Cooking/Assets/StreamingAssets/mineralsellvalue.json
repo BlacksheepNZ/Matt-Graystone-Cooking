@@ -1,0 +1,42 @@
+[
+  {
+    "ResourceType": "Food_1_Pastry",
+    "Value": 2
+  },
+  {
+    "ResourceType": "Food_2_Pastry",
+    "Value": 3
+  },
+  {
+    "ResourceType": "Food_3_Pastry",
+    "Value": 4
+  },
+  {
+    "ResourceType": "Food_4_Pastry",
+    "Value": 16
+  },
+  {
+    "ResourceType": "Food_5_Pastry",
+    "Value": 32
+  },
+  {
+    "ResourceType": "Food_6_Pastry",
+    "Value": 64
+  },
+  {
+    "ResourceType": "Food_7_Pastry",
+    "Value": 128
+  },
+  {
+    "ResourceType": "Food_8_Pastry",
+    "Value": 256
+  },
+  {
+    "ResourceType": "Food_9_Pastry",
+    "Value": 512
+  },
+    {
+    "ResourceType": "Food_10_Pastry",
+    "Value": 1024
+  }
+]

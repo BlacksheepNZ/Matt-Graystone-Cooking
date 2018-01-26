@@ -1,0 +1,28 @@
+[
+  {
+    "Name": "Onion Soup",
+    "Key": "001000000000000000000000000",
+    "Recipe": [
+      {
+        "ItemID": 1,
+        "Count": 1
+      }
+    ],
+    "SellValue": 1
+  },
+  {
+    "Name": "Bread & Soup",
+    "Key": "100200000000000000000000000",
+    "Recipe": [
+      {
+        "ItemID": 100,
+        "Count": 1
+      },
+      {
+        "ItemID": 200,
+        "Count": 1
+      }
+    ],
+    "SellValue": 1
+  }
+]

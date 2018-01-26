@@ -1,0 +1,8 @@
+[
+  {
+    "ResourceType": "Food_1_Pastry",
+    "InitialCost": 500,
+    "Coefficient": 1.25,
+    "InitialTime": 1
+  }
+]

@@ -1,0 +1,27 @@
+[
+  {
+    "ResourceType": "Food_1_Pastry",
+    "ItemRarity": "Common",
+    "Value": 300
+  },
+  {
+    "ResourceType": "Food_1_Pastry",
+    "ItemRarity": "Uncommon",
+    "Value": 600
+  },
+  {
+    "ResourceType": "Food_1_Pastry",
+    "ItemRarity": "Rare",
+    "Value": 900
+  },
+  {
+    "ResourceType": "Food_1_Pastry",
+    "ItemRarity": "Epic",
+    "Value": 1200
+  },
+  {
+    "ResourceType": "Food_1_Pastry",
+    "ItemRarity": "Legendary",
+    "Value": 1500
+  }
+]

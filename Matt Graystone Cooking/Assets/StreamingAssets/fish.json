@@ -1,0 +1,102 @@
+[
+  {
+    "Name": "Food 1",
+    "BaseCost": "3.738",
+    "SpriteName": "Ruby Gem_1",
+    "Coefficent": "1.07",
+    "Count": 1,
+    "ResourceRate": "1",
+    "ResourceType": "Food_1_Fish",
+    "TimeToCompleteTask": "0.6"
+  },
+  {
+    "Name": "Food 2",
+    "BaseCost": "60",
+    "SpriteName": "Ruby Gem_1",
+    "Coefficent": "1.15",
+    "Count": 1,
+    "ResourceRate": "60",
+    "ResourceType": "Food_2_Fish",
+    "TimeToCompleteTask": "3"
+  },
+  {
+    "Name": "Food 3",
+    "BaseCost": "720",
+    "SpriteName": "Ruby Gem_1",
+    "Coefficent": "1.14",
+    "Count": 1,
+    "ResourceRate": "540",
+    "ResourceType": "Food_3_Fish",
+    "TimeToCompleteTask": "6"
+  },
+  {
+    "Name": "Food 4",
+    "BaseCost": "8640",
+    "SpriteName": "Ruby Gem_1",
+    "Coefficent": "1.13",
+    "Count": 1,
+    "ResourceRate": "4320",
+    "ResourceType": "Food_4_Fish",
+    "TimeToCompleteTask": "12"
+  },
+  {
+    "Name": "Food 5",
+    "BaseCost": "103680",
+    "SpriteName": "Ruby Gem_1",
+    "Coefficent": "1.12",
+    "Count": 1,
+    "ResourceRate": "51840",
+    "ResourceType": "Food_5_Fish",
+    "TimeToCompleteTask": "24"
+  },
+  {
+    "Name": "Food 6",
+    "BaseCost": "1244160",
+    "SpriteName": "Ruby Gem_1",
+    "Coefficent": "1.11",
+    "Count": 1,
+    "ResourceRate": "622080",
+    "ResourceType": "Food_6_Fish",
+    "TimeToCompleteTask": "96"
+  },
+  {
+    "Name": "Food 7",
+    "BaseCost": "14929920",
+    "SpriteName": "Ruby Gem_1",
+    "Coefficent": "1.10",
+    "Count": 1,
+    "ResourceRate": "7464960",
+    "ResourceType": "Food_7_Fish",
+    "TimeToCompleteTask": "384"
+  },
+  {
+    "Name": "Food 8",
+    "BaseCost": "179159040",
+    "SpriteName": "Ruby Gem_1",
+    "Coefficent": "1.09",
+    "Count": 1,
+    "ResourceRate": "89579520",
+    "ResourceType": "Food_8_Fish",
+    "TimeToCompleteTask": "1536"
+  },
+  {
+    "Name": "Food 9",
+    "BaseCost": "2149908480",
+    "SpriteName": "Ruby Gem_1",
+    "Coefficent": "1.08",
+    "Count": 1,
+    "ResourceRate": "1074954240",
+    "ResourceType": "Food_9_Fish",
+    "TimeToCompleteTask": "6144"
+  },
+  {
+    "Name": "Food 10",
+    "BaseCost": "25798901760",
+    "SpriteName": "Ruby Gem_1",
+    "Coefficent": "1.07",
+    "Count": 1,
+    "ResourceRate": "29668737024",
+    "ResourceType": "Food_10_Fish",
+    "TimeToCompleteTask": "36864"
+  }
+]

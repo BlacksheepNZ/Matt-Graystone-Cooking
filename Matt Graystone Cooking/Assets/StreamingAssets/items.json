@@ -1,0 +1,542 @@
+[
+  {
+    "Name": "Food_1_Pastry",
+    "ID": "001",
+    "Image": "ICON  item img",
+    "Stackable": true,
+    "ItemRarity": "Common",
+    "ItemType": "Consumable",
+    "ResourceType": "Food_1_Pastry"
+  },
+  {
+    "Name": "Food_2_Pastry",
+    "ID": "002",
+    "Image": "ICON  item img",
+    "Stackable": true,
+    "ItemRarity": "Common",
+    "ItemType": "Consumable",
+    "ResourceType": "Food_2_Pastry"
+  },
+  {
+    "Name": "Food_3_Pastry",
+    "ID": "003",
+    "Image": "ICON  item img",
+    "Stackable": true,
+    "ItemRarity": "Common",
+    "ItemType": "Consumable",
+    "ResourceType": "Food_3_Pastry"
+  },
+  {
+    "Name": "Food_4_Pastry",
+    "ID": "004",
+    "Image": "ICON  item img",
+    "Stackable": true,
+    "ItemRarity": "Common",
+    "ItemType": "Consumable",
+    "ResourceType": "Food_4_Pastry"
+  },
+  {
+    "Name": "Food_5_Pastry",
+    "ID": "005",
+    "Image": "ICON  item img",
+    "Stackable": true,
+    "ItemRarity": "Common",
+    "ItemType": "Consumable",
+    "ResourceType": "Food_5_Pastry"
+  },
+  {
+    "Name": "Food_6_Pastry",
+    "ID": "006",
+    "Image": "ICON  item img",
+    "Stackable": true,
+    "ItemRarity": "Common",
+    "ItemType": "Consumable",
+    "ResourceType": "Food_6_Pastry"
+  },
+  {
+    "Name": "Food_7_Pastry",
+    "ID": "007",
+    "Image": "ICON  item img",
+    "Stackable": true,
+    "ItemRarity": "Common",
+    "ItemType": "Consumable",
+    "ResourceType": "Food_7_Pastry"
+  },
+  {
+    "Name": "Food_8_Pastry",
+    "ID": "008",
+    "Image": "ICON  item img",
+    "Stackable": true,
+    "ItemRarity": "Common",
+    "ItemType": "Consumable",
+    "ResourceType": "Food_8_Pastry"
+  },
+  {
+    "Name": "Food_9_Pastry",
+    "ID": "009",
+    "Image": "ICON  item img",
+    "Stackable": true,
+    "ItemRarity": "Common",
+    "ItemType": "Consumable",
+    "ResourceType": "Food_9_Pastry"
+  },
+  {
+    "Name": "Food_10_Pastry",
+    "ID": "010",
+    "Image": "ICON  item img",
+    "Stackable": true,
+    "ItemRarity": "Common",
+    "ItemType": "Consumable",
+    "ResourceType": "Food_10_Pastry"
+  },
+    {
+    "Name": "Bread",
+    "ID": "100",
+    "Image": "ICON  item img",
+    "Stackable": true,
+    "ItemRarity": "Common",
+    "ItemType": "Consumable",
+    "ResourceType": "Food_1_Larder"
+  },
+  {
+    "Name": "Food_2_Larder",
+    "ID": "101",
+    "Image": "ICON  item img",
+    "Stackable": true,
+    "ItemRarity": "Common",
+    "ItemType": "Consumable",
+    "ResourceType": "Food_2_Larder"
+  },
+  {
+    "Name": "Food_3_Larder",
+    "ID": "102",
+    "Image": "ICON  item img",
+    "Stackable": true,
+    "ItemRarity": "Common",
+    "ItemType": "Consumable",
+    "ResourceType": "Food_3_Larder"
+  },
+  {
+    "Name": "Food_4_Larder",
+    "ID": "103",
+    "Image": "ICON  item img",
+    "Stackable": true,
+    "ItemRarity": "Common",
+    "ItemType": "Consumable",
+    "ResourceType": "Food_4_Larder"
+  },
+  {
+    "Name": "Food_5_Larder",
+    "ID": "104",
+    "Image": "ICON  item img",
+    "Stackable": true,
+    "ItemRarity": "Common",
+    "ItemType": "Consumable",
+    "ResourceType": "Food_5_Larder"
+  },
+  {
+    "Name": "Food_6_Larder",
+    "ID": "105",
+    "Image": "ICON  item img",
+    "Stackable": true,
+    "ItemRarity": "Common",
+    "ItemType": "Consumable",
+    "ResourceType": "Food_6_Larder"
+  },
+  {
+    "Name": "Food_7_Larder",
+    "ID": "106",
+    "Image": "ICON  item img",
+    "Stackable": true,
+    "ItemRarity": "Common",
+    "ItemType": "Consumable",
+    "ResourceType": "Food_7_Larder"
+  },
+  {
+    "Name": "Food_8_Larder",
+    "ID": "107",
+    "Image": "ICON  item img",
+    "Stackable": true,
+    "ItemRarity": "Common",
+    "ItemType": "Consumable",
+    "ResourceType": "Food_8_Larder"
+  },
+  {
+    "Name": "Food_9_Larder",
+    "ID": "108",
+    "Image": "ICON  item img",
+    "Stackable": true,
+    "ItemRarity": "Common",
+    "ItemType": "Consumable",
+    "ResourceType": "Food_9_Larder"
+  },
+  {
+    "Name": "Food_10_Larder",
+    "ID": "109",
+    "Image": "ICON  item img",
+    "Stackable": true,
+    "ItemRarity": "Common",
+    "ItemType": "Consumable",
+    "ResourceType": "Food_10_Larder"
+  },
+      {
+    "Name": "Vegetable Stock",
+    "ID": "200",
+    "Image": "ICON  item img",
+    "Stackable": true,
+    "ItemRarity": "Common",
+    "ItemType": "Consumable",
+    "ResourceType": "Food_1_Sauce"
+  },
+  {
+    "Name": "Food_2_Sauce",
+    "ID": "201",
+    "Image": "ICON  item img",
+    "Stackable": true,
+    "ItemRarity": "Common",
+    "ItemType": "Consumable",
+    "ResourceType": "Food_2_Sauce"
+  },
+  {
+    "Name": "Food_3_Sauce",
+    "ID": "202",
+    "Image": "ICON  item img",
+    "Stackable": true,
+    "ItemRarity": "Common",
+    "ItemType": "Consumable",
+    "ResourceType": "Food_3_Sauce"
+  },
+  {
+    "Name": "Food_4_Sauce",
+    "ID": "203",
+    "Image": "ICON  item img",
+    "Stackable": true,
+    "ItemRarity": "Common",
+    "ItemType": "Consumable",
+    "ResourceType": "Food_4_Sauce"
+  },
+  {
+    "Name": "Food_5_Sauce",
+    "ID": "204",
+    "Image": "ICON  item img",
+    "Stackable": true,
+    "ItemRarity": "Common",
+    "ItemType": "Consumable",
+    "ResourceType": "Food_5_Sauce"
+  },
+  {
+    "Name": "Food_6_Sauce",
+    "ID": "205",
+    "Image": "ICON  item img",
+    "Stackable": true,
+    "ItemRarity": "Common",
+    "ItemType": "Consumable",
+    "ResourceType": "Food_6_Sauce"
+  },
+  {
+    "Name": "Food_7_Sauce",
+    "ID": "206",
+    "Image": "ICON  item img",
+    "Stackable": true,
+    "ItemRarity": "Common",
+    "ItemType": "Consumable",
+    "ResourceType": "Food_7_Sauce"
+  },
+  {
+    "Name": "Food_8_Sauce",
+    "ID": "207",
+    "Image": "ICON  item img",
+    "Stackable": true,
+    "ItemRarity": "Common",
+    "ItemType": "Consumable",
+    "ResourceType": "Food_8_Sauce"
+  },
+  {
+    "Name": "Food_9_Sauce",
+    "ID": "208",
+    "Image": "ICON  item img",
+    "Stackable": true,
+    "ItemRarity": "Common",
+    "ItemType": "Consumable",
+    "ResourceType": "Food_9_Sauce"
+  },
+  {
+    "Name": "Food_10_Sauce",
+    "ID": "209",
+    "Image": "ICON  item img",
+    "Stackable": true,
+    "ItemRarity": "Common",
+    "ItemType": "Consumable",
+    "ResourceType": "Food_10_Sauce"
+  },
+      {
+    "Name": "Food_1_Fish",
+    "ID": "300",
+    "Image": "ICON  item img",
+    "Stackable": true,
+    "ItemRarity": "Common",
+    "ItemType": "Consumable",
+    "ResourceType": "Food_1_Fish"
+  },
+  {
+    "Name": "Food_2_Fish",
+    "ID": "301",
+    "Image": "ICON  item img",
+    "Stackable": true,
+    "ItemRarity": "Common",
+    "ItemType": "Consumable",
+    "ResourceType": "Food_2_Fish"
+  },
+  {
+    "Name": "Food_3_Fish",
+    "ID": "302",
+    "Image": "ICON  item img",
+    "Stackable": true,
+    "ItemRarity": "Common",
+    "ItemType": "Consumable",
+    "ResourceType": "Food_3_Fish"
+  },
+  {
+    "Name": "Food_4_Fish",
+    "ID": "303",
+    "Image": "ICON  item img",
+    "Stackable": true,
+    "ItemRarity": "Common",
+    "ItemType": "Consumable",
+    "ResourceType": "Food_4_Fish"
+  },
+  {
+    "Name": "Food_5_Fish",
+    "ID": "304",
+    "Image": "ICON  item img",
+    "Stackable": true,
+    "ItemRarity": "Common",
+    "ItemType": "Consumable",
+    "ResourceType": "Food_5_Fish"
+  },
+  {
+    "Name": "Food_6_Fish",
+    "ID": "305",
+    "Image": "ICON  item img",
+    "Stackable": true,
+    "ItemRarity": "Common",
+    "ItemType": "Consumable",
+    "ResourceType": "Food_6_Fish"
+  },
+  {
+    "Name": "Food_7_Fish",
+    "ID": "306",
+    "Image": "ICON  item img",
+    "Stackable": true,
+    "ItemRarity": "Common",
+    "ItemType": "Consumable",
+    "ResourceType": "Food_7_Fish"
+  },
+  {
+    "Name": "Food_8_Fish",
+    "ID": "307",
+    "Image": "ICON  item img",
+    "Stackable": true,
+    "ItemRarity": "Common",
+    "ItemType": "Consumable",
+    "ResourceType": "Food_8_Fish"
+  },
+  {
+    "Name": "Food_9_Fish",
+    "ID": "308",
+    "Image": "ICON  item img",
+    "Stackable": true,
+    "ItemRarity": "Common",
+    "ItemType": "Consumable",
+    "ResourceType": "Food_9_Fish"
+  },
+  {
+    "Name": "Food_10_Fish",
+    "ID": "309",
+    "Image": "ICON  item img",
+    "Stackable": true,
+    "ItemRarity": "Common",
+    "ItemType": "Consumable",
+    "ResourceType": "Food_10_Fish"
+  },
+      {
+    "Name": "Food_1_Vegetable",
+    "ID": "400",
+    "Image": "ICON  item img",
+    "Stackable": true,
+    "ItemRarity": "Common",
+    "ItemType": "Consumable",
+    "ResourceType": "Food_1_Vegetable"
+  },
+  {
+    "Name": "Food_2_Vegetable",
+    "ID": "401",
+    "Image": "ICON  item img",
+    "Stackable": true,
+    "ItemRarity": "Common",
+    "ItemType": "Consumable",
+    "ResourceType": "Food_2_Vegetable"
+  },
+  {
+    "Name": "Food_3_Vegetable",
+    "ID": "402",
+    "Image": "ICON  item img",
+    "Stackable": true,
+    "ItemRarity": "Common",
+    "ItemType": "Consumable",
+    "ResourceType": "Food_3_Vegetable"
+  },
+  {
+    "Name": "Food_4_Vegetable",
+    "ID": "403",
+    "Image": "ICON  item img",
+    "Stackable": true,
+    "ItemRarity": "Common",
+    "ItemType": "Consumable",
+    "ResourceType": "Food_4_Vegetable"
+  },
+  {
+    "Name": "Food_5_Vegetable",
+    "ID": "404",
+    "Image": "ICON  item img",
+    "Stackable": true,
+    "ItemRarity": "Common",
+    "ItemType": "Consumable",
+    "ResourceType": "Food_5_Vegetable"
+  },
+  {
+    "Name": "Food_6_Vegetable",
+    "ID": "405",
+    "Image": "ICON  item img",
+    "Stackable": true,
+    "ItemRarity": "Common",
+    "ItemType": "Consumable",
+    "ResourceType": "Food_6_Vegetable"
+  },
+  {
+    "Name": "Food_7_Vegetable",
+    "ID": "406",
+    "Image": "ICON  item img",
+    "Stackable": true,
+    "ItemRarity": "Common",
+    "ItemType": "Consumable",
+    "ResourceType": "Food_7_Vegetable"
+  },
+  {
+    "Name": "Food_8_Vegetable",
+    "ID": "407",
+    "Image": "ICON  item img",
+    "Stackable": true,
+    "ItemRarity": "Common",
+    "ItemType": "Consumable",
+    "ResourceType": "Food_8_Vegetable"
+  },
+  {
+    "Name": "Food_9_Vegetable",
+    "ID": "408",
+    "Image": "ICON  item img",
+    "Stackable": true,
+    "ItemRarity": "Common",
+    "ItemType": "Consumable",
+    "ResourceType": "Food_9_Vegetable"
+  },
+  {
+    "Name": "Food_10_Vegetable",
+    "ID": "409",
+    "Image": "ICON  item img",
+    "Stackable": true,
+    "ItemRarity": "Common",
+    "ItemType": "Consumable",
+    "ResourceType": "Food_10_Vegetable"
+  },
+      {
+    "Name": "Food_1_Meat",
+    "ID": "500",
+    "Image": "ICON  item img",
+    "Stackable": true,
+    "ItemRarity": "Common",
+    "ItemType": "Consumable",
+    "ResourceType": "Food_1_Meat"
+  },
+  {
+    "Name": "Food_2_Meat",
+    "ID": "501",
+    "Image": "ICON  item img",
+    "Stackable": true,
+    "ItemRarity": "Common",
+    "ItemType": "Consumable",
+    "ResourceType": "Food_2_Meat"
+  },
+  {
+    "Name": "Food_3_Meat",
+    "ID": "502",
+    "Image": "ICON  item img",
+    "Stackable": true,
+    "ItemRarity": "Common",
+    "ItemType": "Consumable",
+    "ResourceType": "Food_3_Meat"
+  },
+  {
+    "Name": "Food_4_Meat",
+    "ID": "503",
+    "Image": "ICON  item img",
+    "Stackable": true,
+    "ItemRarity": "Common",
+    "ItemType": "Consumable",
+    "ResourceType": "Food_4_Meat"
+  },
+  {
+    "Name": "Food_5_Meat",
+    "ID": "504",
+    "Image": "ICON  item img",
+    "Stackable": true,
+    "ItemRarity": "Common",
+    "ItemType": "Consumable",
+    "ResourceType": "Food_5_Meat"
+  },
+  {
+    "Name": "Food_6_Meat",
+    "ID": "505",
+    "Image": "ICON  item img",
+    "Stackable": true,
+    "ItemRarity": "Common",
+    "ItemType": "Consumable",
+    "ResourceType": "Food_6_Meat"
+  },
+  {
+    "Name": "Food_7_Meat",
+    "ID": "506",
+    "Image": "ICON  item img",
+    "Stackable": true,
+    "ItemRarity": "Common",
+    "ItemType": "Consumable",
+    "ResourceType": "Food_7_Meat"
+  },
+  {
+    "Name": "Food_8_Meat",
+    "ID": "507",
+    "Image": "ICON  item img",
+    "Stackable": true,
+    "ItemRarity": "Common",
+    "ItemType": "Consumable",
+    "ResourceType": "Food_8_Meat"
+  },
+  {
+    "Name": "Food_9_Meat",
+    "ID": "508",
+    "Image": "ICON  item img",
+    "Stackable": true,
+    "ItemRarity": "Common",
+    "ItemType": "Consumable",
+    "ResourceType": "Food_9_Meat"
+  },
+  {
+    "Name": "Food_10_Meat",
+    "ID": "509",
+    "Image": "ICON  item img",
+    "Stackable": true,
+    "ItemRarity": "Common",
+    "ItemType": "Consumable",
+    "ResourceType": "Food_10_Meat"
+  }
+]
