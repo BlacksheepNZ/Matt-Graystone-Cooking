@@ -1399,9 +1399,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f125337238aff149854422a63613288, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Text_Name: {fileID: 0}
-  Text_Cost: {fileID: 0}
-  Text_Level: {fileID: 0}
+  Text_Name: {fileID: 818657332}
+  Text_Cost: {fileID: 548925868}
+  Text_Level: {fileID: 32037546}
   CurrentLevel: 0
 --- !u!1 &109932618
 GameObject:
@@ -3316,9 +3316,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f125337238aff149854422a63613288, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Text_Name: {fileID: 0}
-  Text_Cost: {fileID: 0}
-  Text_Level: {fileID: 0}
+  Text_Name: {fileID: 563883259}
+  Text_Cost: {fileID: 841163358}
+  Text_Level: {fileID: 550799265}
   CurrentLevel: 0
 --- !u!1 &242489595
 GameObject:
@@ -5754,14 +5754,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04d08a96becff7547a80aa443184f3a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Inventory_Panel: {fileID: 0}
-  SlotPanel: {fileID: 0}
-  ItemHolder: {fileID: 0}
-  TotalGold: {fileID: 0}
-  SlotCount: 0
-  InventorySlot: {fileID: 0}
+  Inventory_Panel: {fileID: 1734433689}
+  SlotPanel: {fileID: 924825757}
+  ItemHolder: {fileID: 469667838}
+  TotalGold: {fileID: 699018182}
+  SlotCount: 10
+  InventorySlot: {fileID: 134276, guid: ed299d2cb56cb494c92e161ced960e34, type: 2}
   slots: []
-  InventoryItem: {fileID: 0}
+  InventoryItem: {fileID: 122376, guid: 64de66f2ca272264c8c0fbe0a2f431bf, type: 2}
   Items: []
   SlotsToCheck: 
   boolToogleButton: 0
@@ -5787,8 +5787,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04b76987a69b9374b91b54e2ef4d3d73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Name: {fileID: 0}
-  Decription: {fileID: 0}
+  Name: {fileID: 2028625793}
+  Decription: {fileID: 124153409}
 --- !u!1 &469667838
 GameObject:
   m_ObjectHideFlags: 0
@@ -8243,9 +8243,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f125337238aff149854422a63613288, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Text_Name: {fileID: 0}
-  Text_Cost: {fileID: 0}
-  Text_Level: {fileID: 0}
+  Text_Name: {fileID: 1192077489}
+  Text_Cost: {fileID: 55167488}
+  Text_Level: {fileID: 1872256859}
   CurrentLevel: 0
 --- !u!1 &665115396
 GameObject:
@@ -9354,42 +9354,43 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c5b56ab362fc304bb5701fa4b05d650, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ItemImages: []
+  ItemImages:
+  - {fileID: 21300000, guid: 7c04382e0fc8b2045bccba37221d7fe2, type: 3}
   BorderImages: []
   RarityImages: []
-  itemSellLocation: 
-  mineralSellLocation: 
-  recipeCostLocation: 
-  itemLocation: 
+  itemSellLocation: itemsellvalue
+  mineralSellLocation: mineralsellvalue
+  recipeCostLocation: recipecost
+  itemLocation: items
   Item_Database: []
-  Recipe_Prefab: {fileID: 0}
-  Purchasable_Prefab: {fileID: 0}
-  Recipe_Location: 
-  Recipe_Parent: {fileID: 0}
+  Recipe_Prefab: {fileID: 164352, guid: 4bddab3b49b0cfd4993346f49d4e1440, type: 2}
+  Purchasable_Prefab: {fileID: 122816, guid: e45d3af0010c44c4ea704aa6de3a0848, type: 2}
+  Recipe_Location: recipe
+  Recipe_Parent: {fileID: 981462730}
   Recipe_Data: []
   Recipe_Item: []
-  Pastry_Location: 
-  Pastry_Parent: {fileID: 0}
+  Pastry_Location: pastry
+  Pastry_Parent: {fileID: 1694879424}
   Pastry_Purchasable: []
   Pastry_Item: []
-  Larder_Location: 
-  Larder_Parent: {fileID: 0}
+  Larder_Location: larder
+  Larder_Parent: {fileID: 1085374955}
   Larder_Purchasable: []
   Larder_Item: []
-  Sauce_Location: 
-  Sauce_Parent: {fileID: 0}
+  Sauce_Location: sauce
+  Sauce_Parent: {fileID: 1547534345}
   Sauce_Purchasable: []
   Sauce_Item: []
-  Fish_Location: 
-  Fish_Parent: {fileID: 0}
+  Fish_Location: fish
+  Fish_Parent: {fileID: 1520771324}
   Fish_Purchasable: []
   Fish_Item: []
-  Vegetable_Location: 
-  Vegetable_Parent: {fileID: 0}
+  Vegetable_Location: vegetable
+  Vegetable_Parent: {fileID: 129337923}
   Vegetable_Purchasable: []
   Vegetable_Item: []
-  Meat_Location: 
-  Meat_Parent: {fileID: 0}
+  Meat_Location: meat
+  Meat_Parent: {fileID: 1960876907}
   Meat_Purchasable: []
   Meat_Item: []
 --- !u!1 &750302630
@@ -9528,10 +9529,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05529a4f66eb2a6498489316207668c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Button_Chef_Vegetable: {fileID: 0}
-  Text_Level: {fileID: 0}
-  Switch_Buy_Amount: {fileID: 0}
-  Switch_Button_Text: {fileID: 0}
+  Button_Chef_Vegetable: {fileID: 1505855757}
+  Text_Level: {fileID: 1656144846}
+  Switch_Buy_Amount: {fileID: 1925534875}
+  Switch_Button_Text: {fileID: 1372867132}
   Buy_Amount_Mode: 0
   Research_Points: 0
 --- !u!1 &784740652
@@ -9939,7 +9940,6 @@ GameObject:
   - 4: {fileID: 809291848}
   - 114: {fileID: 809291849}
   - 114: {fileID: 809291850}
-  - 114: {fileID: 809291851}
   m_Layer: 0
   m_Name: CraftingManager
   m_TagString: Untagged
@@ -9971,10 +9971,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8689142380cc5254ba4349535cf0c134, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  panel: {fileID: 0}
+  panel: {fileID: 2040526808}
   slotId: 
   CurrentKey: 
-  Button: {fileID: 0}
+  Button: {fileID: 234089567}
 --- !u!114 &809291850
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9986,27 +9986,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 440a10b32d2ade74d8ad2722cd96b24a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Button_OK: {fileID: 0}
-  Text_Name: {fileID: 0}
-  Text_Recipe: {fileID: 0}
-  Text_SellValue: {fileID: 0}
-  Prefab_Recipe_Unlock: {fileID: 0}
---- !u!114 &809291851
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 809291847}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 440a10b32d2ade74d8ad2722cd96b24a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Button_OK: {fileID: 0}
-  Text_Name: {fileID: 0}
-  Text_Recipe: {fileID: 0}
-  Text_SellValue: {fileID: 0}
-  Prefab_Recipe_Unlock: {fileID: 0}
+  Button_OK: {fileID: 420966953}
+  Text_Name: {fileID: 929929541}
+  Text_Recipe: {fileID: 592225229}
+  Text_SellValue: {fileID: 1538398860}
+  Prefab_Recipe_Unlock: {fileID: 1124921984}
 --- !u!1 &818657329
 GameObject:
   m_ObjectHideFlags: 0
@@ -10136,10 +10120,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27bdf55aacd74784cb4e1aff89bf8847, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Button_Chef_Sauce: {fileID: 0}
-  Text_Level: {fileID: 0}
-  Switch_Buy_Amount: {fileID: 0}
-  Switch_Button_Text: {fileID: 0}
+  Button_Chef_Sauce: {fileID: 663316241}
+  Text_Level: {fileID: 786655873}
+  Switch_Buy_Amount: {fileID: 1185272526}
+  Switch_Button_Text: {fileID: 1283630991}
   Buy_Amount_Mode: 0
   Research_Points: 0
 --- !u!1 &824978915
@@ -11477,9 +11461,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f125337238aff149854422a63613288, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Text_Name: {fileID: 0}
-  Text_Cost: {fileID: 0}
-  Text_Level: {fileID: 0}
+  Text_Name: {fileID: 428779123}
+  Text_Cost: {fileID: 967049411}
+  Text_Level: {fileID: 967049411}
   CurrentLevel: 0
 --- !u!1 &892294852
 GameObject:
@@ -14090,8 +14074,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2572ba82095b5864597975c42909debe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GoldDisplayText: {fileID: 0}
-  TotalGold: 0
+  GoldDisplayText: {fileID: 699018182}
+  TotalGold: 100000
 --- !u!1 &1074804256
 GameObject:
   m_ObjectHideFlags: 0
@@ -17283,9 +17267,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f125337238aff149854422a63613288, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Text_Name: {fileID: 0}
-  Text_Cost: {fileID: 0}
-  Text_Level: {fileID: 0}
+  Text_Name: {fileID: 1779904371}
+  Text_Cost: {fileID: 668939223}
+  Text_Level: {fileID: 1024067022}
   CurrentLevel: 0
 --- !u!1 &1511325216
 GameObject:
@@ -18309,10 +18293,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60ad0e32d9fb2d045b2b635ee79d3e93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Button_Chef_Larder: {fileID: 0}
-  Text_Level: {fileID: 0}
-  Switch_Buy_Amount: {fileID: 0}
-  Switch_Button_Text: {fileID: 0}
+  Button_Chef_Larder: {fileID: 100892512}
+  Text_Level: {fileID: 667983979}
+  Switch_Buy_Amount: {fileID: 2093216572}
+  Switch_Button_Text: {fileID: 1839923773}
   Buy_Amount_Mode: 0
   Research_Points: 0
 --- !u!1 &1562015271
@@ -18463,8 +18447,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d33b43c7817a097459b965dd5a2fbf7f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Button_SwitchBuyAmount: {fileID: 0}
-  Text_SwitchButtonText: {fileID: 0}
+  Button_SwitchBuyAmount: {fileID: 354900918}
+  Text_SwitchButtonText: {fileID: 257749846}
   BuyAmountMode: 0
 --- !u!1 &1584724895
 GameObject:
@@ -18630,8 +18614,8 @@ MonoBehaviour:
   CurrentLevel: 0
   XpTillNextLevel: 0
   CurrentExperience: 0
-  ResearchPoints: 0
-  progressionBar: {fileID: 0}
+  ResearchPoints: 10000
+  progressionBar: {fileID: 1862843895}
 --- !u!1 &1592030640
 GameObject:
   m_ObjectHideFlags: 0
@@ -18749,10 +18733,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39df80db32d0dd042a451d5a207014b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Button_Chef_Fish: {fileID: 0}
-  Text_Level: {fileID: 0}
-  Switch_Buy_Amount: {fileID: 0}
-  Switch_Button_Text: {fileID: 0}
+  Button_Chef_Fish: {fileID: 887674190}
+  Text_Level: {fileID: 1728178000}
+  Switch_Buy_Amount: {fileID: 848182324}
+  Switch_Button_Text: {fileID: 1495753171}
   Buy_Amount_Mode: 0
   Research_Points: 0
 --- !u!1 &1630685986
@@ -19495,10 +19479,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb7712defd6e7ef44b8ba16a389e7890, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Button_Chef_Pastry: {fileID: 0}
-  Text_Level: {fileID: 0}
-  Switch_Buy_Amount: {fileID: 0}
-  Switch_Button_Text: {fileID: 0}
+  Button_Chef_Pastry: {fileID: 2041282593}
+  Text_Level: {fileID: 405500289}
+  Switch_Buy_Amount: {fileID: 26173244}
+  Switch_Button_Text: {fileID: 1522315511}
   Buy_Amount_Mode: 0
   Research_Points: 0
 --- !u!1 &1710870863
@@ -20812,16 +20796,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   HidenPosition: 0
-  Panel_Pastry: {fileID: 0}
-  Panel_Larder: {fileID: 0}
-  Panel_Sauce: {fileID: 0}
-  Panel_Fish: {fileID: 0}
-  Panel_Vegetable: {fileID: 0}
-  Panel_Meat: {fileID: 0}
-  Panel_Inventory: {fileID: 0}
-  Panel_Crafting: {fileID: 0}
-  Panel_Recipes: {fileID: 0}
-  Panel_ChefResearchTree: {fileID: 0}
+  Panel_Pastry: {fileID: 181437528}
+  Panel_Larder: {fileID: 1347308241}
+  Panel_Sauce: {fileID: 802508179}
+  Panel_Fish: {fileID: 547701008}
+  Panel_Vegetable: {fileID: 1805651027}
+  Panel_Meat: {fileID: 1036242479}
+  Panel_Inventory: {fileID: 1734433689}
+  Panel_Crafting: {fileID: 2138262629}
+  Panel_Recipes: {fileID: 1693027771}
+  Panel_ChefResearchTree: {fileID: 1260247977}
 --- !u!114 &1815371695
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -22241,10 +22225,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a23ac3681b9f0ee4791c15ba2e1fb73a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Button_Chef_Meat: {fileID: 0}
-  Text_Level: {fileID: 0}
-  Switch_Buy_Amount: {fileID: 0}
-  Switch_Button_Text: {fileID: 0}
+  Button_Chef_Meat: {fileID: 241854530}
+  Text_Level: {fileID: 1919643557}
+  Switch_Buy_Amount: {fileID: 945366013}
+  Switch_Button_Text: {fileID: 1405499734}
   Buy_Amount_Mode: 0
   Research_Points: 0
 --- !u!1 &1966640521
@@ -22998,9 +22982,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f125337238aff149854422a63613288, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Text_Name: {fileID: 0}
-  Text_Cost: {fileID: 0}
-  Text_Level: {fileID: 0}
+  Text_Name: {fileID: 1192057978}
+  Text_Cost: {fileID: 1392920294}
+  Text_Level: {fileID: 2045041068}
   CurrentLevel: 0
 --- !u!1 &2044845671
 GameObject:
@@ -23896,8 +23880,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ResearchPoints: 0
   Class: []
-  Text_ChefLevel: {fileID: 0}
-  Text_ResearchPoints: {fileID: 0}
+  Text_ChefLevel: {fileID: 2145297644}
+  Text_ResearchPoints: {fileID: 701465518}
 --- !u!1 &2138262629
 GameObject:
   m_ObjectHideFlags: 0

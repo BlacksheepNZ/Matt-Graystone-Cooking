@@ -116,35 +116,28 @@ public class SaveLoad : MonoBehaviour
 
     public void Json()
     {
-        try
-        {
-            itemSellJsonData = JsonMapper.ToObject(File.ReadAllText(Application.dataPath + "/StreamingAssets/" + itemSellLocation + FileType));
-            ItemSellJsonDataDatabase();
+        itemSellJsonData = JsonMapper.ToObject(File.ReadAllText(Application.dataPath + "/StreamingAssets/" + itemSellLocation + FileType));
+        ItemSellJsonDataDatabase();
 
-            mineralSellJsonData = JsonMapper.ToObject(File.ReadAllText(Application.dataPath + "/StreamingAssets/" + mineralSellLocation + FileType));
-            MineralSellJsonDataDatabase();
+        mineralSellJsonData = JsonMapper.ToObject(File.ReadAllText(Application.dataPath + "/StreamingAssets/" + mineralSellLocation + FileType));
+        MineralSellJsonDataDatabase();
 
-            recipeCostJsonData = JsonMapper.ToObject(File.ReadAllText(Application.dataPath + "/StreamingAssets/" + recipeCostLocation + FileType));
-            RecipeCostJsonDataDatabase();
+        recipeCostJsonData = JsonMapper.ToObject(File.ReadAllText(Application.dataPath + "/StreamingAssets/" + recipeCostLocation + FileType));
+        RecipeCostJsonDataDatabase();
 
-            ItemJsonData = JsonMapper.ToObject(File.ReadAllText(Application.dataPath + "/StreamingAssets/" + itemLocation + FileType));
-            ItemJsonDataDatabase();
+        ItemJsonData = JsonMapper.ToObject(File.ReadAllText(Application.dataPath + "/StreamingAssets/" + itemLocation + FileType));
+        ItemJsonDataDatabase();
 
-            //Purchasable Section
+        //Purchasable Section
 
-            JsonDataDatabase(Recipe_Data, Recipe_Item, Recipe_Location, Recipe_Json_Data, Recipe_Parent, ItemType.General);
+        JsonDataDatabase(Recipe_Data, Recipe_Item, Recipe_Location, Recipe_Json_Data, Recipe_Parent, ItemType.General);
 
-            JsonDataDatabase(Pastry_Purchasable, Pastry_Item, Pastry_Location, Pastry_Json_Data, Pastry_Parent, ItemType.Consumable);
-            JsonDataDatabase(Larder_Purchasable, Larder_Item, Larder_Location, Larder_Json_Data, Larder_Parent, ItemType.Consumable);
-            JsonDataDatabase(Sauce_Purchasable, Sauce_Item, Sauce_Location, Sauce_Json_Data, Sauce_Parent, ItemType.Consumable);
-            JsonDataDatabase(Fish_Purchasable, Fish_Item, Fish_Location, Fish_Json_Data, Fish_Parent, ItemType.Consumable);
-            JsonDataDatabase(Vegetable_Purchasable, Vegetable_Item, Vegetable_Location, Vegetable_Json_Data, Vegetable_Parent, ItemType.Consumable);
-            JsonDataDatabase(Meat_Purchasable, Meat_Item, Meat_Location, Meat_Json_Data, Meat_Parent, ItemType.Consumable);
-        }
-        catch(Exception ex)
-        {
-            Debug.Log(ex.Message);
-        }
+        JsonDataDatabase(Pastry_Purchasable, Pastry_Item, Pastry_Location, Pastry_Json_Data, Pastry_Parent, ItemType.Consumable);
+        JsonDataDatabase(Larder_Purchasable, Larder_Item, Larder_Location, Larder_Json_Data, Larder_Parent, ItemType.Consumable);
+        JsonDataDatabase(Sauce_Purchasable, Sauce_Item, Sauce_Location, Sauce_Json_Data, Sauce_Parent, ItemType.Consumable);
+        JsonDataDatabase(Fish_Purchasable, Fish_Item, Fish_Location, Fish_Json_Data, Fish_Parent, ItemType.Consumable);
+        JsonDataDatabase(Vegetable_Purchasable, Vegetable_Item, Vegetable_Location, Vegetable_Json_Data, Vegetable_Parent, ItemType.Consumable);
+        JsonDataDatabase(Meat_Purchasable, Meat_Item, Meat_Location, Meat_Json_Data, Meat_Parent, ItemType.Consumable);
     }
 
     private void JsonDataDatabase(
@@ -201,7 +194,7 @@ public class SaveLoad : MonoBehaviour
         }
         catch (Exception ex)
         {
-            Debug.Log(ex.Message);
+            Debug.Log(ex.Message + location);
         }
     }
 
