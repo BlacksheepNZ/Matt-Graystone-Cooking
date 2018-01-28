@@ -327,7 +327,7 @@ public class SaveLoad : MonoBehaviour
     public void Start()
     {
         Json();
-        Load();
+        LoadFile();
 
         Current_Date_Time = DateTime.Now;
 
