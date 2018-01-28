@@ -174,9 +174,29 @@ public class Inventory : MonoBehaviour
         data.transform.Find("Count").GetComponent<Text>().text = CurrencyConverter.Instance.GetCurrencyIntoStringNoSign(data.count);
     }
 
+    public Item GetItemFromSlot(int slot)
+    {
+        try
+        {
+            Item data = slots[slot].transform.GetChild(0).GetComponent<ItemData>().Item;
+            return data;
+
+        }
+        catch { }
+        return null;
+    }
+
     public void AddItemToSlot(int slot, int id, int amount)
     {
         Item itemToAdd = ItemDatabase.Instance.FetchItemByID(id);
+
+        //merg items that are the same
+        Item slotItem = GetItemFromSlot(slot);
+        if (slotItem != null && slotItem.ID == id)
+        {
+            AddAmoutToItem(amount, slot);
+            return;
+        }
 
         GameObject itemObject = Instantiate(InventoryItem);
 

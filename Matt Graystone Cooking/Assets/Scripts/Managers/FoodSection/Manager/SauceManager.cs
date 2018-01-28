@@ -80,7 +80,7 @@ public class SauceManager : MonoBehaviour
             Purchasable purchasable = SaveLoad.Instance.Sauce_Item[i].GetComponent<PurchasableData>().Purchasable;
             if (purchasable.Unlocked == true)
             {
-                float valueCurrency = purchasable.IncreaseValue(purchasable.ResourceRate, purchasable.B_IncreaseCurrencyRewardRate);
+                float valueCurrency = purchasable.IncreaseValue(purchasable.Resource_Rate, purchasable.B_IncreaseCurrencyRewardRate);
 
                 value += (valueCurrency * purchasable.Count) / purchasable.TimeToCompleteTask;
             }
@@ -98,6 +98,10 @@ public class SauceManager : MonoBehaviour
             if (SaveLoad.Instance.Sauce_Item[i].GetComponent<PurchasableData>().Purchasable.ID < Button_Chef_Sauce.CurrentLevel)
             {
                 SaveLoad.Instance.Sauce_Item[i].GetComponent<PurchasableData>().gameObject.SetActive(true);
+            }
+            else
+            {
+                SaveLoad.Instance.Sauce_Item[i].GetComponent<PurchasableData>().gameObject.SetActive(false);
             }
 
             SaveLoad.Instance.Sauce_Item[i].GetComponent<PurchasableData>().Update();

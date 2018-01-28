@@ -32,10 +32,10 @@ public class SaveLoad : MonoBehaviour
         get { return Application.persistentDataPath + "/savedGames.idle"; }
     }
 
-    //private DateTime previousDateTime;
-    //private DateTime currentDateTime;
+    private DateTime Previous_Date_Time;
+    private DateTime Current_Date_Time;
 
-    public List<Sprite> ItemImages = new List<Sprite>();
+    public List<Sprite> Item_Images = new List<Sprite>();
     public List<Sprite> BorderImages = new List<Sprite>();
     public List<Sprite> RarityImages = new List<Sprite>();
 
@@ -221,7 +221,7 @@ public class SaveLoad : MonoBehaviour
                     i,
                     (string)data[i]["Name"],
                     float.Parse(data[i]["BaseCost"].ToString()),
-                    ItemImages[imageId],
+                    Item_Images[imageId],
                     float.Parse(data[i]["Coefficent"].ToString()),
                     (int)data[i]["Count"],
                     float.Parse(data[i]["ResourceRate"].ToString()),
@@ -242,7 +242,7 @@ public class SaveLoad : MonoBehaviour
                 purchasable_data.Cost = purchasable[i].Cost;
                 purchasable_data.Coefficent = purchasable[i].Coefficent;
                 purchasable_data.Count = purchasable[i].Count;
-                purchasable_data.ResourceRate = purchasable[i].ResourceRate;
+                purchasable_data.Resource_Rate = purchasable[i].Resource_Rate;
                 purchasable_data.ItemID = purchasable[i].ItemID;
                 purchasable_data.TimeToCompleteTask = purchasable[i].TimeToCompleteTask;
                 //Inventory.Instance.AddSlot(parent_Slot, item_Type);
@@ -294,48 +294,6 @@ public class SaveLoad : MonoBehaviour
         }
     }
 
-    //private void CraftingJsonDataDatabase()
-    //{
-    //    for (int i = 0; i < craftingJsonData.Count; i++)
-    //    {
-    //        string name = (string)craftingJsonData[i]["Name"];
-    //        string key = (string)craftingJsonData[i]["Key"]; var s = Split(key, 3).ToList();
-    //        int countToComsume = (int)craftingJsonData[i]["CountToConsume"];
-    //        ResourceType ResourceType = (ResourceType)Enum.Parse(typeof(ResourceType), (string)craftingJsonData[i]["ResourceType"]);
-    //        int sellValue = (int)craftingJsonData[i]["SellValue"];
-            
-    //        Repice Repice = new Repice(
-    //            name,
-    //            countToComsume,
-    //            ResourceType,
-    //            sellValue,
-    //            s[0], s[1], s[2], s[3], s[4], s[5], s[6], s[7], s[8]);
-
-    //        RepiceDatabase.Add(Repice);
-    //    }
-
-    //    #region old code
-    //    //for (int i = 0; i < craftingJsonData.Count; i++)
-    //    //{
-    //    //    BonusType BonusType = (BonusType)Enum.Parse(typeof(BonusType), (string)craftingJsonData[i]["BonusType"]);
-    //    //    ResourceType ResourceType = (ResourceType)Enum.Parse(typeof(ResourceType), (string)craftingJsonData[i]["ResourceType"]);
-
-    //    //    Bonus.Add(new Bonus(
-    //    //        BonusType,
-    //    //        ResourceType,
-    //    //        float.Parse(craftingJsonData[i]["MinValue"].ToString()),
-    //    //        float.Parse(craftingJsonData[i]["MaxValue"].ToString())));
-    //    //}
-
-    //    //if (CraftingItem.Count == 0)
-    //    //{
-    //    //    var basic = new Tuple<ItemType, ResourceType>(ItemType.General, ResourceType.Onions);
-
-    //    //    CraftingManager.Instance.AddPrefab(basic);
-    //    //}
-    //    #endregion
-    //}
-
     static IEnumerable<string> Split(string str, int chunkSize)
     {
         return Enumerable.Range(0, str.Length / chunkSize)
@@ -355,9 +313,9 @@ public class SaveLoad : MonoBehaviour
             ResourceType ResourceType = (ResourceType)Enum.Parse(typeof(ResourceType), (string)ItemJsonData[i]["ResourceType"]);
 
             Item_Database.Add(new Item(
-                (string)ItemJsonData[i]["Name"],
+                Name,
                 ID,
-                ItemImages[imageId],
+                Item_Images[imageId],
                 imageId,
                 Satackable,
                 ItemRarity,
@@ -365,573 +323,452 @@ public class SaveLoad : MonoBehaviour
                 ResourceType));
         }
     }
-    //private void ScavangerJsonDataDatabase()
-    //{
-    //    for (int i = 0; i < ScavangerJsonData.Count; i++)
-    //    {
-    //        int imageId = 0;
-    //        //for (int x = 0; x < Images.Count; x++)
-    //        //{
-    //        //    if (Images[x].name == (string)ScavangerJsonData[i]["SpriteName"])
-    //        //    {
-    //        //        imageId = x;
-    //        //        break;
-    //        //    }
-    //        //    else
-    //        //    {
-    //        //        Debug.Log("No image found, using defualt");
-    //        //        imageId = 0;
-    //        //        break;
-    //        //    }
-    //        //}
-
-    //        ResourceType ResourceType = (ResourceType)Enum.Parse(typeof(ResourceType), (string)ScavangerJsonData[i]["ResourceType"]);
-
-    //        Scavanger.Add(new Scavanger(
-    //            i,
-    //            (string)ScavangerJsonData[i]["Name"],
-    //            float.Parse(ScavangerJsonData[i]["BaseCost"].ToString()),
-    //            ItemImages[imageId],
-    //            float.Parse(ScavangerJsonData[i]["Coefficent"].ToString()),
-    //            (int)ScavangerJsonData[i]["Count"],
-    //            ResourceType,
-    //            float.Parse(ScavangerJsonData[i]["CurrencyReward"].ToString()),
-    //            float.Parse(ScavangerJsonData[i]["TimeToCompleteTask"].ToString())));
-
-    //        GameObject purchasablePrefab = Instantiate(ScavangerPrefab);
-    //        purchasablePrefab.transform.SetParent(ScavangerParent);
-    //        purchasablePrefab.transform.localScale = new Vector3(1, 1, 1);
-    //        purchasablePrefab.transform.position = ScavangerParent.position;
-    //        GameObject parentSlotScavanger = purchasablePrefab.transform.Find("Slot").gameObject;
-
-    //        Scavanger purchasable = purchasablePrefab.GetComponent<ScavangerData>().Purchasable;
-    //        purchasable.ID = Scavanger[i].ID;
-    //        purchasable.ItemName = Scavanger[i].ItemName;
-    //        purchasable.BaseCost = Scavanger[i].BaseCost;
-    //        purchasable.Image = Scavanger[i].Image;
-    //        purchasable.Cost = Scavanger[i].Cost;
-    //        purchasable.Coefficent = Scavanger[i].Coefficent;
-    //        purchasable.Count = Scavanger[i].Count;
-    //        purchasable.ResourceType = Scavanger[i].ResourceType;
-    //        purchasable.CurrencyReward = Scavanger[i].CurrencyReward;
-    //        purchasable.TimeToCompleteTask = Scavanger[i].TimeToCompleteTask;
-    //        Inventory.Instance.AddSlot(parentSlotScavanger, ItemType.ScavangerItem);
-
-    //        Scavanger_Item.Add(purchasablePrefab);
-    //    }
-    //}
-    //private void DrillUnlockJsonDataDatabase()
-    //{
-    //    for (int i = 0; i < drillUnlockjsonData.Count; i++)
-    //    {
-    //        int imageId = -1;
-    //        for (int x = 0; x < Images.Count; x++)
-    //        {
-    //            if (Images[x].name == (string)drillUnlockjsonData[i]["SpriteName"])
-    //            {
-    //                imageId = x;
-    //                break;
-    //            }
-    //        }
-    //        //could not find image
-
-    //        if (imageId == -1)
-    //        {
-    //            Debug.Log("No image found");
-    //            break;
-    //        }
-
-    //        unlocks.Add(UpgradeManager.Instance.AddUpgrade(
-    //            (string)drillUnlockjsonData[i]["Name"],
-    //            (string)drillUnlockjsonData[i]["Decription"],
-    //            Images[imageId]));
-    //    }
-    //}
-
-    //private void PowerNodeItemJsonDataDatabase()
-    //{
-    //    for (int i = 0; i < PowerNodeItemJsonData.Count; i++)
-    //    {
-    //        int imageId = -1;
-    //        for (int x = 0; x < Images.Count; x++)
-    //        {
-    //            if (Images[x].name == (string)PowerNodeItemJsonData[i]["SpriteName"])
-    //            {
-    //                imageId = x;
-    //                break;
-    //            }
-    //        }
-    //        //could not find image
-    //        if (imageId == -1)
-    //        {
-    //            Debug.Log("No image found");
-    //            break;
-    //        }
-
-    //        ItemRarity ItemRarity = (ItemRarity)Enum.Parse(typeof(ItemRarity), (string)PowerNodeItemJsonData[i]["ItemRarity"]);
-    //        ItemType ItemType = (ItemType)Enum.Parse(typeof(ItemType), (string)PowerNodeItemJsonData[i]["ItemType"]);
-    //        BonusType BonusType = (BonusType)Enum.Parse(typeof(BonusType), (string)PowerNodeItemJsonData[i]["BonusType"]);
-
-    //        PowerNodeItemDatabase.Add(new Item(
-    //            (string)PowerNodeItemJsonData[i]["Name"],
-    //            (int)PowerNodeItemJsonData[i]["ID"],
-    //            Images[imageId],
-    //            imageId,
-    //            (bool)PowerNodeItemJsonData[i]["Stackable"],
-    //            ItemRarity,
-    //            ItemType,
-    //            BonusType,
-    //            float.Parse(PowerNodeItemJsonData[i]["BonusAmount"].ToString()),
-    //            ResourceType.Currency,
-    //            float.Parse(PowerNodeItemJsonData[i]["CostToPurchase"].ToString())));
-    //    }
-    //}
 
     public void Start()
     {
         Json();
         //Load();
 
-        //currentDateTime = DateTime.Now;
+        Current_Date_Time = DateTime.Now;
 
-        //if (currentDateTime > previousDateTime)
-        //{
-        //    previousDateTime = currentDateTime;
-        //}
+        if (Current_Date_Time > Previous_Date_Time)
+        {
+            Previous_Date_Time = Current_Date_Time;
+        }
     }
 
     public void OnApplicationQuit()
     {
-        //currentDateTime = DateTime.Now;
-        //previousDateTime = currentDateTime;
+        Current_Date_Time = DateTime.Now;
+        Previous_Date_Time = Current_Date_Time;
         //SaveFile();
     }
 
     public void Update()
     {
-        if (Input.GetKeyDown(KeyCode.F1))
+        if(Input.GetKeyDown(KeyCode.F1))
         {
-            //CraftingManager.Instance.Add(ItemType.PowerNode);
+            SaveFile();
         }
         if (Input.GetKeyDown(KeyCode.F2))
         {
+            LoadFile();
         }
     }
 
-    //public void SaveFile()
-    //{
-    //    BinaryFormatter format = new BinaryFormatter();
-    //    FileStream file = File.Create(SaveLocation);
+    public void SaveFile()
+    {
+        BinaryFormatter format = new BinaryFormatter();
+        FileStream file = File.Create(Save_Location);
 
-    //    SaveState save = new SaveState();
+        Save_State save = new Save_State();
 
-    //    save.DateTime = Calendar.Instance.Date;
+        //save.Date_Time = Calendar.Instance.Date;
 
-    //    //save.currentDateTime = currentDateTime;
-    //    //save.previousDateTime = previousDateTime;
+        save.Current_Date_Time = Current_Date_Time;
+        save.Previous_Date_Time = Previous_Date_Time;
 
-    //    save.AFKCurrency = ScavangerManager.Instance.GetRewardRate();
-    //    save.AFKResource = DrillManager.Instance.GetRewardRate();
+        //save.AFKCurrency = ScavangerManager.Instance.GetRewardRate();
+        //save.AFKResource = DrillManager.Instance.GetRewardRate();
 
-    //    save.TotalGold = Game.Instance.TotalGold;
-    //    //save.TotalGoldPerClick = Game.Instance.TotalGoldPerClick;
+        save.Total_Gold = Game.Instance.TotalGold;
 
-    //    //save.PlayerSaveState = new PlayerSaveState();
-    //    //save.PlayerSaveState.TotalXp = PlayerManager.Instance.TotalXp;
-    //    //save.PlayerSaveState.CurrentLevel = PlayerManager.Instance.CurrentLevel;
-    //    //save.PlayerSaveState.XpTillNextLevel = PlayerManager.Instance.XpTillNextLevel;
-    //    //save.PlayerSaveState.CurrentExperience = PlayerManager.Instance.CurrentExperience;
+        save.Player_Save_State = new Player_Save_State();
+        save.Player_Save_State.Total_Xp = PlayerManager.Instance.TotalXp;
+        save.Player_Save_State.Current_Level = PlayerManager.Instance.CurrentLevel;
+        save.Player_Save_State.Xp_Till_Next_Level = PlayerManager.Instance.XpTillNextLevel;
+        save.Player_Save_State.Current_Experience = PlayerManager.Instance.CurrentExperience;
+        save.Player_Save_State.ResearchPoints = PlayerManager.Instance.ResearchPoints;
 
-    //    //save.PlayerSaveState.RemainingPoints = Prestige.Instance.RemainingPoints;
-    //    //save.PlayerSaveState.TotalPoints = Prestige.Instance.TotalPoints;
-    //    //save.PlayerSaveState.LifetimCurrency = Prestige.Instance.LifetimCurrency;
+        ResearchTreeSaveSate(save);
 
-    //    save.ScavangerSaveState = new List<ScavangerSaveState>();
-    //    save.DrillSaveState = new List<DrillSaveState>();
+        save.Larder_Manager_Save_Sate = new List<Food_Section_Save_State>();
+        save.Meat_Manager_Save_Sate = new List<Food_Section_Save_State>();
+        save.Pastry_Manager_Save_Sate = new List<Food_Section_Save_State>();
+        save.Sauce_Manager_Save_Sate = new List<Food_Section_Save_State>();
+        save.Vegetable_Manager_Save_Sate = new List<Food_Section_Save_State>();
+        save.Fish_Manager_Save_Sate = new List<Food_Section_Save_State>();
 
-    //    save.ResourceSaveState = new List<ResourceSaveState>();
-    //    save.ItemSaveState = new List<ItemSaveState>();
+        save.Resource_Save_State = new List<Resource_Save_State>();
+        save.Item_Save_State = new List<Item_Save_State>();
 
-    //    save.CraftingSaveState = new List<CraftingSaveState>();
+        for (int x = 0; x < Inventory.Instance.slots.Count; x++)
+        {
+            GameObject slot = Inventory.Instance.slots[x].gameObject;
 
-    //    for (int x = 0; x < Inventory.Instance.slots.Count; x++)
-    //    {
-    //        GameObject slot = Inventory.Instance.slots[x].gameObject;
+            if (slot.transform.childCount > 0)
+            {
+                ItemData item = slot.transform.GetChild(0).GetComponent<ItemData>();
 
-    //        if (slot.transform.childCount > 0)
-    //        {
-    //            ItemData item = slot.transform.GetChild(0).GetComponent<ItemData>();
+                if (item.Item.ItemType == ItemType.Consumable)
+                {
+                    Resource_Save_State resourceSave = new Resource_Save_State();
 
-    //            if (item.Item.ItemType == ItemType.Ore)
-    //            {
-    //                ResourceSaveState resourceSave = new ResourceSaveState();
+                    resourceSave.ID = item.Item.ID;
+                    resourceSave.Count = item.count;
+                    resourceSave.Slot_ID = x;
 
-    //                resourceSave.ID = item.Item.ID;
-    //                resourceSave.Count = item.count;
-    //                resourceSave.SlotID = x;
+                    save.Resource_Save_State.Add(resourceSave);
+                }
+            }
+        }
 
-    //                save.ResourceSaveState.Add(resourceSave);
-    //            }
-    //            if (item.Item.ItemType == ItemType.DrillItem || item.Item.ItemType == ItemType.ScavangerItem)
-    //            {
-    //                ItemSaveState itemSave = new ItemSaveState();
+        FishManager.Instance.Research_Points = save.Fish_Manager_Research_Points;
+        LarderManager.Instance.Research_Points = save.Larder_Manager_Research_Points;
+        MeatManager.Instance.Research_Points = save.Meat_Manager_Research_Points;
+        PastryManager.Instance.Research_Points = save.Pastry_Manager_Research_Points;
+        SauceManager.Instance.Research_Points = save.Sauce_Manager_Research_Points;
+        VegetableManager.Instance.Research_Points = save.Vegetable_Manager_Research_Points;
 
-    //                itemSave.ID = item.Item.ID;
-    //                itemSave.Count = item.count;
-    //                itemSave.SlotID = x;
+        ItemSaveState(save.Fish_Manager_Save_Sate, Fish_Item);
+        ItemSaveState(save.Larder_Manager_Save_Sate, Larder_Item);
+        ItemSaveState(save.Meat_Manager_Save_Sate, Meat_Item);
+        ItemSaveState(save.Pastry_Manager_Save_Sate, Pastry_Item);
+        ItemSaveState(save.Sauce_Manager_Save_Sate, Sauce_Item);
+        ItemSaveState(save.Vegetable_Manager_Save_Sate, Vegetable_Item);
 
-    //                itemSave.Name = item.Item.Name;
-    //                itemSave.ID = item.Item.ID;
-    //                itemSave.ImageID = item.Item.ImageID;
-    //                itemSave.Stackable = item.Item.Stackable;
-    //                itemSave.ItemRarity = item.Item.ItemRarity;
-    //                itemSave.ItemType = item.Item.ItemType;
+        format.Serialize(file, save);
+        file.Close();
 
-    //                itemSave.BonusSaveState = new List<BonusSaveState>();
+        Debug.Log("saved");
+    }
 
-    //                for (int i = 0; i < item.Item.BonusAttached.Count; i++)
-    //                {
-    //                    BonusType bType = item.Item.BonusAttached[i].Item1;
-    //                    float bAmount = item.Item.BonusAttached[i].Item2;
+    private void ResearchTreeSaveSate(Save_State save)
+    {
+        for (int  i = 0; i < ChefResearchTree.Instance.Class.Count; i++)
+        {
+            Chef chef = ChefResearchTree.Instance.Class[i];
+            Chef_Research_Save_State save_state = new Chef_Research_Save_State();
 
-    //                    BonusSaveState BonusSaveState = new BonusSaveState();
-    //                    BonusSaveState.BonusType = bType;
-    //                    BonusSaveState.Amount = bAmount;
+            save_state.Current_Level = chef.CurrentLevel;
+            save_state.Max_Level = chef.MaxLevel;
+            save_state.Cost_To_Level = chef.CostToLevel;
+            save.Chef_Research_Save_State.Add(save_state);
+        }
+    }
 
-    //                    itemSave.BonusSaveState.Add(BonusSaveState);
-    //                }
+    private void ResearchTreeLoadSate(Save_State load)
+    {
+        for (int i = 0; i < ChefResearchTree.Instance.Class.Count; i++)
+        {
+            Chef chef = ChefResearchTree.Instance.Class[i];
 
-    //                save.ItemSaveState.Add(itemSave);
-    //            }
-    //            else { }
-    //        }
-    //    }
+            chef.CurrentLevel = load.Chef_Research_Save_State[i].Current_Level;
+            chef.MaxLevel = load.Chef_Research_Save_State[i].Max_Level;
+            chef.CostToLevel = load.Chef_Research_Save_State[i].Cost_To_Level;
+        }
+    }
 
-    //    for (int i = 0; i < ScavangerItem.Count(); i++)
-    //    {
-    //        Scavanger item = ScavangerItem[i].GetComponent<ScavangerData>().Purchasable;
-    //        ScavangerSaveState scavanger = new ScavangerSaveState();
-    //        scavanger.Cost = item.Cost;
-    //        scavanger.Count = item.Count;
-    //        scavanger.CurrencyReward = item.CurrencyReward;
-    //        scavanger.IsPurchased = item.IsPurchased;
-    //        scavanger.OnComplete = item.OnComplete;
-    //        scavanger.Unlocked = item.Unlocked;
+    private void ItemSaveState(List<Food_Section_Save_State> save, List<GameObject> purchasable)
+    {
+        for (int i = 0; i < purchasable.Count(); i++)
+        {
+            Purchasable item = purchasable[i].GetComponent<PurchasableData>().Purchasable;
+            Food_Section_Save_State save_sate = new Food_Section_Save_State();
+            save_sate.Cost = item.Cost;
+            save_sate.Count = item.Count;
+            save_sate.Resource_Rate = item.Resource_Rate;
+            save_sate.Is_Purchased = item.IsPurchased;
+            save_sate.On_Complete = item.OnComplete;
+            save_sate.Unlocked = item.Unlocked;
+            save_sate.Current_Time = item.Current_Time;
+            save_sate.Started_Timer = item.Started_Timer;
+            save.Add(save_sate);
+        }
+    }
 
-    //        save.ScavangerSaveState.Add(scavanger);
-    //    }
+    public void LoadFile()
+    {
+        if (File.Exists(Save_Location))
+        {
+            BinaryFormatter format = new BinaryFormatter();
+            FileStream file = File.Open(Save_Location, FileMode.Open);
 
-    //    for (int i = 0; i < DrillItem.Count(); i++)
-    //    {
-    //        Drill item = DrillItem[i].GetComponent<DrillData>().Purchasable;
+            Save_State load = (Save_State)format.Deserialize(file);
+            file.Close();
 
-    //        DrillSaveState drill = new DrillSaveState();
-    //        drill.Cost = item.Cost;
-    //        drill.Count = item.Count;
-    //        drill.ResourceRate = item.ResourceRate;
-    //        drill.IsPurchased = item.IsPurchased;
-    //        drill.OnComplete = item.OnComplete;
-    //        drill.Unlocked = item.Unlocked;
+            //Calendar.Instance.Date = load.Date_Time;
 
-    //        save.DrillSaveState.Add(drill);
-    //    }
+            Current_Date_Time = load.Current_Date_Time;
+            Previous_Date_Time = load.Previous_Date_Time;
 
-    //    for (int i = 0; i < CraftingItem.Count; i++)
-    //    {
-    //        CraftingData craftData = CraftingItem[i].GetComponent<CraftingData>();
-    //        Crafting craft = craftData.Crafting;
+            int currecy = load.AFK_Currency;
+            int resource = load.AFK_Resource;
 
-    //        CraftingSaveState craftSaveState = new CraftingSaveState();
-    //        craftSaveState.ID = craft.ID;
-    //        craftSaveState.CurrentTime = craftData.CurrentTime;
-    //        craftSaveState.StartedTimer = craftData.StartedTimer;
+            TimeSpan Difference = DateTime.Now - Previous_Date_Time;
 
-    //        save.CraftingSaveState.Add(craftSaveState);
-    //    }
+            int afkC = Difference.Seconds * currecy;
+            int afkR = Difference.Seconds * resource;
 
-    //    format.Serialize(file, save);
-    //    file.Close();
-    //}
+            Game.Instance.AddGold(afkC);
 
-    //public void Load()
-    //{
-    //    if (File.Exists(SaveLocation))
-    //    {
-    //        BinaryFormatter format = new BinaryFormatter();
-    //        FileStream file = File.Open(SaveLocation, FileMode.Open);
+            Game.Instance.TotalGold = load.Total_Gold;
 
-    //        SaveState load = (SaveState)format.Deserialize(file);
-    //        file.Close();
+            PlayerManager.Instance.TotalXp = load.Player_Save_State.Total_Xp;
+            PlayerManager.Instance.CurrentLevel = load.Player_Save_State.Current_Level;
+            PlayerManager.Instance.XpTillNextLevel = load.Player_Save_State.Xp_Till_Next_Level;
+            PlayerManager.Instance.CurrentExperience = load.Player_Save_State.Current_Experience;
+            PlayerManager.Instance.ResearchPoints = load.Player_Save_State.ResearchPoints;
 
-    //        Calendar.Instance.Date = load.DateTime;
+            ResearchTreeLoadSate(load);
 
-    //        currentDateTime = load.currentDateTime;
-    //        previousDateTime = load.previousDateTime;
+            for (int i = 0; i < load.Resource_Save_State.Count; i++)
+            {
+                Resource_Save_State itemSave = load.Resource_Save_State[i];
 
-    //        float currecy = load.AFKCurrency;
-    //        float resource = load.AFKResource;
+                Inventory.Instance.AddItemToSlot(itemSave.Slot_ID, itemSave.ID, itemSave.Count + afkR);
 
-    //        TimeSpan Difference = DateTime.Now - previousDateTime;
+                Debug.Log("added item to slot: " + itemSave.Slot_ID + " (" + itemSave.Count + afkR + ")");
+            }
 
-    //        float afkC = Difference.Seconds * currecy;
-    //        float afkR = Difference.Seconds * resource;
+            for (int i = 0; i < load.Item_Save_State.Count; i++)
+            {
+                Item_Save_State item_Save = load.Item_Save_State[i];
 
-    //        Game.Instance.AddGold(afkC);
+                if (item_Save.Item_Type == ItemType.Consumable)
+                {
+                    //create item from save
+                    Item item = new Item(
+                    item_Save.Name,
+                    item_Save.ID,
+                    item_Save.Image_ID,
+                    item_Save.Stackable,
+                    item_Save.Item_Rarity,
+                    item_Save.Item_Type,
+                    item_Save.Resource_Type);
 
-    //        Game.Instance.TotalGold = load.TotalGold;
-    //        //Game.Instance.TotalGoldPerClick = load.TotalGoldPerClick;
+                    for (int x = 0; x < load.Item_Save_State[i].Bonus_Save_State.Count; x++)
+                    {
+                        BonusType bType = load.Item_Save_State[i].Bonus_Save_State[x].Bonus_Type;
+                        float bAmount = load.Item_Save_State[i].Bonus_Save_State[x].Amount;
 
-    //        PlayerManager.Instance.TotalXp = load.PlayerSaveState.TotalXp;
-    //        PlayerManager.Instance.CurrentLevel = load.PlayerSaveState.CurrentLevel;
-    //        PlayerManager.Instance.XpTillNextLevel = load.PlayerSaveState.XpTillNextLevel;
-    //        PlayerManager.Instance.CurrentExperience = load.PlayerSaveState.CurrentExperience;
+                        item.AddBonus(bType, bAmount);
+                    }
 
-    //        Prestige.Instance.RemainingPoints = load.PlayerSaveState.RemainingPoints;
-    //        Prestige.Instance.TotalPoints = load.PlayerSaveState.TotalPoints;
-    //        Prestige.Instance.LifetimCurrency = load.PlayerSaveState.LifetimCurrency;
+                    //add to database
+                    SaveLoad.Instance.Item_Database.Add(item);
+                    Inventory.Instance.Items.Add(item);
+                    Inventory.Instance.AddItemToSlot(item_Save.Slot_ID, item_Save.ID, item_Save.Count + afkR);
+                }
+            }
 
-    //        try
-    //        {
-    //            for (int i = 0; i < load.ResourceSaveState.Count; i++)
-    //            {
-    //                ResourceSaveState itemSave = load.ResourceSaveState[i];
+            load.Fish_Manager_Research_Points = FishManager.Instance.Research_Points;
+            load.Larder_Manager_Research_Points = LarderManager.Instance.Research_Points;
+            load.Meat_Manager_Research_Points = MeatManager.Instance.Research_Points;
+            load.Pastry_Manager_Research_Points = PastryManager.Instance.Research_Points;
+            load.Sauce_Manager_Research_Points = SauceManager.Instance.Research_Points;
+            load.Vegetable_Manager_Research_Points = VegetableManager.Instance.Research_Points;
 
-    //                Inventory.Instance.AddItemToSlot(itemSave.SlotID, itemSave.ID, itemSave.Count + afkR);
+            ItemLoadState(load.Fish_Manager_Save_Sate, Fish_Item);
+            ItemLoadState(load.Larder_Manager_Save_Sate, Larder_Item);
+            ItemLoadState(load.Meat_Manager_Save_Sate, Meat_Item);
+            ItemLoadState(load.Pastry_Manager_Save_Sate, Pastry_Item);
+            ItemLoadState(load.Sauce_Manager_Save_Sate, Sauce_Item);
+            ItemLoadState(load.Vegetable_Manager_Save_Sate, Vegetable_Item);
+        }
 
-    //                Debug.Log("added item to slot: " + itemSave.SlotID + " (" + itemSave.Count + afkR + ")");
-    //            }
-    //        }
-    //        catch (Exception ex)
-    //        {
-    //            Debug.Log(ex.Message);
-    //        }
+        Debug.Log("loaded");
+    }
 
-    //        for (int i = 0; i < load.ItemSaveState.Count; i++)
-    //        {
-    //            ItemSaveState itemSave = load.ItemSaveState[i];
+    private void ItemLoadState(List<Food_Section_Save_State> load, List<GameObject> purchasable)
+    {
+        for (int i = 0; i < purchasable.Count(); i++)
+        {
+            Purchasable item = purchasable[i].GetComponent<PurchasableData>().Purchasable;
 
-    //            if (itemSave.ItemType == ItemType.DrillItem || itemSave.ItemType == ItemType.ScavangerItem)
-    //            {
-    //                //create item from save
-    //                Item item = new Item(
-    //                itemSave.Name,
-    //                itemSave.ID,
-    //                Images[itemSave.ImageID],
-    //                itemSave.ImageID,
-    //                false,
-    //                itemSave.ItemRarity,
-    //                itemSave.ItemType,
-    //                BonusType.Empty,
-    //                0,
-    //                itemSave.ResourceType,
-    //                itemSave.CostToPurchase);
-
-    //                for (int x = 0; x < load.ItemSaveState[i].BonusSaveState.Count; x++)
-    //                {
-    //                    BonusType bType = load.ItemSaveState[i].BonusSaveState[x].BonusType;
-    //                    float bAmount = load.ItemSaveState[i].BonusSaveState[x].Amount;
-
-    //                    item.AddBonus(bType, bAmount);
-    //                }
-
-    //                //add to database
-    //                SaveLoad.Instance.ItemDatabase.Add(item);
-    //                Inventory.Instance.Items.Add(item);
-    //                Inventory.Instance.AddItemToSlot(itemSave.SlotID, itemSave.ID, itemSave.Count + afkR);
-    //            }
-    //        }
-
-    //        for (int i = 0; i < ScavangerItem.Count(); i++)
-    //        {
-    //            Scavanger item = ScavangerItem[i].GetComponent<ScavangerData>().Purchasable;
-
-    //            ScavangerSaveState scavanger = load.ScavangerSaveState[i];
-    //            item.Cost = scavanger.Cost;
-    //            item.Count = scavanger.Count;
-    //            item.CurrencyReward = scavanger.CurrencyReward;
-    //            item.IsPurchased = scavanger.IsPurchased;
-    //            item.Unlocked = scavanger.Unlocked;
-    //            item.CurrentTime = scavanger.CurrentTime;
-    //            item.StartedTimer = scavanger.StartedTimer;
-    //        }
-
-    //        for (int i = 0; i < DrillItem.Count(); i++)
-    //        {
-    //            Drill item = DrillItem[i].GetComponent<DrillData>().Purchasable;
-
-    //            DrillSaveState drill = load.DrillSaveState[i];
-    //            item.Cost = drill.Cost;
-    //            item.Count = drill.Count;
-    //            item.ResourceRate = drill.ResourceRate;
-    //            item.IsPurchased = drill.IsPurchased;
-    //            item.Unlocked = drill.Unlocked;
-    //            item.CurrentTime = drill.CurrentTime;
-    //            item.StartedTimer = drill.StartedTimer;
-    //        }
-    //        for (int i = 0; i < load.CraftingSaveState.Count; i++)
-    //        {
-    //            CraftingManager.Instance.Add();
-
-    //            CraftingData craftData = CraftingItem[i].GetComponent<CraftingData>();
-    //            Crafting craft = craftData.Crafting;
-
-    //            CraftingSaveState craftSaveState = load.CraftingSaveState[i];
-    //            craft.ID = craftSaveState.ID;
-    //            craftData.CurrentTime = craftSaveState.CurrentTime;
-    //            craftData.StartedTimer = craftSaveState.StartedTimer;
-
-    //            craftData.Start();
-    //        }
-    //    }
-    //    else
-    //    {
-    //        if (CraftingItem.Count == 0)
-    //        {
-    //            CraftingManager.Instance.Add();
-    //        }
-
-    //        SaveFile();
-    //    }
-    //}
+            Food_Section_Save_State load_sate = load[i];
+            item.Cost = load_sate.Cost;
+            item.Count = load_sate.Count;
+            item.Resource_Rate = load_sate.Resource_Rate;
+            item.IsPurchased = load_sate.Is_Purchased;
+            item.OnComplete = load_sate.On_Complete;
+            item.Unlocked = load_sate.Unlocked;
+            item.Current_Time = load_sate.Current_Time;
+            item.Started_Timer = load_sate.Started_Timer;
+        }
+    }
 }
 
 [Serializable]
-class SaveState
+class Save_State
 {
     [SerializeField]
-    public DateTime DateTime;
+    public DateTime Date_Time;
 
     [SerializeField]
-    public DateTime previousDateTime;
+    public DateTime Previous_Date_Time;
     [SerializeField]
-    public DateTime currentDateTime;
+    public DateTime Current_Date_Time;
 
     [SerializeField]
-    public float AFKCurrency;
+    public int AFK_Currency;
     [SerializeField]
-    public float AFKResource;
+    public int AFK_Resource;
 
     [SerializeField]
-    public float TotalGold;
-    [SerializeField]
-    public float TotalGoldPerClick;
+    public float Total_Gold;
 
     [SerializeField]
-    public PlayerSaveState PlayerSaveState;
+    public Player_Save_State Player_Save_State;
 
     [SerializeField]
-    public List<ScavangerSaveState> ScavangerSaveState;
+    public List<Food_Section_Save_State> Fish_Manager_Save_Sate;
 
     [SerializeField]
-    public List<DrillSaveState> DrillSaveState;
+    public int Fish_Manager_Research_Points;
 
     [SerializeField]
-    public List<ItemSaveState> ItemSaveState;
+    public List<Food_Section_Save_State> Larder_Manager_Save_Sate;
 
     [SerializeField]
-    public List<ResourceSaveState> ResourceSaveState;
+    public int Larder_Manager_Research_Points;
 
     [SerializeField]
-    public List<CraftingSaveState> CraftingSaveState;
+    public List<Food_Section_Save_State> Meat_Manager_Save_Sate;
+
+    [SerializeField]
+    public int Meat_Manager_Research_Points;
+
+    [SerializeField]
+    public List<Food_Section_Save_State> Pastry_Manager_Save_Sate;
+
+    [SerializeField]
+    public int Pastry_Manager_Research_Points;
+
+    [SerializeField]
+    public List<Food_Section_Save_State> Sauce_Manager_Save_Sate;
+
+    [SerializeField]
+    public int Sauce_Manager_Research_Points;
+
+    [SerializeField]
+    public List<Food_Section_Save_State> Vegetable_Manager_Save_Sate;
+
+    [SerializeField]
+    public int Vegetable_Manager_Research_Points;
+
+    [SerializeField]
+    public List<Item_Save_State> Item_Save_State;
+
+    [SerializeField]
+    public List<Resource_Save_State> Resource_Save_State;
+
+    [SerializeField]
+    public List<Chef_Research_Save_State> Chef_Research_Save_State = new List<global::Chef_Research_Save_State>();
 }
 
 [Serializable]
-class PlayerSaveState
+class Player_Save_State
 {
     [SerializeField]
-    public float TotalXp;
+    public float Total_Xp;
     [SerializeField]
-    public int CurrentLevel;
+    public int Current_Level;
     [SerializeField]
-    public int XpTillNextLevel;
+    public int Xp_Till_Next_Level;
     [SerializeField]
-    public float CurrentExperience;
+    public float Current_Experience;
+    [SerializeField]
+    public int ResearchPoints;
 
     [SerializeField]
-    public float RemainingPoints;
+    public float Remaining_Points;
     [SerializeField]
-    public float TotalPoints;
+    public float Total_Points;
     [SerializeField]
-    public float LifetimCurrency;
+    public float Lifetime_Currency;
 }
 
 [Serializable]
-class ScavangerSaveState
+class Food_Section_Save_State
 {
     [SerializeField]
     public float Cost;
     [SerializeField]
     public int Count;
     [SerializeField]
-    public float CurrencyReward;
+    public float Resource_Rate;
     [SerializeField]
-    public bool IsPurchased;
+    public bool Is_Purchased;
     [SerializeField]
-    public bool OnComplete;
+    public bool On_Complete;
     [SerializeField]
     public bool Unlocked;
-    public float CurrentTime;
     [SerializeField]
-    public bool StartedTimer;
+    public float Current_Time;
+    [SerializeField]
+    public bool Started_Timer;
 }
 
+//[Serializable]
+//class Chef_Research_Tree_Save_State
+//{
+//    [SerializeField]
+//    public List<Chef_Research_Save_State> Chef_Research_Save_State;
+
+//    [SerializeField]
+//    public Chef_Research_Save_State Fish_Manager_Research_Points;
+//    [SerializeField]
+//    public Chef_Research_Save_State Larder_Manager_Research_Points;
+//    [SerializeField]
+//    public Chef_Research_Save_State Meat_Manager_Research_Points;
+//    [SerializeField]
+//    public Chef_Research_Save_State Pastry_Manager_Research_Points;
+//    [SerializeField]
+//    public Chef_Research_Save_State Sauce_Manager_Research_Points;
+//    [SerializeField]
+//    public Chef_Research_Save_State Vegetable_Manager_Research_Points;
+//    //public List<Chef_Research_Save_State> Research = new List<Chef_Research_Save_State>();
+//}
+
 [Serializable]
-class DrillSaveState
+class Chef_Research_Save_State
 {
     [SerializeField]
-    public float Cost;
+    public int Cost_To_Level;
     [SerializeField]
-    public int Count;
+    public int Max_Level;
     [SerializeField]
-    public float ResourceRate;
-    [SerializeField]
-    public bool IsPurchased;
-    [SerializeField]
-    public bool OnComplete;
-    [SerializeField]
-    public bool Unlocked;
-    public float CurrentTime;
-    [SerializeField]
-    public bool StartedTimer;
+    public int Current_Level;
 }
 
 [Serializable]
-class ResourceSaveState
+class Resource_Save_State
 {
     [SerializeField]
     public int ID;
     [SerializeField]
-    public float Count;
+    public int Count;
     [SerializeField]
-    public int SlotID;
+    public int Slot_ID;
 }
 
     [Serializable]
-class ItemSaveState
+class Item_Save_State
 {
     [SerializeField]
     public int ID;
     [SerializeField]
-    public float Count;
+    public int Count;
     [SerializeField]
-    public int SlotID;
+    public int Slot_ID;
 
     [SerializeField]
     public string Name;
     [SerializeField]
-    public int ImageID;
+    public int Image_ID;
     [SerializeField]
     public bool Stackable;
     [SerializeField]
-    public ItemRarity ItemRarity;
+    public ItemRarity Item_Rarity;
     [SerializeField]
-    public ItemType ItemType;
+    public ItemType Item_Type;
     [SerializeField]
-    public ResourceType ResourceType;
+    public ResourceType Resource_Type;
     [SerializeField]
-    public float CostToPurchase;
+    public float Cost_To_Purchase;
     [SerializeField]
-    public List<BonusSaveState> BonusSaveState;
+    public List<Bonus_Save_State> Bonus_Save_State;
     //[SerializeField]
     //public float B_DecreseCost;
     //[SerializeField]
@@ -947,22 +784,11 @@ class ItemSaveState
 }
 
 [Serializable]
-class BonusSaveState
+class Bonus_Save_State
 {
     [SerializeField]
-    public BonusType BonusType;
+    public BonusType Bonus_Type;
     [SerializeField]
     public float Amount;
-}
-
-[Serializable]
-class CraftingSaveState
-{
-    [SerializeField]
-    public int ID;
-    [SerializeField]
-    public float CurrentTime;
-    [SerializeField]
-    public bool StartedTimer;
 }
 

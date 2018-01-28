@@ -10,8 +10,8 @@ public class Chef : MonoBehaviour
     public Text Text_Cost;
     public Text Text_Level;
 
-    private int CostToLevel = 1;
-    private int MaxLevel = 100;
+    public int CostToLevel = 1;
+    public int MaxLevel = 10;
     public int CurrentLevel = 0;
 
     private void Start()

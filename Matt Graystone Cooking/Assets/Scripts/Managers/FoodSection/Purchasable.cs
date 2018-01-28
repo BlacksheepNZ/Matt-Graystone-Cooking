@@ -27,7 +27,7 @@ public class Purchasable
     public float Cost;
     public float Coefficent;
     public int Count;
-    public float ResourceRate;
+    public float Resource_Rate;
 
     public string ItemID;
 
@@ -71,7 +71,7 @@ public class Purchasable
         Image = image;
         Coefficent = coefficent;
         Count = count;
-        ResourceRate = resourceRate;
+        Resource_Rate = resourceRate;
         ItemID = itemID;
         TimeToCompleteTask = timeToCompleteTask;
 
@@ -96,10 +96,10 @@ public class Purchasable
         ItemNameText.text = ItemName;
         CountText.text = "LVL. " + Count.ToString("0");
 
-        float valueResource = IncreaseValue(ResourceRate, B_IncreaseResourceRate);
+        float valueResource = IncreaseValue(Resource_Rate, B_IncreaseResourceRate);
 
         Text_Reward.text = "+ " + CurrencyConverter.Instance.GetCurrencyIntoString(valueResource);
-        ValueText.text = CurrencyConverter.Instance.GetCurrencyIntoStringNoSign(ResourceRate * Count) + DisplayText(B_IncreaseResourceRate);
+        ValueText.text = CurrencyConverter.Instance.GetCurrencyIntoStringNoSign(Resource_Rate * Count) + DisplayText(B_IncreaseResourceRate);
 
         //ProgressionBar.progressText.text = CurrencyConverter.Instance.GetCurrencyIntoStringNoSign(ProgressionBar.Current) + "/" + CurrencyConverter.Instance.GetCurrencyIntoStringNoSign(ProgressionBar.Max) + DisplayText(B_DecreaseTimeToCompleteTask);
     }
@@ -197,12 +197,12 @@ public class Purchasable
 
     #region Timer
 
-    public bool StartedTimer;
-    public float CurrentTime = 0;
+    public bool Started_Timer;
+    public float Current_Time = 0;
 
     public IEnumerator UpdateTimer()
     {
-        StartedTimer = true;
+        Started_Timer = true;
         OnComplete = false;
 
         float value = DecreaseValue(TimeToCompleteTask, B_DecreaseTimeToCompleteTask);
@@ -212,7 +212,7 @@ public class Purchasable
         while (ProgressionBar.Value < 1)
         {
             ProgressionBar.Value += speed;
-            CurrentTime = ProgressionBar.Value;
+            Current_Time = ProgressionBar.Value;
 
             yield return null;
         }
@@ -223,7 +223,7 @@ public class Purchasable
 
     private void ResetTimer()
     {
-        float valueResource = IncreaseValue(ResourceRate, B_IncreaseResourceRate);
+        float valueResource = IncreaseValue(Resource_Rate, B_IncreaseResourceRate);
 
         if (!Inventory.Instance.InventoryFull())
         {

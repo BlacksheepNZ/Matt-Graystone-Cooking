@@ -1402,6 +1402,8 @@ MonoBehaviour:
   Text_Name: {fileID: 818657332}
   Text_Cost: {fileID: 548925868}
   Text_Level: {fileID: 32037546}
+  CostToLevel: 1
+  MaxLevel: 100
   CurrentLevel: 0
 --- !u!1 &109932618
 GameObject:
@@ -2993,6 +2995,8 @@ MonoBehaviour:
   Text_Name: {fileID: 0}
   Text_Cost: {fileID: 0}
   Text_Level: {fileID: 0}
+  CostToLevel: 1
+  MaxLevel: 100
   CurrentLevel: 0
 --- !u!1 &234089565
 GameObject:
@@ -3319,6 +3323,8 @@ MonoBehaviour:
   Text_Name: {fileID: 563883259}
   Text_Cost: {fileID: 841163358}
   Text_Level: {fileID: 550799265}
+  CostToLevel: 1
+  MaxLevel: 100
   CurrentLevel: 0
 --- !u!1 &242489595
 GameObject:
@@ -3861,6 +3867,8 @@ MonoBehaviour:
   Text_Name: {fileID: 0}
   Text_Cost: {fileID: 0}
   Text_Level: {fileID: 0}
+  CostToLevel: 1
+  MaxLevel: 100
   CurrentLevel: 0
 --- !u!1 &286475307
 GameObject:
@@ -7655,6 +7663,8 @@ MonoBehaviour:
   Text_Name: {fileID: 0}
   Text_Cost: {fileID: 0}
   Text_Level: {fileID: 0}
+  CostToLevel: 1
+  MaxLevel: 100
   CurrentLevel: 0
 --- !u!1 &606937174
 GameObject:
@@ -8257,6 +8267,8 @@ MonoBehaviour:
   Text_Name: {fileID: 1192077489}
   Text_Cost: {fileID: 55167488}
   Text_Level: {fileID: 1872256859}
+  CostToLevel: 1
+  MaxLevel: 100
   CurrentLevel: 0
 --- !u!1 &665115396
 GameObject:
@@ -9364,7 +9376,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c5b56ab362fc304bb5701fa4b05d650, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ItemImages:
+  Item_Images:
   - {fileID: 21300000, guid: 7c04382e0fc8b2045bccba37221d7fe2, type: 3}
   BorderImages: []
   RarityImages: []
@@ -10893,7 +10905,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1038261777}
   m_HandleRect: {fileID: 1038261774}
   m_Direction: 2
-  m_Value: 0
+  m_Value: 1
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -11485,6 +11497,8 @@ MonoBehaviour:
   Text_Name: {fileID: 428779123}
   Text_Cost: {fileID: 967049411}
   Text_Level: {fileID: 967049411}
+  CostToLevel: 1
+  MaxLevel: 100
   CurrentLevel: 0
 --- !u!1 &892294852
 GameObject:
@@ -16774,7 +16788,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2122153056}
   m_HandleRect: {fileID: 2122153053}
   m_Direction: 2
-  m_Value: 0
+  m_Value: 1
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -17303,6 +17317,8 @@ MonoBehaviour:
   Text_Name: {fileID: 1779904371}
   Text_Cost: {fileID: 668939223}
   Text_Level: {fileID: 1024067022}
+  CostToLevel: 1
+  MaxLevel: 100
   CurrentLevel: 0
 --- !u!1 &1511325216
 GameObject:
@@ -18665,7 +18681,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 841550852}
   m_HandleRect: {fileID: 841550849}
   m_Direction: 2
-  m_Value: 0
+  m_Value: 1
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -21168,7 +21184,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 390517041}
   m_HandleRect: {fileID: 390517038}
   m_Direction: 2
-  m_Value: 0
+  m_Value: 1
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -21500,7 +21516,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 83420242}
   m_HandleRect: {fileID: 83420239}
   m_Direction: 2
-  m_Value: 0
+  m_Value: 1
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -23156,6 +23172,8 @@ MonoBehaviour:
   Text_Name: {fileID: 1192057978}
   Text_Cost: {fileID: 1392920294}
   Text_Level: {fileID: 2045041068}
+  CostToLevel: 1
+  MaxLevel: 100
   CurrentLevel: 0
 --- !u!1 &2044845671
 GameObject:
@@ -23395,7 +23413,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1540237092}
   m_HandleRect: {fileID: 1540237089}
   m_Direction: 2
-  m_Value: 0
+  m_Value: 1
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -24049,8 +24067,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03fe2149673639246a44e8336e9aeabc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ResearchPoints: 0
-  Class: []
+  Class:
+  - {fileID: 2041282593}
+  - {fileID: 100892512}
+  - {fileID: 663316241}
+  - {fileID: 887674190}
+  - {fileID: 1505855757}
+  - {fileID: 241854530}
   Text_ChefLevel: {fileID: 2145297644}
   Text_ResearchPoints: {fileID: 701465518}
 --- !u!1 &2138262629

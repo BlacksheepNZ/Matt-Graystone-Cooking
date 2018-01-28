@@ -31,9 +31,9 @@ public class PurchasableData : MonoBehaviour
 
         Purchasable.IDText.text = Purchasable.ID.ToString("00");
 
-        if (Purchasable.StartedTimer == true)
+        if (Purchasable.Started_Timer == true)
         {
-            Purchasable.ProgressionBar.Value = Purchasable.CurrentTime;
+            Purchasable.ProgressionBar.Value = Purchasable.Current_Time;
 
             StartCoroutine(Purchasable.UpdateTimer());
         }

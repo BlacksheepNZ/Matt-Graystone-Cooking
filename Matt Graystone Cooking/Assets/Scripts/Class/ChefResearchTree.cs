@@ -6,7 +6,20 @@ using System;
 
 public class ChefResearchTree : MonoBehaviour
 {
-    public int ResearchPoints;
+    private static ChefResearchTree instance;
+    public static ChefResearchTree Instance
+    {
+        get
+        {
+            if (instance == null)
+            {
+                instance = GameObject.FindObjectOfType<ChefResearchTree>();
+            }
+
+            return ChefResearchTree.instance;
+        }
+    }
+
     public List<Chef> Class = new List<Chef>();
 
     public Text Text_ChefLevel;

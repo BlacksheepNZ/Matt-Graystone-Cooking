@@ -1,6 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
+[System.Serializable]
 public class PlayerManager : MonoBehaviour
 {
     private static PlayerManager instance;
@@ -28,9 +29,9 @@ public class PlayerManager : MonoBehaviour
 
     public void Update()
     {
-        if(Input.GetKeyDown(KeyCode.F1))
+        if(Input.GetKeyDown(KeyCode.F10))
         {
-            AddExperience(1);
+            AddExperience(100000);
         }
 
         if (CurrentExperience > 0)
