@@ -24,8 +24,12 @@ public class Chef : MonoBehaviour
 
     public void UpdateText()
     {
-        Text_Cost.text = "Cost. " + CostToLevel.ToString();
-        Text_Level.text = CurrentLevel.ToString() + "/" + MaxLevel.ToString();
+        try
+        {
+            Text_Cost.text = "Cost. " + CostToLevel.ToString();
+            Text_Level.text = CurrentLevel.ToString() + "/" + MaxLevel.ToString();
+        }
+        catch (Exception ex) { }
     }
 
     public void Purchasable()

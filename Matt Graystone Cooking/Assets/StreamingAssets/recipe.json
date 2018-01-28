@@ -1,25 +1,37 @@
 [
   {
     "Name": "Onion Soup",
-    "Key": "001000000000000000000000000",
+    "Key": "400200000000000000000000000",
     "Recipe": [
       {
-        "ItemID": 1,
+        "ItemID": 400,
+        "Count": 1
+      },
+      {
+        "ItemID": 200,
         "Count": 1
       }
     ],
     "SellValue": 1
   },
   {
-    "Name": "Bread & Soup",
-    "Key": "100200000000000000000000000",
+    "Name": "Chicken Burger",
+    "Key": "000401101000500000000100000",
     "Recipe": [
       {
-        "ItemID": 100,
+        "ItemID": 401,
         "Count": 1
       },
       {
-        "ItemID": 200,
+        "ItemID": 101,
+        "Count": 1
+      },
+      {
+        "ItemID": 500,
+        "Count": 1
+      },
+      {
+        "ItemID": 100,
         "Count": 1
       }
     ],

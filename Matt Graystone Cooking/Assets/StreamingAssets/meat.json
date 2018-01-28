@@ -6,7 +6,7 @@
     "Coefficent": "1.07",
     "Count": 1,
     "ResourceRate": "1",
-    "ResourceType": "Food_1_Meat",
+    "ItemID": "500",
     "TimeToCompleteTask": "0.6"
   },
   {
@@ -16,7 +16,7 @@
     "Coefficent": "1.15",
     "Count": 1,
     "ResourceRate": "60",
-    "ResourceType": "Food_2_Meat",
+    "ItemID": "501",
     "TimeToCompleteTask": "3"
   },
   {
@@ -26,7 +26,7 @@
     "Coefficent": "1.14",
     "Count": 1,
     "ResourceRate": "540",
-    "ResourceType": "Food_3_Meat",
+    "ItemID": "502",
     "TimeToCompleteTask": "6"
   },
   {
@@ -36,7 +36,7 @@
     "Coefficent": "1.13",
     "Count": 1,
     "ResourceRate": "4320",
-    "ResourceType": "Food_4_Meat",
+    "ItemID": "503",
     "TimeToCompleteTask": "12"
   },
   {
@@ -46,7 +46,7 @@
     "Coefficent": "1.12",
     "Count": 1,
     "ResourceRate": "51840",
-    "ResourceType": "Food_5_Meat",
+    "ItemID": "504",
     "TimeToCompleteTask": "24"
   },
   {
@@ -56,7 +56,7 @@
     "Coefficent": "1.11",
     "Count": 1,
     "ResourceRate": "622080",
-    "ResourceType": "Food_6_Meat",
+    "ItemID": "505",
     "TimeToCompleteTask": "96"
   },
   {
@@ -66,7 +66,7 @@
     "Coefficent": "1.10",
     "Count": 1,
     "ResourceRate": "7464960",
-    "ResourceType": "Food_7_Meat",
+    "ItemID": "506",
     "TimeToCompleteTask": "384"
   },
   {
@@ -76,7 +76,7 @@
     "Coefficent": "1.09",
     "Count": 1,
     "ResourceRate": "89579520",
-    "ResourceType": "Food_8_Meat",
+    "ItemID": "507",
     "TimeToCompleteTask": "1536"
   },
   {
@@ -86,7 +86,7 @@
     "Coefficent": "1.08",
     "Count": 1,
     "ResourceRate": "1074954240",
-    "ResourceType": "Food_9_Meat",
+    "ItemID": "508",
     "TimeToCompleteTask": "6144"
   },
   {
@@ -96,7 +96,7 @@
     "Coefficent": "1.07",
     "Count": 1,
     "ResourceRate": "29668737024",
-    "ResourceType": "Food_10_Meat",
+    "ItemID": "509",
     "TimeToCompleteTask": "36864"
   }
 ]

@@ -8,7 +8,11 @@ using System;
 [System.Serializable]
 public class Item
 {
-    public string Name;
+    public string Name
+    {
+        get;
+        set;
+    }
     public int ID;
     public Sprite BorderImage;
     public int ImageID;
@@ -50,6 +54,26 @@ public class Item
         Name = name;
         ID = id;
         BorderImage = borderImage;
+        ImageID = imageID;
+        Stackable = stackable;
+        ItemRarity = itemRarity;
+        ItemType = itemType;
+        ResourceType = resourceType;
+
+        BonusAttached = new List<Tuple<BonusType, float>>();
+        AddBonus(BonusType, B_Amount);
+    }
+
+    public Item(string name,
+    int id,
+    int imageID,
+    bool stackable,
+    ItemRarity itemRarity,
+    ItemType itemType,
+    ResourceType resourceType)
+    {
+        Name = name;
+        ID = id;
         ImageID = imageID;
         Stackable = stackable;
         ItemRarity = itemRarity;

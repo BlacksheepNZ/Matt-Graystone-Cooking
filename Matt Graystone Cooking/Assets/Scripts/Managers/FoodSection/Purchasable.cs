@@ -29,7 +29,7 @@ public class Purchasable
     public int Count;
     public float ResourceRate;
 
-    public ResourceType ResourceType;
+    public string ItemID;
 
     public float TimeToCompleteTask = 1.0f;
 
@@ -62,7 +62,7 @@ public class Purchasable
      float coefficent,
      int count,
      float resourceRate,
-     ResourceType resourceTypeReward,
+     string itemID,
      float timeToCompleteTask)
     {
         ID = id;
@@ -72,7 +72,7 @@ public class Purchasable
         Coefficent = coefficent;
         Count = count;
         ResourceRate = resourceRate;
-        ResourceType = resourceTypeReward;
+        ItemID = itemID;
         TimeToCompleteTask = timeToCompleteTask;
 
         Cost = BaseCost;
@@ -227,7 +227,7 @@ public class Purchasable
 
         if (!Inventory.Instance.InventoryFull())
         {
-            Inventory.Instance.AddItem((int)ResourceType, (int)(Count * valueResource));
+            Inventory.Instance.AddItem(int.Parse(ItemID), (int)(Count * valueResource));
             OnComplete = true;
         }
     }

@@ -217,8 +217,6 @@ public class SaveLoad : MonoBehaviour
             {
                 int imageId = 0;
 
-                ResourceType ResourceType = (ResourceType)Enum.Parse(typeof(ResourceType), (string)data[i]["ResourceType"]);
-
                 purchasable.Add(new Purchasable(
                     i,
                     (string)data[i]["Name"],
@@ -227,7 +225,7 @@ public class SaveLoad : MonoBehaviour
                     float.Parse(data[i]["Coefficent"].ToString()),
                     (int)data[i]["Count"],
                     float.Parse(data[i]["ResourceRate"].ToString()),
-                    ResourceType,
+                    (string)data[i]["ItemID"],
                     float.Parse(data[i]["TimeToCompleteTask"].ToString())));
 
                 GameObject purchasablePrefab = Instantiate(Purchasable_Prefab);
@@ -245,7 +243,7 @@ public class SaveLoad : MonoBehaviour
                 purchasable_data.Coefficent = purchasable[i].Coefficent;
                 purchasable_data.Count = purchasable[i].Count;
                 purchasable_data.ResourceRate = purchasable[i].ResourceRate;
-                purchasable_data.ResourceType = purchasable[i].ResourceType;
+                purchasable_data.ItemID = purchasable[i].ItemID;
                 purchasable_data.TimeToCompleteTask = purchasable[i].TimeToCompleteTask;
                 //Inventory.Instance.AddSlot(parent_Slot, item_Type);
 
@@ -254,7 +252,7 @@ public class SaveLoad : MonoBehaviour
         }
         catch (Exception ex)
         {
-            Debug.Log(ex.Message);
+            Debug.Log(ex.Message + location);
         }
     }
 
