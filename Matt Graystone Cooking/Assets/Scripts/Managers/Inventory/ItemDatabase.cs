@@ -6,7 +6,6 @@ using System;
 
 public class ItemDatabase : MonoBehaviour
 {
-
     public Item FetchItemByID(int id)
     {
         for (int i = 0; i < SaveLoad.Instance.Item_Database.Count; i++)
@@ -16,14 +15,6 @@ public class ItemDatabase : MonoBehaviour
                 return SaveLoad.Instance.Item_Database[i];
             }
         }
-
-        //for (int i = 0; i < SaveLoad.Instance.PowerNodeItemDatabase.Count; i++)
-        //{
-        //    if (SaveLoad.Instance.PowerNodeItemDatabase[i].ID == id)
-        //    {
-        //        return SaveLoad.Instance.PowerNodeItemDatabase[i];
-        //    }
-        //}
 
         return null;
     }

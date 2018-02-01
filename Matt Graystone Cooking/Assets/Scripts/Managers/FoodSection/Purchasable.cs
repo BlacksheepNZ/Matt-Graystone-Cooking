@@ -46,12 +46,6 @@ public class Purchasable
     /// Bonus
     /// </summary>
 
-    public float B_DecreseCost = 1;
-    public float B_IncreaseResourceRate;
-
-    public float B_IncreaseCurrencyRewardRate;
-    public float B_DecreaseTimeToCompleteTask;
-
     public bool IsPurchased;
 
     public Purchasable(
@@ -81,8 +75,7 @@ public class Purchasable
 
     public bool CanPurchase()
     {
-        float value = DecreaseValue(Cost, B_DecreseCost);
-        if (Game.Instance.CanPurchase(value))
+        if (Game.Instance.CanPurchase(Cost))
         {
             return true;
         }
@@ -96,10 +89,8 @@ public class Purchasable
         ItemNameText.text = ItemName;
         CountText.text = "LVL. " + Count.ToString("0");
 
-        float valueResource = IncreaseValue(Resource_Rate, B_IncreaseResourceRate);
-
-        Text_Reward.text = "+ " + CurrencyConverter.Instance.GetCurrencyIntoString(valueResource);
-        ValueText.text = CurrencyConverter.Instance.GetCurrencyIntoStringNoSign(Resource_Rate * Count) + DisplayText(B_IncreaseResourceRate);
+        Text_Reward.text = "+ " + CurrencyConverter.Instance.GetCurrencyIntoString(Resource_Rate);
+        ValueText.text = CurrencyConverter.Instance.GetCurrencyIntoStringNoSign(Resource_Rate * Count);
 
         //ProgressionBar.progressText.text = CurrencyConverter.Instance.GetCurrencyIntoStringNoSign(ProgressionBar.Current) + "/" + CurrencyConverter.Instance.GetCurrencyIntoStringNoSign(ProgressionBar.Max) + DisplayText(B_DecreaseTimeToCompleteTask);
     }
@@ -150,12 +141,10 @@ public class Purchasable
 
     public float CostToBuy()
     {
-        float cost = DecreaseValue(Cost, B_DecreseCost);
-
         float value = 0;
         for (int i = 0; i < CostToPurchaseAmount; i++)
         {
-            value += cost * Coefficent;
+            value += Cost * Coefficent;
         }
 
         return value;
@@ -163,7 +152,6 @@ public class Purchasable
 
     public void Upgrade()
     {
-        float cost = DecreaseValue(Cost, B_DecreseCost);
         float value = CostToBuy();
 
         if (Game.Instance.CanPurchase(value))
@@ -172,27 +160,11 @@ public class Purchasable
 
             for (int i = 0; i < CostToPurchaseAmount; i++)
             {
-                Cost += cost * Coefficent;
+                Cost += Cost * Coefficent;
             }
 
             Count += CostToPurchaseAmount;
         }
-    }
-
-    public void AddRewards(Item itemToAdd)
-    {
-        B_DecreseCost = itemToAdd.B_DecreseCost;
-        B_IncreaseResourceRate = itemToAdd.B_IncreaseResourceRate;
-        B_IncreaseCurrencyRewardRate = itemToAdd.B_IncreaseCurrencyRewardRate;
-        B_DecreaseTimeToCompleteTask = itemToAdd.B_DecreaseTimeToCompleteTask;
-    }
-
-    public void RemoveRewards()
-    {
-        B_DecreseCost = 0;
-        B_IncreaseResourceRate = 0;
-        B_IncreaseCurrencyRewardRate = 0;
-        B_DecreaseTimeToCompleteTask = 0;
     }
 
     #region Timer
@@ -205,9 +177,7 @@ public class Purchasable
         Started_Timer = true;
         OnComplete = false;
 
-        float value = DecreaseValue(TimeToCompleteTask, B_DecreaseTimeToCompleteTask);
-
-        float speed = (Time.fixedDeltaTime / value);
+        float speed = (Time.fixedDeltaTime / TimeToCompleteTask);
 
         while (ProgressionBar.Value < 1)
         {
@@ -223,11 +193,10 @@ public class Purchasable
 
     private void ResetTimer()
     {
-        float valueResource = IncreaseValue(Resource_Rate, B_IncreaseResourceRate);
-
         if (!Inventory.Instance.InventoryFull())
         {
-            Inventory.Instance.AddItem(int.Parse(ItemID), (int)(Count * valueResource));
+            PlayerManager.Instance.AddExperience(Count * Resource_Rate);
+            Inventory.Instance.AddItem(int.Parse(ItemID), (int)(Count * Resource_Rate));
             OnComplete = true;
         }
     }

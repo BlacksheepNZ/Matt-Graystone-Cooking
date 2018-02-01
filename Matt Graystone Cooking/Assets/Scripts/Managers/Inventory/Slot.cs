@@ -46,46 +46,42 @@ public class Slot : MonoBehaviour, IDropHandler, IPointerClickHandler
         return false;
     }
 
-    public void CheckDrillDataItemSlot()
-    {
-        //2 slots one is overiding the other.
+    //public void CheckDrillDataItemSlot()
+    //{
+    //    //2 slots one is overiding the other.
 
-        if (this.transform.childCount <= 0)
-        {
-            //get the parent item of the slot
-            GameObject parent = this.gameObject.transform.parent.transform.parent.gameObject;
-            //get the purchasable data from parent so we can modify it.
-            PurchasableData DrillData = parent.GetComponent<PurchasableData>();
+    //    if (this.transform.childCount <= 0) //what does this do???
+    //    {
+    //        //get the parent item of the slot
+    //        GameObject parent = this.gameObject.transform.parent.transform.parent.gameObject;
+    //        //get the purchasable data from parent so we can modify it.
+    //        PurchasableData DrillData = parent.GetComponent<PurchasableData>();
 
-            if (DrillData != null)
-            {
-                DrillData.Purchasable.RemoveRewards();
-            }
-            return;
-        }
-        if (this.transform.childCount > 0)
-        {
-            //get the parent item of the slot
-            GameObject parent = this.gameObject.transform.parent.transform.parent.gameObject;
-            //get the purchasable data from parent so we can modify it.
-            PurchasableData DrillData = parent.GetComponent<PurchasableData>();
+    //        return;
+    //    }
+    //    if (this.transform.childCount > 0)
+    //    {
+    //        //get the parent item of the slot
+    //        GameObject parent = this.gameObject.transform.parent.transform.parent.gameObject;
+    //        //get the purchasable data from parent so we can modify it.
+    //        PurchasableData DrillData = parent.GetComponent<PurchasableData>();
 
-            //get the item in our child
-            GameObject child = this.gameObject.transform.GetChild(0).gameObject;
-            //get child item data
-            Item childItem = child.GetComponent<ItemData>().Item;
+    //        //get the item in our child
+    //        GameObject child = this.gameObject.transform.GetChild(0).gameObject;
+    //        //get child item data
+    //        Item childItem = child.GetComponent<ItemData>().Item;
 
-            //this will throw error for slots that are not part of an parent with Purchasable, ie inventory items
+    //        //this will throw error for slots that are not part of an parent with Purchasable, ie inventory items
 
-            if (DrillData != null)
-            {
-                DrillData.Purchasable.AddRewards(childItem);
-            }
-            return;
+    //        if (DrillData != null)
+    //        {
+    //            DrillData.Purchasable.AddRewards(childItem);
+    //        }
+    //        return;
 
-        }
-        else { }
-    }
+    //    }
+    //    else { }
+    //}
 
     //public void CheckScavangerDataItemSlot()
     //{
@@ -140,83 +136,27 @@ public class Slot : MonoBehaviour, IDropHandler, IPointerClickHandler
             #region todo
             switch (droppedItem.Item.ItemType)
             {
-                case ItemType.WorkerItem:
-                    if (InventoryType(SlotID, droppedItem, ItemType.WorkerItem)) { SetNewItem(droppedItem); }
-                    break;
-                case ItemType.ScavangerItem:
-                    if (InventoryType(SlotID, droppedItem, ItemType.ScavangerItem)) { SetNewItem(droppedItem); }
+                case ItemType.General:
+                    if (InventoryType(SlotID, droppedItem, ItemType.General)) { SetNewItem(droppedItem); }
                     break;
                 case ItemType.Consumable:
                     if (InventoryType(SlotID, droppedItem, ItemType.General)) { SetNewItem(droppedItem); }
                     break;
-                case ItemType.General:
-                    if (InventoryType(SlotID, droppedItem, ItemType.General)) { SetNewItem(droppedItem); }
-                    break;
-                case ItemType.Ore:
-                    if (InventoryType(SlotID, droppedItem, ItemType.General)) { SetNewItem(droppedItem); }
-                    break;
-                case ItemType.Quest:
-                    if (InventoryType(SlotID, droppedItem, ItemType.General)) { SetNewItem(droppedItem); }
-                    break;
-                case ItemType.PowerNode:
-                    if (InventoryType(SlotID, droppedItem, ItemType.PowerNode)) { SetNewItem(droppedItem); }
-                    break;
-                case ItemType.ShieldGrid:
-                    if (InventoryType(SlotID, droppedItem, ItemType.ShieldGrid)) { SetNewItem(droppedItem); }
-                    break;
-                case ItemType.WeaponsArray:
-                    if (InventoryType(SlotID, droppedItem, ItemType.WeaponsArray)) { SetNewItem(droppedItem); }
-                    break;
-                case ItemType.Sensors:
-                    if (InventoryType(SlotID, droppedItem, ItemType.Sensors)) { SetNewItem(droppedItem); }
-                    break;
-                case ItemType.Transporters:
-                    if (InventoryType(SlotID, droppedItem, ItemType.Transporters)) { SetNewItem(droppedItem); }
-                    break;
             }
             #endregion
-        }
-        else if (ID == droppedItem.slot)
-        {
-
         }
         else
         {
             //Swap item
             switch (droppedItem.Item.ItemType)
             {
-                case ItemType.WorkerItem:
-                    if (InventoryType(SlotID, droppedItem, ItemType.WorkerItem)) { SwapItem(droppedItem); }
-                    break;
-                case ItemType.ScavangerItem:
-                    if (InventoryType(SlotID, droppedItem, ItemType.ScavangerItem)) { SwapItem(droppedItem); }
-                    break;
-                case ItemType.Consumable:
-                    if (InventoryType(SlotID, droppedItem, ItemType.General)) { SwapItem(droppedItem); }
-                    break;
                 case ItemType.General:
                     if (InventoryType(SlotID, droppedItem, ItemType.General)) { SwapItem(droppedItem); }
                     break;
-                case ItemType.Ore:
-                    if (InventoryType(SlotID, droppedItem, ItemType.General)) { SwapItem(droppedItem); }
-                    break;
-                case ItemType.Quest:
-                    if (InventoryType(SlotID, droppedItem, ItemType.General)) { SwapItem(droppedItem); }
-                    break;
-                case ItemType.PowerNode:
-                    if (InventoryType(SlotID, droppedItem, ItemType.PowerNode)) { SwapItem(droppedItem); }
-                    break;
-                case ItemType.ShieldGrid:
-                    if (InventoryType(SlotID, droppedItem, ItemType.ShieldGrid)) { SwapItem(droppedItem); }
-                    break;
-                case ItemType.WeaponsArray:
-                    if (InventoryType(SlotID, droppedItem, ItemType.WeaponsArray)) { SwapItem(droppedItem); }
-                    break;
-                case ItemType.Sensors:
-                    if (InventoryType(SlotID, droppedItem, ItemType.Sensors)) { SwapItem(droppedItem); }
-                    break;
-                case ItemType.Transporters:
-                    if (InventoryType(SlotID, droppedItem, ItemType.Transporters)) { SwapItem(droppedItem); }
+                case ItemType.Consumable:
+                    if (InventoryType(SlotID, droppedItem, ItemType.General) ||
+                        InventoryType(SlotID, droppedItem, ItemType.Consumable))
+                    { SwapItem(droppedItem); }
                     break;
             }
         }

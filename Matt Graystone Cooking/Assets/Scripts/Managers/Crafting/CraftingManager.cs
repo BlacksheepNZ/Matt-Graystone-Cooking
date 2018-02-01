@@ -25,7 +25,6 @@ public class CraftingManager : MonoBehaviour
 
     public GameObject panel;
     private int slotCount = 9;
-    public List<int> slotId = new List<int>();
 
     private string LastKey = "000000000000000000000000000";
     public string CurrentKey = "";
@@ -35,20 +34,21 @@ public class CraftingManager : MonoBehaviour
     {
         for (int i = 0; i < slotCount; i++)
         {
-            Inventory.Instance.AddSlot(panel, ItemType.General);
-            slotId.Add(Inventory.Instance.slots.Count - 1);
+            Inventory.Instance.AddSlot(panel, ItemType.Consumable);
         }
 
         LastKey = CurrentKey;
         Button.interactable = false;
 
         //direct add
-        UnlockRecipe(SaveLoad.Instance.Recipe_Data[0], false);
+        //UnlockRecipe(SaveLoad.Instance.Recipe_Data[0], false);
     }
 
     private string KeyBuilder()
     {
         string key_builder = "";
+
+        List<int> slotId = Inventory.Instance.SlotsToCheck;
 
         for (int i = 0; i < slotId.Count; i++)
         {
@@ -101,10 +101,20 @@ public class CraftingManager : MonoBehaviour
                 if(showUnlock == true)
                     gameObject.GetComponent<RecipeUnlock>().Set(
                         r.recipe.Name, 
-                        r.Text_Requirements(), 
+                        r.StringBuilder(),
                         r.recipe.SellValue.ToString());
+
+                MoveAllItemToInventory();
             }
         }
+    }
+
+    public void MoveAllItemToInventory()
+    {
+        int s = Inventory.Instance.slots.Count(x => x.GetComponent<Slot>().ItemType == ItemType.Consumable);
+        Item z = Inventory.Instance.GetItemFromSlot(s);
+
+        Inventory.Instance.MoveItemToSlot(z, Inventory.Instance.slots[Inventory.Instance.GetEmptySlot()].GetComponent<Slot>());
     }
 
     public Recipe CheckForKey(string key)

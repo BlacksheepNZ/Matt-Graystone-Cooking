@@ -72,16 +72,7 @@ public enum ResourceType
 public enum ItemType
 {
     General = 0,
-    WorkerItem = 1,
-    ScavangerItem = 2,
-    Consumable = 3,
-    Quest = 4,
-    Ore = 5,
-    PowerNode,
-    ShieldGrid,
-    WeaponsArray,
-    Sensors,
-    Transporters,
+    Consumable = 1,
 }
 
 public enum ItemRarity

@@ -8,7 +8,7 @@
         "Count": 1
       },
       {
-        "ItemID": 200,
+        "ItemID": 203,
         "Count": 1
       }
     ],
@@ -33,6 +33,40 @@
       {
         "ItemID": 100,
         "Count": 1
+      }
+    ],
+    "SellValue": 1
+  },
+  {
+    "Name": "Chicken Parma",
+    "Key": "500101409000000000000000000",
+    "Recipe": [
+      {
+        "ItemID": 500,
+        "Count": 1
+      },
+      {
+        "ItemID": 101,
+        "Count": 2
+      },
+      {
+        "ItemID": 409,
+        "Count": 5
+      }
+    ],
+    "SellValue": 1
+  },
+  {
+    "Name": "Eggs on Toast",
+    "Key": "101003000000000000000000000",
+    "Recipe": [
+      {
+        "ItemID": 101,
+        "Count": 1
+      },
+      {
+        "ItemID": 3,
+        "Count": 2
       }
     ],
     "SellValue": 1

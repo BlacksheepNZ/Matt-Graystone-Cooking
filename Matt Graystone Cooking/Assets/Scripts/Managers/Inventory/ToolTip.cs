@@ -58,7 +58,7 @@ public class ToolTip : MonoBehaviour
             itemColor = "FFA500";
 
         Name.text = "<color=#" + itemColor + "><b>" + item.Name + "</b></color>";
-        Decription.text = item.GetDecription();
+        //Decription.text = item.GetDecription();
     }
 
     public void DeActivate()

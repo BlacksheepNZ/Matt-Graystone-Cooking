@@ -23,25 +23,6 @@ public class Item
     public ItemType ItemType;
     public ResourceType ResourceType;
 
-    /// <summary>
-    /// Bonus
-    /// </summary>
-
-    public float B_DecreseCost;
-    public float B_IncreaseResourceRate;
-
-    public float B_IncreaseCurrencyRewardRate;
-    public float B_DecreaseTimeToCompleteTask;
-
-    public float B_IncreaseCritChance;
-    public float B_MineNextTeir;
-
-    public float B_Speed;
-
-    public List<Tuple<BonusType, float>> BonusAttached;
-    public BonusType BonusType;
-    public float B_Amount;
-
     public Item(string name,
         int id, 
         Sprite borderImage, 
@@ -59,9 +40,6 @@ public class Item
         ItemRarity = itemRarity;
         ItemType = itemType;
         ResourceType = resourceType;
-
-        BonusAttached = new List<Tuple<BonusType, float>>();
-        AddBonus(BonusType, B_Amount);
     }
 
     public Item(string name,
@@ -79,38 +57,6 @@ public class Item
         ItemRarity = itemRarity;
         ItemType = itemType;
         ResourceType = resourceType;
-
-        BonusAttached = new List<Tuple<BonusType, float>>();
-        AddBonus(BonusType, B_Amount);
-    }
-
-    public void AddBonus(BonusType BonusType, float b_amount)
-    {
-        switch(BonusType)
-        {
-            case BonusType.Empty:
-                break;
-            case BonusType.DecreseSpeed:
-                B_DecreseCost = b_amount;
-                break;
-            case BonusType.DecreasePurchaseCost:
-                B_DecreaseTimeToCompleteTask = b_amount;
-                break;
-            case BonusType.IncreaseCurrency:
-                B_IncreaseCurrencyRewardRate = b_amount;
-                break;
-            case BonusType.CritChance:
-                B_IncreaseCritChance = b_amount;
-                break;
-            case BonusType.MineNextTeir:
-                B_MineNextTeir = b_amount;
-                break;
-            case BonusType.PowerNode:
-                B_Speed = b_amount;
-                break;
-        }
-
-        BonusAttached.Add(new Tuple<BonusType, float>(BonusType, b_amount));
     }
 
     public Item()
@@ -119,31 +65,6 @@ public class Item
     }
 
     string nl = "\n";
-
-    public string GetDecription()
-    {
-        string value = "";
-
-        if (B_DecreseCost != 0)
-            value += "Decrese Cost By " + B_DecreseCost.ToString("0.00") + "%" + nl;
-
-        if (B_IncreaseResourceRate != 0)
-            value += "Increase Resource Reward By " + B_IncreaseResourceRate.ToString("0.00") + "%" + nl;
-
-        if (B_IncreaseCurrencyRewardRate != 0)
-            value += "Increase Currency Reward By " + B_IncreaseCurrencyRewardRate.ToString("0.00") + "%" + nl;
-
-        if (B_DecreaseTimeToCompleteTask != 0)
-            value += "Decrease Time To Complete Task By " + B_DecreaseTimeToCompleteTask.ToString("0.00") + "%" + nl;
-
-        if (B_IncreaseCritChance != 0)
-            value += "Increase Crit Chance By " + B_IncreaseCritChance.ToString("0.00") + "%" + nl;
-
-        if (B_MineNextTeir != 0)
-            value += "Mine Next Teir Chance By " + B_MineNextTeir.ToString("0.00") + "%" + nl;
-
-        return value;
-    }
 
     public void Upgrade(ItemRarity itemRarity)
     {

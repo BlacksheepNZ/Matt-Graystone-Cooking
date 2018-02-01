@@ -20,8 +20,6 @@ public class ChefResearchTree : MonoBehaviour
         }
     }
 
-    public List<Chef> Class = new List<Chef>();
-
     public Text Text_ChefLevel;
     public Text Text_ResearchPoints;
 

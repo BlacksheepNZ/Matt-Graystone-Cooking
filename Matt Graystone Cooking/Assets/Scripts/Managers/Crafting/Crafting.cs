@@ -195,7 +195,7 @@ public class Crafting
         {
             BonusType value = (BonusType)array[i];
             float amount = AddBonus(value, (ResourceType)DropDownBox2.value);
-            item.AddBonus(value, amount);
+            //item.AddBonus(value, amount);
         }
     }
 

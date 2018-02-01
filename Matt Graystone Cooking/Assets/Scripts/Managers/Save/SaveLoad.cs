@@ -28,7 +28,7 @@ public class SaveLoad : MonoBehaviour
 
     private string Save_Location
     {
-        //C:/Users/matthew/AppData/LocalLow/Highwind/Idle_Journey
+        //C:\Users\matthew\AppData\LocalLow\DefaultCompany\Matt Graystone Cooking
         get { return Application.persistentDataPath + "/savedGames.idle"; }
     }
 
@@ -112,6 +112,10 @@ public class SaveLoad : MonoBehaviour
     public List<Purchasable> Meat_Purchasable = new List<Purchasable>();
     public List<GameObject> Meat_Item = new List<GameObject>();
 
+    public string Chef_Requirment_Location = "";
+    private JsonData Chef_Requirment_Json_Data;
+    public List<Chef> Chef_Requirment_Purchasable = new List<Chef>();
+
     string FileType = ".json";
 
     public void Json()
@@ -128,6 +132,9 @@ public class SaveLoad : MonoBehaviour
         ItemJsonData = JsonMapper.ToObject(File.ReadAllText(Application.dataPath + "/StreamingAssets/" + itemLocation + FileType));
         ItemJsonDataDatabase();
 
+        Chef_Requirment_Json_Data = JsonMapper.ToObject(File.ReadAllText(Application.dataPath + "/StreamingAssets/" + Chef_Requirment_Location + FileType));
+        Chef_RequirmentDatabase();
+
         //Purchasable Section
 
         JsonDataDatabase(Recipe_Data, Recipe_Item, Recipe_Location, Recipe_Json_Data, Recipe_Parent, ItemType.General);
@@ -138,6 +145,25 @@ public class SaveLoad : MonoBehaviour
         JsonDataDatabase(Fish_Purchasable, Fish_Item, Fish_Location, Fish_Json_Data, Fish_Parent, ItemType.Consumable);
         JsonDataDatabase(Vegetable_Purchasable, Vegetable_Item, Vegetable_Location, Vegetable_Json_Data, Vegetable_Parent, ItemType.Consumable);
         JsonDataDatabase(Meat_Purchasable, Meat_Item, Meat_Location, Meat_Json_Data, Meat_Parent, ItemType.Consumable);
+    }
+
+    private void Chef_RequirmentDatabase()
+    {
+        for (int i = 0; i < Chef_Requirment_Json_Data.Count; i++)
+        {
+            string Name = (string)Chef_Requirment_Json_Data[i]["Name"];
+            int Required_Level = (int)Chef_Requirment_Json_Data[i]["Required_Level"];
+            int Cost_To_Level = (int)Chef_Requirment_Json_Data[i]["Cost_To_Level"];
+            int Max_Level = (int)Chef_Requirment_Json_Data[i]["Max_Level"];
+
+            Chef chef = Chef_Requirment_Purchasable[i];
+
+            chef.Name = Name;
+            chef.RequiredLevel = Required_Level;
+            chef.CostToLevel = Cost_To_Level;
+            chef.MaxLevel = Max_Level;
+            chef.UpdateText();
+        }
     }
 
     private void JsonDataDatabase(
@@ -435,27 +461,28 @@ public class SaveLoad : MonoBehaviour
 
     private void ResearchTreeSaveSate(Save_State save)
     {
-        for (int  i = 0; i < ChefResearchTree.Instance.Class.Count; i++)
+        for (int  i = 0; i < Chef_Requirment_Purchasable.Count; i++)
         {
-            Chef chef = ChefResearchTree.Instance.Class[i];
+            Chef chef = Chef_Requirment_Purchasable[i];
             Chef_Research_Save_State save_state = new Chef_Research_Save_State();
 
+            save_state.Name = chef.Name;
+            save_state.Unlocked = chef.Unlocked;
             save_state.Current_Level = chef.CurrentLevel;
-            save_state.Max_Level = chef.MaxLevel;
-            save_state.Cost_To_Level = chef.CostToLevel;
             save.Chef_Research_Save_State.Add(save_state);
         }
     }
 
     private void ResearchTreeLoadSate(Save_State load)
     {
-        for (int i = 0; i < ChefResearchTree.Instance.Class.Count; i++)
+        for (int i = 0; i < Chef_Requirment_Purchasable.Count; i++)
         {
-            Chef chef = ChefResearchTree.Instance.Class[i];
+            Chef chef = Chef_Requirment_Purchasable[i];
+            Chef_Research_Save_State loadState = load.Chef_Research_Save_State[i];
 
-            chef.CurrentLevel = load.Chef_Research_Save_State[i].Current_Level;
-            chef.MaxLevel = load.Chef_Research_Save_State[i].Max_Level;
-            chef.CostToLevel = load.Chef_Research_Save_State[i].Cost_To_Level;
+            chef.Name = loadState.Name;
+            chef.Unlocked = loadState.Unlocked;
+            chef.CurrentLevel = loadState.Current_Level;
         }
     }
 
@@ -537,13 +564,13 @@ public class SaveLoad : MonoBehaviour
                     item_Save.Item_Type,
                     item_Save.Resource_Type);
 
-                    for (int x = 0; x < load.Item_Save_State[i].Bonus_Save_State.Count; x++)
-                    {
-                        BonusType bType = load.Item_Save_State[i].Bonus_Save_State[x].Bonus_Type;
-                        float bAmount = load.Item_Save_State[i].Bonus_Save_State[x].Amount;
+                    //for (int x = 0; x < load.Item_Save_State[i].Bonus_Save_State.Count; x++)
+                    //{
+                    //    BonusType bType = load.Item_Save_State[i].Bonus_Save_State[x].Bonus_Type;
+                    //    float bAmount = load.Item_Save_State[i].Bonus_Save_State[x].Amount;
 
-                        item.AddBonus(bType, bAmount);
-                    }
+                    //    item.AddBonus(bType, bAmount);
+                    //}
 
                     //add to database
                     SaveLoad.Instance.Item_Database.Add(item);
@@ -724,6 +751,14 @@ class Food_Section_Save_State
 [Serializable]
 class Chef_Research_Save_State
 {
+    [SerializeField]
+    public string Name;
+
+    [SerializeField]
+    public int RequiredLevel;
+    [SerializeField]
+    public bool Unlocked;
+
     [SerializeField]
     public int Cost_To_Level;
     [SerializeField]

@@ -98,12 +98,12 @@ public class Inventory : MonoBehaviour
 
     public void Update()
     {
-        for (int i = 0; i < SlotsToCheck.Count; i++)
-        {
-            int slotId = SlotsToCheck[i];
-            slots[slotId].GetComponent<Slot>().CheckDrillDataItemSlot();
-            //slots[slotId].GetComponent<Slot>().CheckScavangerDataItemSlot();
-        }
+        //for (int i = 0; i < SlotsToCheck.Count; i++)
+        //{
+        //    int slotId = SlotsToCheck[i];
+        //    //slots[slotId].GetComponent<Slot>().CheckDrillDataItemSlot();
+        //    //slots[slotId].GetComponent<Slot>().CheckScavangerDataItemSlot();
+        //}
 
         TotalGold.text = CurrencyConverter.Instance.GetCurrencyIntoString(
             Game.Instance.TotalGold);
@@ -120,11 +120,7 @@ public class Inventory : MonoBehaviour
             {
                 switch (slot.ItemType)
                 {
-                    case ItemType.WorkerItem:
-                        return x;
-                    case ItemType.ScavangerItem:
-                        return x;
-                    case ItemType.Ore:
+                    case ItemType.General:
                         return x;
                 }
             }
@@ -174,16 +170,25 @@ public class Inventory : MonoBehaviour
         data.transform.Find("Count").GetComponent<Text>().text = CurrencyConverter.Instance.GetCurrencyIntoStringNoSign(data.count);
     }
 
-    public Item GetItemFromSlot(int slot)
+    public Item GetItemFromSlot(int slot_id)
     {
         try
         {
-            Item data = slots[slot].transform.GetChild(0).GetComponent<ItemData>().Item;
+            Item data = slots[slot_id].transform.GetChild(0).GetComponent<ItemData>().Item;
             return data;
-
         }
-        catch { }
+        catch(Exception ex)
+        {
+            Debug.Log(ex.Message);
+        }
+
         return null;
+    }
+
+    public void MoveItemToSlot(Item i, Slot s)
+    {
+        ItemData id = s.transform.GetChild(0).GetComponent<ItemData>();
+        id.transform.SetParent(GameObject.Find(s.name).transform);
     }
 
     public void AddItemToSlot(int slot, int id, int amount)
@@ -503,22 +508,22 @@ public class Inventory : MonoBehaviour
 
                 #endregion
 
-                if (itemdata.Item.ItemType == ItemType.Ore)
-                {
-                    for (int i = 0; i < MineralSellValue.Count(); i++)
-                    {
-                        if (MineralSellValue[i].ResourceType == itemdata.Item.ResourceType)
-                        {
-                            float value = MineralSellValue[i].Value * itemcount;
+                //if (itemdata.Item.ItemType == ItemType.Ore)
+                //{
+                //    for (int i = 0; i < MineralSellValue.Count(); i++)
+                //    {
+                //        if (MineralSellValue[i].ResourceType == itemdata.Item.ResourceType)
+                //        {
+                //            float value = MineralSellValue[i].Value * itemcount;
 
-                            Game.Instance.AddGold(value);
-                            Debug.Log("Sold " + itemdata.Item.ResourceType + " Gold added: " + value);
-                            RemoveItem(itemToRemove.ID, itemcount);
-                            slotWithItem.Clear();
-                            UnSelectAll();
-                        }
-                    }
-                }
+                //            Game.Instance.AddGold(value);
+                //            Debug.Log("Sold " + itemdata.Item.ResourceType + " Gold added: " + value);
+                //            RemoveItem(itemToRemove.ID, itemcount);
+                //            slotWithItem.Clear();
+                //            UnSelectAll();
+                //        }
+                //    }
+                //}
             }
         }
     }
@@ -557,6 +562,20 @@ public class Inventory : MonoBehaviour
 
     public bool boolToogleButton = false;
 
+    public Item GetItemByID(int id)
+    {
+        for (int i = 0; i < SaveLoad.Instance.Item_Database.Count; i++)
+        {
+            Item item = SaveLoad.Instance.Item_Database[i];
+            if (item.ID == id)
+            {
+                return item;
+            }
+        }
+
+        return null;
+    }
+
     public void UseComsumable(int ID)
     {
         if (SlotPanel.transform.childCount > 0)
@@ -591,24 +610,24 @@ public class Inventory : MonoBehaviour
         //get all items in main weapon panel
         if (SlotPanel.transform.childCount > 0)
         {
-            //make sure the item type are the same weapons to weaponslot
-            for (int i = 0; i < slots.Count; i++)
-            {
-                //make sure only inventory items are selected
-                if (slots[i].GetComponent<Slot>().ItemType == ItemType.General)
-                {
-                    //remove slots without weapons in it
-                    if (slots[i].transform.childCount > 0)
-                    {
-                        if (slots[i].transform.GetChild(0).GetComponent<ItemData>().Item.ItemType == ItemType.WorkerItem ||
-                            slots[i].transform.GetChild(0).GetComponent<ItemData>().Item.ItemType == ItemType.ScavangerItem ||
-                            slots[i].transform.GetChild(0).GetComponent<ItemData>().Item.ItemType == ItemType.Ore)
-                        {
-                            slotWithItem.Add(i);
-                        }
-                    }
-                }
-            }
+            ////make sure the item type are the same weapons to weaponslot
+            //for (int i = 0; i < slots.Count; i++)
+            //{
+            //    //make sure only inventory items are selected
+            //    if (slots[i].GetComponent<Slot>().ItemType == ItemType.General)
+            //    {
+            //        //remove slots without weapons in it
+            //        if (slots[i].transform.childCount > 0)
+            //        {
+            //            if (slots[i].transform.GetChild(0).GetComponent<ItemData>().Item.ItemType == ItemType.WorkerItem ||
+            //                slots[i].transform.GetChild(0).GetComponent<ItemData>().Item.ItemType == ItemType.ScavangerItem ||
+            //                slots[i].transform.GetChild(0).GetComponent<ItemData>().Item.ItemType == ItemType.Ore)
+            //            {
+            //                slotWithItem.Add(i);
+            //            }
+            //        }
+            //    }
+            //}
 
             //no items in inventory
             if (slots.Count == 0)

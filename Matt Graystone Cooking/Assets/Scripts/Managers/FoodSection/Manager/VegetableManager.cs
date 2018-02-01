@@ -80,9 +80,7 @@ public class VegetableManager : MonoBehaviour
             Purchasable purchasable = SaveLoad.Instance.Vegetable_Item[i].GetComponent<PurchasableData>().Purchasable;
             if (purchasable.Unlocked == true)
             {
-                float valueCurrency = purchasable.IncreaseValue(purchasable.Resource_Rate, purchasable.B_IncreaseCurrencyRewardRate);
-
-                value += (valueCurrency * purchasable.Count) / purchasable.TimeToCompleteTask;
+                value += (purchasable.Resource_Rate * purchasable.Count) / purchasable.TimeToCompleteTask;
             }
         }
 

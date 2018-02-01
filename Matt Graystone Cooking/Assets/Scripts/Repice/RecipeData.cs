@@ -20,24 +20,22 @@ public class RecipeData : MonoBehaviour
     public void Start()
     {
         Text_Name.text = recipe.Name;
-        Text_Sell_Value.text = recipe.SellValue.ToString();
 
         Button_Purchase.onClick.AddListener(() => Purchase());
-
-        UpdateText();
     }
 
-    public string Text_Requirements()
+    public void Update()
     {
-        return "Requirements :" + StringBuilder() + " = $" + recipe.SellValue * AmountSellMuiltplyer;
+        UpdateText();
     }
 
     public void UpdateText()
     {
-        Text_Requirement.text = Text_Requirements();
+        Text_Sell_Value.text = "$" + recipe.SellValue * AmountSellMuiltplyer;
+        Text_Requirement.text = StringBuilder();
     }
 
-    private string StringBuilder()
+    public string StringBuilder()
     {
         string x = "";
 
@@ -46,12 +44,41 @@ public class RecipeData : MonoBehaviour
             Item item = GetItemByID(recipe.Items[i].ItemID);
             if (item != null)
             {
-                x += item.Name + " " +
-                   "x" + recipe.Items[i].Count * AmountSellMuiltplyer + " ";
+                //for (int y = 0; y < Inventory.Instance.slots.Count; y++)
+                //{
+                //    Slot slot = Inventory.Instance.slots[y].GetComponent<Slot>();
+                //    ItemData z = Inventory.Instance.GetItemFromSlot(y);
+
+                //    if(z.Item.Name == item.Name && z.count >= recipe.Items[i].Count)
+                //    {
+                //        x += item.Name + " " +
+                //            "x" + recipe.Items[i].Count * AmountSellMuiltplyer + " ";
+                //    }
+                //    else
+                //    {
+                //    }
+                //}
+
+                int item_count = Inventory.Instance.CheckItemCount(recipe.Items[i].ItemID);
+                if (item_count >= recipe.Items[i].Count * AmountSellMuiltplyer)
+                {
+                    string value = item.Name + " " + "x" + recipe.Items[i].Count * AmountSellMuiltplyer + " \n";
+                    x += ColorString("FFA500", value);
+                }
+                else
+                {
+                    string value = item.Name + " " + "x" + recipe.Items[i].Count * AmountSellMuiltplyer + " \n";
+                    x += ColorString("FFFFFF", value);
+                }
             }
         }
 
         return x;
+    }
+
+    public string ColorString(string color, string input)
+    {
+       return "<color=#" + color + ">" + input + "</color>";
     }
 
     private Item GetItemByID(int id)
@@ -85,7 +112,7 @@ public class RecipeData : MonoBehaviour
             {
                 int count = Inventory.Instance.CheckItemCount(item.ID);
 
-                if (count >= AmountSellMuiltplyer) { have_item_count += 1; }
+                if (count > AmountSellMuiltplyer) { have_item_count += 1; }
                 else { Debug.Log("need more resources"); break; }//ok
             }
         }
