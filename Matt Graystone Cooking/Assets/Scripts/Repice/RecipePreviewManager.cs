@@ -15,7 +15,7 @@ public class RecipePreviewManager : MonoBehaviour
 
     public void Start()
     {
-        List<Recipe> data = SaveLoad.Instance.Recipe_Data;
+        List<RecipeData> data = SaveLoad.Instance.Recipe_Data;
         for (int i = 0; i < data.Count; i++)
         {
             CreatePrefab(data[i]);
@@ -70,7 +70,7 @@ public class RecipePreviewManager : MonoBehaviour
         }
     }
 
-    public void CreatePrefab(Recipe recipe)
+    public void CreatePrefab(RecipeData recipe)
     {
         GameObject recipe_preview_prefab = Instantiate(Recipe_Prefab_Preview);
         recipe_preview_prefab.transform.SetParent(Recipe_Parent);
@@ -80,10 +80,10 @@ public class RecipePreviewManager : MonoBehaviour
 
         RecipePreview recipe_preview_data = recipe_preview_prefab.GetComponent<RecipePreview>();
 
-        recipe_preview_prefab.name = recipe.Name + "_Prefab";
-        recipe_preview_data.Name = recipe.Name;
-        recipe_preview_data.Item = ConstructItem(recipe.Items);
-        recipe_preview_data.Sell_Value = "Sell Value :" + recipe.SellValue.ToString();
+        recipe_preview_prefab.name = recipe.recipe.Name + "_Prefab";
+        recipe_preview_data.Name = recipe.recipe.Name;
+        recipe_preview_data.Item = ConstructItem(recipe.recipe.Items);
+        recipe_preview_data.Sell_Value = "Sell Value :" + recipe.recipe.SellValue.ToString();
         recipe_preview_data.SetText();
     }
 

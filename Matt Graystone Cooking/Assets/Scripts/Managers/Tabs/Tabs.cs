@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -40,17 +41,37 @@ public class Tabs : MonoBehaviour {
 
     //Top Panel
     public GameObject Panel_Option;
+    public GameObject Panel_Recipe_Preview;
 
     private void Start()
     {
-        Close_Inventory();
-        Close_Crafting();
+        Close_Top_Panel();
+    }
+
+    public void Close_Top_Panel()
+    {
         Close_Chef_Research_Tree();
+        Close_Inventory();
         Close_Panel_Option();
+        Close_Recipe_Preview();
+    }
+
+    public void Open_Recipe_Preview()
+    {
+        Close_Top_Panel();
+
+        Open_Panel(Panel_Recipe_Preview);
+    }
+
+    private void Close_Recipe_Preview()
+    {
+        Close_Panel(Panel_Recipe_Preview);
     }
 
     public void Open_Panel_Option()
     {
+        Close_Top_Panel();
+
         Open_Panel(Panel_Option);
     }
 
@@ -91,14 +112,16 @@ public class Tabs : MonoBehaviour {
 
     public void Open_Recipes()
     {
+        Close_Top_Panel();
+
         Open_Panel(Panel_Recipes);
     }
 
     public void Open_Inventory()
     {
-        Open_Panel(Panel_Inventory);
+        Close_Top_Panel();
 
-        Close_Chef_Research_Tree();
+        Open_Panel(Panel_Inventory);
     }
     public void Close_Inventory()
     {
@@ -116,9 +139,9 @@ public class Tabs : MonoBehaviour {
 
     public void Open_Chef_Research_Tree()
     {
-        Open_Panel(Panel_Chef_Research_Tree);
+        Close_Top_Panel();
 
-        Close_Inventory();
+        Open_Panel(Panel_Chef_Research_Tree);
     }
     public void Close_Chef_Research_Tree()
     {

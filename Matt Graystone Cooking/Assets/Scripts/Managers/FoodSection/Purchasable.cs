@@ -17,36 +17,28 @@ public class Purchasable
     public Text ValueText;
     public Text CostToPurchase;
     public Text Text_Reward;
-    public int CostToPurchaseAmount;
+    public int Cost_To_Purchase_Amount;
 
     public Sprite Image;
 
     public int ID;
-    public string ItemName;
-    public float BaseCost;
+    public string Item_Name;
+    public float Base_Cost;
     public float Cost;
     public float Coefficent;
     public int Count;
     public float Resource_Rate;
+    public string Item_ID;
+    public float Time_To_Complete_Task = 1.0f;
 
-    public string ItemID;
+    public ProgressionBar Progression_Bar;
 
-    public float TimeToCompleteTask = 1.0f;
+    public Button Button_FirstTime_Purchase;
+    public Button Button_Upgrade;
 
-    public ProgressionBar ProgressionBar;
-
-    public Button ButtonFirstTimePurchase;
-    public Button ButtonUpgrade;
-    //public Button ButtonImage;
-    //public Button ButtonUpgradePurchase;
-
-    public bool OnComplete;
+    public bool On_Complete;
     public bool Unlocked = false;
-    /// <summary>
-    /// Bonus
-    /// </summary>
-
-    public bool IsPurchased;
+    public bool Is_Purchased;
 
     public Purchasable(
         int id, 
@@ -60,20 +52,20 @@ public class Purchasable
      float timeToCompleteTask)
     {
         ID = id;
-        ItemName = itemName;
-        BaseCost = baseCost;
+        Item_Name = itemName;
+        Base_Cost = baseCost;
         Image = image;
         Coefficent = coefficent;
         Count = count;
         Resource_Rate = resourceRate;
-        ItemID = itemID;
-        TimeToCompleteTask = timeToCompleteTask;
+        Item_ID = itemID;
+        Time_To_Complete_Task = timeToCompleteTask;
 
-        Cost = BaseCost;
-        IsPurchased = false;
+        Cost = Base_Cost;
+        Is_Purchased = false;
     }
 
-    public bool CanPurchase()
+    public bool Can_Purchase()
     {
         if (Game.Instance.CanPurchase(Cost))
         {
@@ -85,8 +77,8 @@ public class Purchasable
 
     public void Update()
     {
-        CostToPurchase.text = CurrencyConverter.Instance.GetCurrencyIntoString(CostToBuy());
-        ItemNameText.text = ItemName;
+        CostToPurchase.text = CurrencyConverter.Instance.GetCurrencyIntoString(Cost_To_Buy());
+        ItemNameText.text = Inventory.Instance.GetItemByID(int.Parse(Item_ID)).Name;
         CountText.text = "LVL. " + Count.ToString("0");
 
         Text_Reward.text = "+ " + CurrencyConverter.Instance.GetCurrencyIntoString(Resource_Rate);
@@ -95,7 +87,7 @@ public class Purchasable
         //ProgressionBar.progressText.text = CurrencyConverter.Instance.GetCurrencyIntoStringNoSign(ProgressionBar.Current) + "/" + CurrencyConverter.Instance.GetCurrencyIntoStringNoSign(ProgressionBar.Max) + DisplayText(B_DecreaseTimeToCompleteTask);
     }
 
-    private string DisplayText(float bonus)
+    private string Display_Text(float bonus)
     {
         if (bonus != 0)
             return "<color=#0473f0><b> (" + CurrencyConverter.Instance.GetCurrencyIntoString(bonus) + "%) </b></color>";
@@ -103,7 +95,7 @@ public class Purchasable
             return "";
     }
 
-    public float DecreaseValue(float cost, float decrease)
+    public float Decrease_Value(float cost, float decrease)
     {
         if(decrease == 0)
         {
@@ -116,7 +108,7 @@ public class Purchasable
         Mathf.Clamp(value, 0.001f, value);
         return value;
     }
-    public float IncreaseValue(float cost, float increase)
+    public float Increase_Value(float cost, float increase)
     {
         if (increase == 0)
         {
@@ -129,20 +121,20 @@ public class Purchasable
         return value;
     }
 
-    public void FirstTimePurchase()
+    public void First_Time_Purchase()
     {
-        if (CanPurchase() == true)
+        if (Can_Purchase() == true)
         {
             Game.Instance.RemoveGold(Cost);
-            IsPurchased = true;
+            Is_Purchased = true;
             Unlocked = true;
         }
     }
 
-    public float CostToBuy()
+    public float Cost_To_Buy()
     {
         float value = 0;
-        for (int i = 0; i < CostToPurchaseAmount; i++)
+        for (int i = 0; i < Cost_To_Purchase_Amount; i++)
         {
             value += Cost * Coefficent;
         }
@@ -152,18 +144,18 @@ public class Purchasable
 
     public void Upgrade()
     {
-        float value = CostToBuy();
+        float value = Cost_To_Buy();
 
         if (Game.Instance.CanPurchase(value))
         {
             Game.Instance.RemoveGold(value);
 
-            for (int i = 0; i < CostToPurchaseAmount; i++)
+            for (int i = 0; i < Cost_To_Purchase_Amount; i++)
             {
                 Cost += Cost * Coefficent;
             }
 
-            Count += CostToPurchaseAmount;
+            Count += Cost_To_Purchase_Amount;
         }
     }
 
@@ -172,32 +164,32 @@ public class Purchasable
     public bool Started_Timer;
     public float Current_Time = 0;
 
-    public IEnumerator UpdateTimer()
+    public IEnumerator Update_Timer()
     {
         Started_Timer = true;
-        OnComplete = false;
+        On_Complete = false;
 
-        float speed = (Time.fixedDeltaTime / TimeToCompleteTask);
+        float speed = (Time.fixedDeltaTime / Time_To_Complete_Task);
 
-        while (ProgressionBar.Value < 1)
+        while (Progression_Bar.Value < 1)
         {
-            ProgressionBar.Value += speed;
-            Current_Time = ProgressionBar.Value;
+            Progression_Bar.Value += speed;
+            Current_Time = Progression_Bar.Value;
 
             yield return null;
         }
 
-        ProgressionBar.Value = 0;
-        ResetTimer();
+        Progression_Bar.Value = 0;
+        Reset_Timer();
     }
 
-    private void ResetTimer()
+    private void Reset_Timer()
     {
         if (!Inventory.Instance.InventoryFull())
         {
             PlayerManager.Instance.AddExperience(Count * Resource_Rate);
-            Inventory.Instance.AddItem(int.Parse(ItemID), (int)(Count * Resource_Rate));
-            OnComplete = true;
+            Inventory.Instance.AddItem(int.Parse(Item_ID), (int)(Count * Resource_Rate));
+            On_Complete = true;
         }
     }
 

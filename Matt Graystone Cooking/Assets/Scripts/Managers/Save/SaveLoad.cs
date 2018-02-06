@@ -26,10 +26,29 @@ public class SaveLoad : MonoBehaviour
         }
     }
 
+    private string Path;
+    private string File_Name;
+
     private string Save_Location
     {
         //C:\Users\matthew\AppData\LocalLow\DefaultCompany\Matt Graystone Cooking
-        get { return Application.persistentDataPath + "/savedGames.idle"; }
+        get { return Path + File_Name; } //Application.persistentDataPath
+    }
+
+    public void Start()
+    {
+        File_Name = "savedGames.idle";
+        Path = Application.dataPath + "/StreamingAssets/Save/";
+
+        Json();
+        LoadFile();
+
+        Current_Date_Time = DateTime.Now;
+
+        if (Current_Date_Time > Previous_Date_Time)
+        {
+            Previous_Date_Time = Current_Date_Time;
+        }
     }
 
     private DateTime Previous_Date_Time;
@@ -67,7 +86,7 @@ public class SaveLoad : MonoBehaviour
     public string Recipe_Location = "";
     private JsonData Recipe_Json_Data = "";
     public Transform Recipe_Parent;
-    public List<Recipe> Recipe_Data = new List<Recipe>();
+    public List<RecipeData> Recipe_Data = new List<RecipeData>();
     public List<GameObject> Recipe_Item = new List<GameObject>();
 
     //Pastry
@@ -167,7 +186,7 @@ public class SaveLoad : MonoBehaviour
     }
 
     private void JsonDataDatabase(
-    List<Recipe> purchasable,
+    List<RecipeData> purchasable,
     List<GameObject> item,
     string location,
     JsonData data,
@@ -183,6 +202,9 @@ public class SaveLoad : MonoBehaviour
             {
                 string name = (string)data[i]["Name"];
                 string key = (string)data[i]["Key"];
+                string image_preview = (string)data[i]["Image_Preview"];
+
+                int image_id = Function.FindImageID(Item_Images, image_preview);
 
                 List<RecipeItem> ri = new List<RecipeItem>();
 
@@ -197,24 +219,22 @@ public class SaveLoad : MonoBehaviour
 
                 int sellvalue = (int)data[i]["SellValue"];
 
-                purchasable.Add(new Recipe(
+                Recipe recipe = new Recipe(
                     name,
                     key,
+                    Item_Images[image_id],
                     ri,
-                    sellvalue));
+                    sellvalue);
 
-                GameObject recipePrefab = Instantiate(Recipe_Prefab);
-                recipePrefab.transform.SetParent(Parent);
-                recipePrefab.transform.localScale = new Vector3(1, 1, 1);
-                recipePrefab.transform.position = Parent.position;
-                recipePrefab.SetActive(false);
+                GameObject recipePrefab = CreateRecipePrefab(Parent);
 
-                Recipe recipe_data = recipePrefab.GetComponent<RecipeData>().recipe;
-                recipe_data.Name = purchasable[i].Name;
-                recipe_data.Key = purchasable[i].Key;
-                recipe_data.Items = purchasable[i].Items;
-                recipe_data.SellValue = purchasable[i].SellValue;
+                RecipeData recipe_data = recipePrefab.GetComponent<RecipeData>();
+                recipe_data.recipe.Name = recipe.Name;
+                recipe_data.recipe.Key = recipe.Key;
+                recipe_data.recipe.Items = recipe.Items;
+                recipe_data.recipe.SellValue = recipe.SellValue;
 
+                purchasable.Add(recipe_data);
                 item.Add(recipePrefab);
             }
         }
@@ -222,6 +242,17 @@ public class SaveLoad : MonoBehaviour
         {
             Debug.Log(ex.Message + location);
         }
+    }
+
+    private GameObject CreateRecipePrefab(Transform Parent)
+    {
+        GameObject recipePrefab = Instantiate(Recipe_Prefab);
+        recipePrefab.transform.SetParent(Parent);
+        recipePrefab.transform.localScale = new Vector3(1, 1, 1);
+        recipePrefab.transform.position = Parent.position;
+        recipePrefab.SetActive(false);
+
+        return recipePrefab;
     }
 
     private void JsonDataDatabase(
@@ -241,13 +272,11 @@ public class SaveLoad : MonoBehaviour
 
             for (int i = 0; i < data.Count; i++)
             {
-                int imageId = 0;
-
                 purchasable.Add(new Purchasable(
                     i,
                     (string)data[i]["Name"],
                     float.Parse(data[i]["BaseCost"].ToString()),
-                    Item_Images[imageId],
+                    Item_Images[Function.FindImageID(Item_Images, (string)ItemJsonData[i]["SpriteName"])],
                     float.Parse(data[i]["Coefficent"].ToString()),
                     (int)data[i]["Count"],
                     float.Parse(data[i]["ResourceRate"].ToString()),
@@ -262,15 +291,15 @@ public class SaveLoad : MonoBehaviour
 
                 Purchasable purchasable_data = purchasablePrefab.GetComponent<PurchasableData>().Purchasable;
                 purchasable_data.ID = purchasable[i].ID;
-                purchasable_data.ItemName = purchasable[i].ItemName;
-                purchasable_data.BaseCost = purchasable[i].BaseCost;
+                purchasable_data.Item_Name = purchasable[i].Item_Name;
+                purchasable_data.Base_Cost = purchasable[i].Base_Cost;
                 purchasable_data.Image = purchasable[i].Image;
                 purchasable_data.Cost = purchasable[i].Cost;
                 purchasable_data.Coefficent = purchasable[i].Coefficent;
                 purchasable_data.Count = purchasable[i].Count;
                 purchasable_data.Resource_Rate = purchasable[i].Resource_Rate;
-                purchasable_data.ItemID = purchasable[i].ItemID;
-                purchasable_data.TimeToCompleteTask = purchasable[i].TimeToCompleteTask;
+                purchasable_data.Item_ID = purchasable[i].Item_ID;
+                purchasable_data.Time_To_Complete_Task = purchasable[i].Time_To_Complete_Task;
                 //Inventory.Instance.AddSlot(parent_Slot, item_Type);
 
                 item.Add(purchasablePrefab);
@@ -320,7 +349,7 @@ public class SaveLoad : MonoBehaviour
         }
     }
 
-    static IEnumerable<string> Split(string str, int chunkSize)
+    private static IEnumerable<string> Split(string str, int chunkSize)
     {
         return Enumerable.Range(0, str.Length / chunkSize)
             .Select(i => str.Substring(i * chunkSize, chunkSize));
@@ -332,7 +361,7 @@ public class SaveLoad : MonoBehaviour
         {
             string Name = (string)ItemJsonData[i]["Name"];
             int ID = int.Parse((string)ItemJsonData[i]["ID"]);
-            int imageId = 0; //Function.FindImageID(Images, (string)ItemJsonData[i]["SpriteName"]);
+            int imageId = Function.FindImageID(Item_Images, (string)ItemJsonData[i]["SpriteName"]);
             bool Satackable = (bool)ItemJsonData[i]["Stackable"];
             ItemRarity ItemRarity = (ItemRarity)Enum.Parse(typeof(ItemRarity), (string)ItemJsonData[i]["ItemRarity"]);
             ItemType ItemType = (ItemType)Enum.Parse(typeof(ItemType), (string)ItemJsonData[i]["ItemType"]);
@@ -347,19 +376,6 @@ public class SaveLoad : MonoBehaviour
                 ItemRarity,
                 ItemType,
                 ResourceType));
-        }
-    }
-
-    public void Start()
-    {
-        Json();
-        LoadFile();
-
-        Current_Date_Time = DateTime.Now;
-
-        if (Current_Date_Time > Previous_Date_Time)
-        {
-            Previous_Date_Time = Current_Date_Time;
         }
     }
 
@@ -453,6 +469,8 @@ public class SaveLoad : MonoBehaviour
         ItemSaveState(save.Sauce_Manager_Save_Sate, Sauce_Item);
         ItemSaveState(save.Vegetable_Manager_Save_Sate, Vegetable_Item);
 
+        RecipeSaveState(save.Recipe_Save_State, Recipe_Item);
+
         format.Serialize(file, save);
         file.Close();
 
@@ -486,6 +504,17 @@ public class SaveLoad : MonoBehaviour
         }
     }
 
+    private void RecipeSaveState(List<Recipe_Save_State> save, List<GameObject> purchasable)
+    {
+        for (int i = 0; i < purchasable.Count(); i++)
+        {
+            RecipeData item = purchasable[i].GetComponent<RecipeData>();
+            Recipe_Save_State save_sate = new Recipe_Save_State();
+            save_sate.Unlocked = item.recipe.Unlocked;
+            save.Add(save_sate);
+        }
+    }
+
     private void ItemSaveState(List<Food_Section_Save_State> save, List<GameObject> purchasable)
     {
         for (int i = 0; i < purchasable.Count(); i++)
@@ -495,8 +524,8 @@ public class SaveLoad : MonoBehaviour
             save_sate.Cost = item.Cost;
             save_sate.Count = item.Count;
             save_sate.Resource_Rate = item.Resource_Rate;
-            save_sate.Is_Purchased = item.IsPurchased;
-            save_sate.On_Complete = item.OnComplete;
+            save_sate.Is_Purchased = item.Is_Purchased;
+            save_sate.On_Complete = item.On_Complete;
             save_sate.Unlocked = item.Unlocked;
             save_sate.Current_Time = item.Current_Time;
             save_sate.Started_Timer = item.Started_Timer;
@@ -592,6 +621,12 @@ public class SaveLoad : MonoBehaviour
             ItemLoadState(load.Pastry_Manager_Save_Sate, Pastry_Item);
             ItemLoadState(load.Sauce_Manager_Save_Sate, Sauce_Item);
             ItemLoadState(load.Vegetable_Manager_Save_Sate, Vegetable_Item);
+
+            RecipeLoadState(load.Recipe_Save_State, Recipe_Item);
+        }
+        else
+        {
+            SaveFile();
         }
 
         Debug.Log("loaded");
@@ -607,11 +642,23 @@ public class SaveLoad : MonoBehaviour
             item.Cost = load_sate.Cost;
             item.Count = load_sate.Count;
             item.Resource_Rate = load_sate.Resource_Rate;
-            item.IsPurchased = load_sate.Is_Purchased;
-            item.OnComplete = load_sate.On_Complete;
+            item.Is_Purchased = load_sate.Is_Purchased;
+            item.On_Complete = load_sate.On_Complete;
             item.Unlocked = load_sate.Unlocked;
             item.Current_Time = load_sate.Current_Time;
             item.Started_Timer = load_sate.Started_Timer;
+        }
+    }
+
+    private void RecipeLoadState(List<Recipe_Save_State> load, List<GameObject> purchasable)
+    {
+        for (int i = 0; i < purchasable.Count(); i++)
+        {
+            RecipeData item = purchasable[i].GetComponent<RecipeData>();
+
+            Recipe_Save_State load_sate = load[i];
+            item.recipe.Unlocked = load_sate.Unlocked;
+            item.Unlock();
         }
     }
 }
@@ -682,6 +729,9 @@ class Save_State
 
     [SerializeField]
     public List<Chef_Research_Save_State> Chef_Research_Save_State = new List<global::Chef_Research_Save_State>();
+
+    [SerializeField]
+    public List<Recipe_Save_State> Recipe_Save_State = new List<global::Recipe_Save_State>();
 }
 
 [Serializable]
@@ -704,6 +754,12 @@ class Player_Save_State
     public float Total_Points;
     [SerializeField]
     public float Lifetime_Currency;
+}
+
+[Serializable]
+public class Recipe_Save_State
+{
+    public bool Unlocked;
 }
 
 [Serializable]

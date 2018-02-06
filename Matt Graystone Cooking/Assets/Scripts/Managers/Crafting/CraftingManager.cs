@@ -24,6 +24,7 @@ public class CraftingManager : MonoBehaviour
     }
 
     public GameObject panel;
+    public GameObject panel_preview;
     private int slotCount = 9;
 
     private string LastKey = "000000000000000000000000000";
@@ -75,15 +76,22 @@ public class CraftingManager : MonoBehaviour
             Recipe repice = CheckForKey(CurrentKey);
             if (repice != null && repice.Unlocked == false)
             {
+                panel_preview.GetComponent<Image>().sprite = repice.Preview_Image;
+
                 //display repice found
                 //await user input to craft
                 Button.interactable = true;
                 //add repice to prefab tab
                 Button.onClick.AddListener(() => UnlockRecipe(repice, true));
             }
+            else
+            {
+                panel_preview.GetComponent<Image>().sprite = SaveLoad.Instance.Item_Images[0];// repice.Preview_Image;
+                Button.interactable = false;
 
-            //no repice found
-            LastKey = CurrentKey;
+                //no repice found
+                LastKey = CurrentKey;
+            }
         }
     }
 
@@ -111,19 +119,37 @@ public class CraftingManager : MonoBehaviour
 
     public void MoveAllItemToInventory()
     {
-        int s = Inventory.Instance.slots.Count(x => x.GetComponent<Slot>().ItemType == ItemType.Consumable);
-        Item z = Inventory.Instance.GetItemFromSlot(s);
+        List<GameObject> item_in_slot = new List<GameObject>();
+        for (int i = 0; i < Inventory.Instance.slots.Count; i++)
+        {
+            if (Inventory.Instance.slots[i].GetComponent<Slot>().ItemType == ItemType.Consumable)
+            {
+                if (Inventory.Instance.slots[i].transform.childCount > 0)
+                {
+                    item_in_slot.Add(Inventory.Instance.slots[i]);
+                }
+            }
+        }
 
-        Inventory.Instance.MoveItemToSlot(z, Inventory.Instance.slots[Inventory.Instance.GetEmptySlot()].GetComponent<Slot>());
+        for (int i = 0; i < item_in_slot.Count; i++)
+        {
+            GameObject to_slot = Inventory.Instance.slots[Inventory.Instance.GetEmptySlot()];
+
+            Inventory.Instance.MoveItemToSlot(item_in_slot[i], to_slot);
+
+            //Debug.Log("from " + item_in_slot[i] + " " + "to" + to_slot.GetComponent<Slot>().ID);
+        }
     }
 
     public Recipe CheckForKey(string key)
     {
-        for (int i = 0; i < SaveLoad.Instance.Recipe_Data.Count; i++)
+        for (int i = 0; i < SaveLoad.Instance.Recipe_Item.Count; i++)
         {
-            if (SaveLoad.Instance.Recipe_Data[i].Key == key)
+            Recipe RecipeData = SaveLoad.Instance.Recipe_Item[i].GetComponent<RecipeData>().recipe;
+
+            if (RecipeData.Key == key)
             {
-                return SaveLoad.Instance.Recipe_Data[i];
+                return RecipeData;
             }
         }
 

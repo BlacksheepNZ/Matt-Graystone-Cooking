@@ -575,29 +575,25 @@ MonoBehaviour:
     ValueText: {fileID: 11489080}
     CostToPurchase: {fileID: 11495988}
     Text_Reward: {fileID: 11457200}
-    CostToPurchaseAmount: 0
+    Cost_To_Purchase_Amount: 0
     Image: {fileID: 0}
     ID: 0
-    ItemName: 
-    BaseCost: 0
+    Item_Name: 
+    Base_Cost: 0
     Cost: 0
     Coefficent: 0
     Count: 0
-    ResourceRate: 0
-    ResourceType: 0
-    TimeToCompleteTask: 0
-    ProgressionBar: {fileID: 11446788}
-    ButtonFirstTimePurchase: {fileID: 11494954}
-    ButtonUpgrade: {fileID: 11478052}
-    OnComplete: 0
+    Resource_Rate: 0
+    Item_ID: 
+    Time_To_Complete_Task: 0
+    Progression_Bar: {fileID: 11446788}
+    Button_FirstTime_Purchase: {fileID: 11494954}
+    Button_Upgrade: {fileID: 11478052}
+    On_Complete: 0
     Unlocked: 0
-    B_DecreseCost: 0
-    B_IncreaseResourceRate: 0
-    B_IncreaseCurrencyRewardRate: 0
-    B_DecreaseTimeToCompleteTask: 0
-    IsPurchased: 0
-    StartedTimer: 0
-    CurrentTime: 0
+    Is_Purchased: 0
+    Started_Timer: 0
+    Current_Time: 0
 --- !u!114 &11442364
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -24,6 +24,18 @@ public class RecipeData : MonoBehaviour
         Button_Purchase.onClick.AddListener(() => Purchase());
     }
 
+    public void Unlock()
+    {
+        if (recipe.Unlocked == true)
+        {
+            this.gameObject.SetActive(true);
+        }
+        else
+        {
+            this.gameObject.SetActive(false);
+        }
+    }
+
     public void Update()
     {
         UpdateText();
@@ -44,21 +56,6 @@ public class RecipeData : MonoBehaviour
             Item item = GetItemByID(recipe.Items[i].ItemID);
             if (item != null)
             {
-                //for (int y = 0; y < Inventory.Instance.slots.Count; y++)
-                //{
-                //    Slot slot = Inventory.Instance.slots[y].GetComponent<Slot>();
-                //    ItemData z = Inventory.Instance.GetItemFromSlot(y);
-
-                //    if(z.Item.Name == item.Name && z.count >= recipe.Items[i].Count)
-                //    {
-                //        x += item.Name + " " +
-                //            "x" + recipe.Items[i].Count * AmountSellMuiltplyer + " ";
-                //    }
-                //    else
-                //    {
-                //    }
-                //}
-
                 int item_count = Inventory.Instance.CheckItemCount(recipe.Items[i].ItemID);
                 if (item_count >= recipe.Items[i].Count * AmountSellMuiltplyer)
                 {

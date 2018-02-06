@@ -33,16 +33,17 @@ public class Recipe
     [SerializeField]
     public List<RecipeItem> Items = new List<RecipeItem>();
     [SerializeField]
-    public int ItemIDToRemove;
-    [SerializeField]
     public int SellValue;
     [SerializeField]
     public string Key;
+    [SerializeField]
+    public Sprite Preview_Image;
 
-    public Recipe(string name, string key, List<RecipeItem> item, int sell_value)
+    public Recipe(string name, string key, Sprite preview_image, List<RecipeItem> item, int sell_value)
     {
         Name = name;
         Key = key;
+        Preview_Image = preview_image;
         Items = item;
         SellValue = sell_value;
     }

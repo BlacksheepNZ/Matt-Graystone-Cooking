@@ -22,6 +22,6 @@ public static class Function
             }
         }
 
-        return -1;
+        return 0;
     }
 }

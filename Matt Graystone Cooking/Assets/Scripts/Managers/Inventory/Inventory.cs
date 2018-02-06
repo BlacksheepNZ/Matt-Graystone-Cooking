@@ -172,23 +172,22 @@ public class Inventory : MonoBehaviour
 
     public Item GetItemFromSlot(int slot_id)
     {
-        try
+        if (slots[slot_id].transform.childCount > 0)
         {
             Item data = slots[slot_id].transform.GetChild(0).GetComponent<ItemData>().Item;
             return data;
         }
-        catch(Exception ex)
+        else
         {
-            Debug.Log(ex.Message);
+            return null;
         }
-
-        return null;
     }
 
-    public void MoveItemToSlot(Item i, Slot s)
+    public void MoveItemToSlot(GameObject from_slot, GameObject to_slot)
     {
-        ItemData id = s.transform.GetChild(0).GetComponent<ItemData>();
-        id.transform.SetParent(GameObject.Find(s.name).transform);
+        GameObject local_item = from_slot.transform.GetChild(0).gameObject;
+        local_item.transform.SetParent(GameObject.Find(to_slot.name).transform);
+        local_item.transform.localPosition = Vector2.zero;
     }
 
     public void AddItemToSlot(int slot, int id, int amount)

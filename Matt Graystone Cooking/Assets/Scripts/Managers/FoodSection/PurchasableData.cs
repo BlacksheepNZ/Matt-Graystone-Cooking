@@ -20,49 +20,49 @@ public class PurchasableData : MonoBehaviour
 
     public void Start()
     {
-        Purchasable.ButtonFirstTimePurchase.onClick.AddListener(FirstTimePurchase);
-        Purchasable.ButtonUpgrade.onClick.AddListener(Upgrade);
-        Purchasable.CostToPurchaseAmount = 1;
+        Purchasable.Button_FirstTime_Purchase.onClick.AddListener(FirstTimePurchase);
+        Purchasable.Button_Upgrade.onClick.AddListener(Upgrade);
+        Purchasable.Cost_To_Purchase_Amount = 1;
 
-        Text Costtext = Purchasable.ButtonFirstTimePurchase.GetComponentInChildren<Text>();
+        Text Costtext = Purchasable.Button_FirstTime_Purchase.GetComponentInChildren<Text>();
         Costtext.text = CurrencyConverter.Instance.GetCurrencyIntoString(Purchasable.Cost);
 
-        Purchasable.OnComplete = true;
+        Purchasable.On_Complete = true;
 
         Purchasable.IDText.text = Purchasable.ID.ToString("00");
 
         if (Purchasable.Started_Timer == true)
         {
-            Purchasable.ProgressionBar.Value = Purchasable.Current_Time;
+            Purchasable.Progression_Bar.Value = Purchasable.Current_Time;
 
-            StartCoroutine(Purchasable.UpdateTimer());
+            StartCoroutine(Purchasable.Update_Timer());
         }
 
-        Purchasable.CostToPurchaseAmount = 1;
+        Purchasable.Cost_To_Purchase_Amount = 1;
     }
 
     public void Update()
     {
         Purchasable.Update();
 
-        if (Purchasable.IsPurchased == true)
+        if (Purchasable.Is_Purchased == true)
         {
-            Purchasable.ButtonFirstTimePurchase.gameObject.SetActive(false);
+            Purchasable.Button_FirstTime_Purchase.gameObject.SetActive(false);
         }
         else
         {
-            Purchasable.ButtonFirstTimePurchase.gameObject.SetActive(true);
+            Purchasable.Button_FirstTime_Purchase.gameObject.SetActive(true);
         }
 
-        if(Purchasable.Unlocked == true && Purchasable.OnComplete == true)
+        if(Purchasable.Unlocked == true && Purchasable.On_Complete == true)
         {
-            StartCoroutine(Purchasable.UpdateTimer());
+            StartCoroutine(Purchasable.Update_Timer());
         }
     }
 
     public void FirstTimePurchase()
     {
-        Purchasable.FirstTimePurchase();
+        Purchasable.First_Time_Purchase();
     }
 
     public void Upgrade()

@@ -73,6 +73,7 @@ public class Chef : MonoBehaviour
             if (CurrentLevel < MaxLevel &&
                 PlayerManager.Instance.GetPrestigePoints() >= CostToLevel)
             {
+
                 CurrentLevel++;
                 PlayerManager.Instance.RemovePrestigePoints(CostToLevel);
             }

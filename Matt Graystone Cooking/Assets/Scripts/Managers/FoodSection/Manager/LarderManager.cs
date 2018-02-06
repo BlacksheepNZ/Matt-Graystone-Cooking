@@ -64,7 +64,7 @@ public class LarderManager : MonoBehaviour
             for (int i = 0; i < SaveLoad.Instance.Larder_Item.Count; i++)
             {
                 Purchasable purchasable = SaveLoad.Instance.Larder_Item[i].GetComponent<PurchasableData>().Purchasable;
-                purchasable.CostToPurchaseAmount = amount;
+                purchasable.Cost_To_Purchase_Amount = amount;
             }
 
             Switch_Button_Text.text = Buy_Amount_Mode.ToString();
@@ -80,7 +80,7 @@ public class LarderManager : MonoBehaviour
             Purchasable purchasable = SaveLoad.Instance.Larder_Item[i].GetComponent<PurchasableData>().Purchasable;
             if (purchasable.Unlocked == true)
             {
-                value += (purchasable.Resource_Rate * purchasable.Count) / purchasable.TimeToCompleteTask;
+                value += (purchasable.Resource_Rate * purchasable.Count) / purchasable.Time_To_Complete_Task;
             }
         }
 
