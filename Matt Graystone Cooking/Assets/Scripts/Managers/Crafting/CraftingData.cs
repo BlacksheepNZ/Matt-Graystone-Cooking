@@ -112,7 +112,7 @@ public class CraftingData : MonoBehaviour
 
         SaveLoad.Instance.Item_Database.Add(item);
 
-        Inventory.Instance.AddItem(Crafting.ID, 1);
+        Inventory.Instance.AddItemToSlot(Inventory.Instance.GetEmptySlot(), Crafting.ID, 1);
 
         Crafting.CraftingCount++;
     }
@@ -129,7 +129,7 @@ public class CraftingData : MonoBehaviour
 
                     if (Crafting.CheckCost(cost))
                     {
-                        Inventory.Instance.RemoveItem((int)Crafting.ResourceType, (int)cost);
+                        //Inventory.Instance.RemoveItem((int)Crafting.ResourceType, (int)cost);
 
                         StartCoroutine(UpdateTimer());
 

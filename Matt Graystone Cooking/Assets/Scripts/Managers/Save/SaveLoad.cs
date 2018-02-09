@@ -384,6 +384,7 @@ public class SaveLoad : MonoBehaviour
         Current_Date_Time = DateTime.Now;
         Previous_Date_Time = Current_Date_Time;
         SaveFile();
+        Application.Quit();
     }
 
     public void Update()
@@ -574,7 +575,7 @@ public class SaveLoad : MonoBehaviour
 
                 Inventory.Instance.AddItemToSlot(itemSave.Slot_ID, itemSave.ID, itemSave.Count + afkR);
 
-                Debug.Log("added item to slot: " + itemSave.Slot_ID + " (" + itemSave.Count + afkR + ")");
+                //Debug.Log("added item to slot: " + itemSave.Slot_ID + " (" + itemSave.Count + afkR + ")");
             }
 
             for (int i = 0; i < load.Item_Save_State.Count; i++)
@@ -623,13 +624,15 @@ public class SaveLoad : MonoBehaviour
             ItemLoadState(load.Vegetable_Manager_Save_Sate, Vegetable_Item);
 
             RecipeLoadState(load.Recipe_Save_State, Recipe_Item);
+
+            MessageBox.Instance.SetText("Welcome Back!", "You earned $" + afkC + " while you where away.");
         }
         else
         {
             SaveFile();
         }
 
-        Debug.Log("loaded");
+        //Debug.Log("loaded");
     }
 
     private void ItemLoadState(List<Food_Section_Save_State> load, List<GameObject> purchasable)

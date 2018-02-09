@@ -5,7 +5,7 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using System;
 
-public class ItemData : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IPointerEnterHandler, IPointerExitHandler
+public class ItemData : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
 {
     public Item Item;
     public int count;
@@ -23,12 +23,21 @@ public class ItemData : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
         toolTip = Inventory.Instance.GetComponent<ToolTip>();
     }
 
+    public void Update()
+    {
+        if(Inventory.Instance.Split_Stack_Prefab.activeInHierarchy == true)
+        {
+            Inventory.Instance.Split_Stack_Prefab.GetComponent<SplitStack>().OnValueChanged(this);
+        }
+    }
+
     public void OnBeginDrag(PointerEventData eventData)
     {
         if (Item != null)
         {
-            offSet = eventData.position - new Vector2(this.transform.position.x, this.transform.position.y);
+            Inventory.Instance.HideSplitStack(this);
 
+            offSet = eventData.position - new Vector2(this.transform.position.x, this.transform.position.y);
             this.transform.SetParent(GameObject.Find("Item_Holder").transform);// this.transform.parent.parent);
             this.transform.position = eventData.position; //+offset
             GetComponent<CanvasGroup>().blocksRaycasts = false;
@@ -47,9 +56,12 @@ public class ItemData : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        this.transform.SetParent(Inventory.Instance.slots[slot].transform);
-        this.transform.position = Inventory.Instance.slots[slot].transform.position;
-        GetComponent<CanvasGroup>().blocksRaycasts = true;
+        if (Item != null)
+        {
+            this.transform.SetParent(Inventory.Instance.slots[slot].transform);
+            this.transform.position = Inventory.Instance.slots[slot].transform.position;
+            GetComponent<CanvasGroup>().blocksRaycasts = true;
+        }
 
         Cursor.visible = true;
     }
@@ -62,5 +74,16 @@ public class ItemData : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
     public void OnPointerExit(PointerEventData eventData)
     {
         //toolTip.DeActivate();
+    }
+
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        if (Item != null)
+        {
+            if (eventData.button == PointerEventData.InputButton.Left)
+                Inventory.Instance.HideSplitStack(this);
+            else if (eventData.button == PointerEventData.InputButton.Right)
+                Inventory.Instance.ShowSplitStack(this, this.transform.parent.gameObject);
+        }
     }
 }

@@ -216,7 +216,7 @@ public class Crafting
         int itemcount = Inventory.Instance.CheckItemCount(itemToRemove.ID);
         if (itemcount >= cost)
         {
-            Inventory.Instance.RemoveItem(itemToRemove.ID, cost);
+            //Inventory.Instance.RemoveItem(itemToRemove.ID, cost);
             Debug.Log("Removed Item Cost");
         }
         else

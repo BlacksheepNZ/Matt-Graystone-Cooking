@@ -78,7 +78,7 @@ public class RecipeData : MonoBehaviour
        return "<color=#" + color + ">" + input + "</color>";
     }
 
-    private Item GetItemByID(int id)
+    public Item GetItemByID(int id)
     {
         for (int y = 0; y < SaveLoad.Instance.Item_Database.Count; y++)
         {
@@ -119,7 +119,15 @@ public class RecipeData : MonoBehaviour
         {
             for (int i = 0; i < recipe.Items.Count; i++)
             {
-                Inventory.Instance.RemoveItem(recipe.Items[i].ItemID, recipe.Items[i].Count * AmountSellMuiltplyer);
+                for (int x = 0; x < Inventory.Instance.slots.Count; x++)
+                {
+                    Item item = Inventory.Instance.slots[x].transform.GetChild(0).GetComponent<ItemData>().Item;
+
+                    if(item.ID == recipe.Items[i].ItemID)
+                    {
+                        //Inventory.Instance.RemoveItem(recipe.Items[i].ItemID, recipe.Items[i].Count * AmountSellMuiltplyer);
+                    }
+                }
             }
 
             Game.Instance.AddGold(recipe.SellValue * AmountSellMuiltplyer);

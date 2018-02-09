@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
 using UnityEngine.UI;
 using System.Collections.Generic;
 
@@ -12,10 +11,11 @@ public class RecipePreviewManager : MonoBehaviour
 
     public Button Button_Left;
     public Button Button_Right;
+    List<RecipeData> data = new List<RecipeData>();
 
     public void Start()
     {
-        List<RecipeData> data = SaveLoad.Instance.Recipe_Data;
+        data = SaveLoad.Instance.Recipe_Data;
         for (int i = 0; i < data.Count; i++)
         {
             CreatePrefab(data[i]);
@@ -70,6 +70,49 @@ public class RecipePreviewManager : MonoBehaviour
         }
     }
 
+    public void Update()
+    {
+        UpdateText();
+    }
+
+    public void UpdateText()
+    {
+        GameObject recipe_preview_gameobject = Recipe_Prefab_GameObject[currentIndex];
+        RecipePreview RecipePreview = recipe_preview_gameobject.GetComponent<RecipePreview>();
+
+        RecipePreview.Text_Sell_Value.text = "$" 
+            + data[currentIndex].recipe.SellValue 
+            * data[currentIndex].AmountSellMuiltplyer;
+
+        RecipePreview.Text_Item.text = StringBuilder(data[currentIndex]);
+    }
+
+    public string StringBuilder(RecipeData data)
+    {
+        string x = "";
+
+        for (int i = 0; i < data.recipe.Items.Count; i++)
+        {
+            Item item = data.GetItemByID(data.recipe.Items[i].ItemID);
+            if (item != null)
+            {
+                int item_count = Inventory.Instance.CheckItemCount(data.recipe.Items[i].ItemID);
+                if (item_count >= data.recipe.Items[i].Count * data.AmountSellMuiltplyer)
+                {
+                    string value = item.Name + " " + "x" + data.recipe.Items[i].Count * data.AmountSellMuiltplyer + " \n";
+                    x += data.ColorString("FFA500", value);
+                }
+                else
+                {
+                    string value = item.Name + " " + "x" + data.recipe.Items[i].Count * data.AmountSellMuiltplyer + " \n";
+                    x += data.ColorString("FFFFFF", value);
+                }
+            }
+        }
+
+        return x;
+    }
+
     public void CreatePrefab(RecipeData recipe)
     {
         GameObject recipe_preview_prefab = Instantiate(Recipe_Prefab_Preview);
@@ -82,20 +125,9 @@ public class RecipePreviewManager : MonoBehaviour
 
         recipe_preview_prefab.name = recipe.recipe.Name + "_Prefab";
         recipe_preview_data.Name = recipe.recipe.Name;
-        recipe_preview_data.Item = ConstructItem(recipe.recipe.Items);
-        recipe_preview_data.Sell_Value = "Sell Value :" + recipe.recipe.SellValue.ToString();
+        recipe_preview_data.Item = StringBuilder(recipe);
+        recipe_preview_data.Sell_Value = recipe.recipe.SellValue.ToString();
         recipe_preview_data.SetText();
-    }
-
-    private string ConstructItem(List<RecipeItem> item_data)
-    {
-        string data = "";
-
-        for (int i = 0; i < item_data.Count; i++)
-        {
-            data += Inventory.Instance.GetItemByID(item_data[i].ItemID).Name + " x" + item_data[i].Count + "\n";
-        }
-
-        return data;
+        UpdateText();
     }
 }

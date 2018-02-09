@@ -18,6 +18,21 @@ public class Slot : MonoBehaviour, IDropHandler, IPointerClickHandler
         dropedItem.slot = ID;
     }
 
+    void MergItem(ItemData dropedItem)
+    {
+        if (this.transform.childCount > 0)
+        {
+            ItemData item_in_slot = transform.GetChild(0).GetComponent<ItemData>();
+            if(item_in_slot.Item.ID == dropedItem.Item.ID)
+            {
+                Inventory.Instance.AddAmoutToItem(dropedItem.count, item_in_slot.slot);
+                Inventory.Instance.DestroyItemFromMerg(dropedItem);
+                dropedItem.OnEndDrag(null);
+
+            }
+        }
+    }
+
     void SwapItem(ItemData dropedItem)
     {
         if (this.transform.childCount > 0)
@@ -130,9 +145,9 @@ public class Slot : MonoBehaviour, IDropHandler, IPointerClickHandler
         if (droppedItem == null) return;
 
         int SlotID = droppedItem.slot;
-        //slot empty add droped item to it
         if (Inventory.Instance.Items[ID].ID == 000)
         {
+            //add new item
             #region todo
             switch (droppedItem.Item.ItemType)
             {
@@ -145,7 +160,20 @@ public class Slot : MonoBehaviour, IDropHandler, IPointerClickHandler
             }
             #endregion
         }
-        else
+        else if (Inventory.Instance.Items[ID].ID == droppedItem.Item.ID)
+        {
+            //merg item
+            switch (droppedItem.Item.ItemType)
+            {
+                case ItemType.General:
+                    if (InventoryType(SlotID, droppedItem, ItemType.General)) { MergItem(droppedItem); }
+                    break;
+                case ItemType.Consumable:
+                    if (InventoryType(SlotID, droppedItem, ItemType.General)) { MergItem(droppedItem); }
+                    break;
+            }
+        }
+        else if (Inventory.Instance.Items[ID].ID != droppedItem.Item.ID)
         {
             //Swap item
             switch (droppedItem.Item.ItemType)
@@ -160,6 +188,9 @@ public class Slot : MonoBehaviour, IDropHandler, IPointerClickHandler
                     break;
             }
         }
+        else { }
+
+        
     }
 
     public void OnPointerClick(PointerEventData eventData)

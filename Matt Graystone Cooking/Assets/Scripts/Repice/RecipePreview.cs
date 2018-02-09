@@ -16,6 +16,6 @@ public class RecipePreview : MonoBehaviour
     {
         Text_Name.text = Name;
         Text_Item.text = Item;
-        Text_Sell_Value.text = Sell_Value;
+        Text_Sell_Value.text = "$" + Sell_Value;
     }
 }

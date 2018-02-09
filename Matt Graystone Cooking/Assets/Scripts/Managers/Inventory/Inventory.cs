@@ -42,6 +42,8 @@ public class Inventory : MonoBehaviour
     private List<ItemSellValue> ItemSellValue = new List<global::ItemSellValue>();
     private List<MineralSellValue> MineralSellValue = new List<global::MineralSellValue>();
 
+    public GameObject Split_Stack_Prefab;
+
     //public List<GameObject> Consumable_Slot;
     //public int Consumable_Slot_Count;
     //public GameObject Parent_Consumable_Slot;
@@ -60,6 +62,8 @@ public class Inventory : MonoBehaviour
             slots.Add(Instantiate(InventorySlot));
             InISlot(SlotPanel, i, ItemType.General);
         }
+
+        CreateSplitStack();
     }
 
     public List<int> ReturnSlotIDOfType(ItemType ItemType)
@@ -108,6 +112,39 @@ public class Inventory : MonoBehaviour
         TotalGold.text = CurrencyConverter.Instance.GetCurrencyIntoString(
             Game.Instance.TotalGold);
     }
+
+    #region Item_Split_Stack
+
+    private void CreateSplitStack()
+    {
+        Split_Stack_Prefab.transform.SetAsLastSibling();
+        Split_Stack_Prefab.transform.localScale = new Vector3(1, 1, 1);
+        Split_Stack_Prefab.SetActive(false);
+    }
+
+    public void ShowSplitStack(ItemData item, GameObject slot)
+    {
+        if (item.count > 0)
+        {
+            Split_Stack_Prefab.SetActive(true);
+            Split_Stack_Prefab.transform.position = item.transform.position;
+            Split_Stack_Prefab.GetComponent<SplitStack>().ItemData =  slot;
+        }
+    }
+
+    public void SplitItem(ItemData itemToAdd, int newValue)
+    {
+        RemoveItem(itemToAdd.Item.ID, (int)newValue, slots[itemToAdd.slot].GetComponent<Slot>());
+        AddItemToSlot(GetEmptySlot(), itemToAdd.Item.ID, (int)newValue);
+    }
+
+    public void HideSplitStack(ItemData item)
+    {
+        Split_Stack_Prefab.SetActive(false);
+        Split_Stack_Prefab.GetComponent<SplitStack>().ItemData = null;
+    }
+
+    #endregion
 
     public int GetEmptySlot()
     {
@@ -165,8 +202,7 @@ public class Inventory : MonoBehaviour
     {
         ItemData data = slots[slot].transform.GetChild(0).GetComponent<ItemData>();
 
-        data.count = amount;
-
+        data.count += amount;
         data.transform.Find("Count").GetComponent<Text>().text = CurrencyConverter.Instance.GetCurrencyIntoStringNoSign(data.count);
     }
 
@@ -226,7 +262,7 @@ public class Inventory : MonoBehaviour
         toggle.GetComponent<Toggle>().isOn = false;
 
         ItemData data = slots[slot].transform.GetChild(0).GetComponent<ItemData>();
-        data.count = amount;
+        data.count += amount;
         data.transform.Find("Count").GetComponent<Text>().text = CurrencyConverter.Instance.GetCurrencyIntoStringNoSign(data.count);
 
         Items[slot] = itemToAdd;
@@ -361,52 +397,37 @@ public class Inventory : MonoBehaviour
                         return data.count;
                     }
                 }
-
-                //dont forgot to check the item holder if the player has pick up the item
-                //if (ItemHolder.transform.childCount > 0)
-                //{
-                //    if (ItemDatabase.Instance.Database[i].ID == id && slots[x].transform.GetChild(0).GetComponent<ItemData>().Item.ID == id)
-                //    {
-                //        //we have an item in the item holder
-                //        ItemData data = ItemHolder.transform.GetChild(0).GetComponent<ItemData>();
-                //        return data.amount;
-                //    }
-                //}
             }
         }
 
         return 0;
     }
 
-    public void RemoveItem(int id, int amount)
+    public void RemoveItem(int id, int amount, Slot slot)
     {
         if(id == 000)
             return;
 
         Item itemToRemove = ItemDatabase.Instance.FetchItemByID(id);
-        if (itemToRemove.Stackable && CheckInventory(itemToRemove))
+        if (itemToRemove != null && itemToRemove.Stackable && CheckInventory(itemToRemove))
         {
+            ItemData item_data_in_slot = slot.transform.GetChild(0).GetComponent<ItemData>();
 
-            for (int i = 0; i < Items.Count; i++)
+            if (item_data_in_slot.Item.ID == id)
             {
-                if (Items[i].ID == id)
+                item_data_in_slot.count -= amount;
+
+                item_data_in_slot.transform.Find("Count").GetComponent<Text>().text = CurrencyConverter.Instance.GetCurrencyIntoStringNoSign(item_data_in_slot.count);
+                if (item_data_in_slot.count <= 0)
                 {
-                    ItemData data = slots[i].transform.GetChild(0).GetComponent<ItemData>();
-                    data.count -= amount;
-                    data.transform.Find("Count").GetComponent<Text>().text = CurrencyConverter.Instance.GetCurrencyIntoStringNoSign(data.count);
-                    if (data.count == 0)
-                    {
-                        Destroy(slots[i].transform.GetChild(0).gameObject);
-                        Items[i] = new Item();
-                        break;
-                    }
-                    else if (data.count == 1)
-                    {
-                        slots[i].transform.GetChild(0).transform.Find("Count").GetComponent<Text>().text = "";
-                        break;
-                    }
-                    break;
+                    Destroy(slot.transform.GetChild(0).gameObject);
+                    Items[slot.ID] = new Item();
                 }
+                else if (item_data_in_slot.count == 1)
+                {
+                    slot.transform.GetChild(0).transform.Find("Count").GetComponent<Text>().text = "";
+                }
+                else { }
             }
         }
         else
@@ -416,10 +437,19 @@ public class Inventory : MonoBehaviour
                 if (Items[i].ID != 000 && Items[i].ID == id)
                 {
                     Destroy(slots[i].transform.GetChild(0).gameObject);
-                    Items[i] = new Item();
                     break;
                 }
             }
+        }
+    }
+    public void DestroyItemFromMerg(ItemData dropedItem)
+    {
+        if (dropedItem != null)
+        {
+            ItemData data = ItemHolder.transform.GetChild(0).GetComponent<ItemData>();
+
+            Destroy(ItemHolder.transform.GetChild(0).gameObject);
+            Items[dropedItem.slot] = new Item();
         }
     }
 
@@ -593,7 +623,7 @@ public class Inventory : MonoBehaviour
                         if (ID == itemdata.Item.ID)
                         {
                             Debug.Log("Comsumed Potion");
-                            RemoveItem(itemdata.Item.ID, 1);
+                            //RemoveItem(itemdata.Item.ID, 1);
                             break;
                         }
                     }
@@ -675,7 +705,7 @@ public class Inventory : MonoBehaviour
 
                     Game.Instance.AddGold(sellValue);
                     Debug.Log("Sold " + count + "@" + MineralSellValue[i].Value + " " + resourceType + " Gold added: " + value + " from slot " + SlotID);
-                    RemoveItem(itemData.Item.ID, count);
+                    RemoveItem(itemData.Item.ID, count, slots[SlotID].GetComponent<Slot>());
                     break;
                 }
             }
@@ -711,7 +741,7 @@ public class Inventory : MonoBehaviour
             float v = sellValue * count;
 
             Game.Instance.AddGold(v);
-            RemoveItem(itemData.Item.ID, count);
+            //RemoveItem(itemData.Item.ID, count);
         }
         else
         {

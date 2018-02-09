@@ -42,6 +42,7 @@ public class Tabs : MonoBehaviour {
     //Top Panel
     public GameObject Panel_Option;
     public GameObject Panel_Recipe_Preview;
+    public GameObject Panel_Message_Box;
 
     private void Start()
     {
@@ -54,6 +55,17 @@ public class Tabs : MonoBehaviour {
         Close_Inventory();
         Close_Panel_Option();
         Close_Recipe_Preview();
+        Close_Message_Box();
+    }
+
+    public void Open_Message_Box()
+    {
+        Open_Panel(Panel_Message_Box);
+    }
+
+    public void Close_Message_Box()
+    {
+        Close_Panel(Panel_Message_Box);
     }
 
     public void Open_Recipe_Preview()
@@ -63,7 +75,7 @@ public class Tabs : MonoBehaviour {
         Open_Panel(Panel_Recipe_Preview);
     }
 
-    private void Close_Recipe_Preview()
+    public void Close_Recipe_Preview()
     {
         Close_Panel(Panel_Recipe_Preview);
     }
