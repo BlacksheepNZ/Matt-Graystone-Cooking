@@ -129,6 +129,8 @@ public class Inventory : MonoBehaviour
             Split_Stack_Prefab.SetActive(true);
             Split_Stack_Prefab.transform.position = item.transform.position;
             Split_Stack_Prefab.GetComponent<SplitStack>().ItemData =  slot;
+            Split_Stack_Prefab.GetComponent<SplitStack>().Text_Count.text 
+                = CurrencyConverter.Instance.GetCurrencyIntoStringNoSign(item.count);
         }
     }
 
@@ -138,7 +140,7 @@ public class Inventory : MonoBehaviour
         AddItemToSlot(GetEmptySlot(), itemToAdd.Item.ID, (int)newValue);
     }
 
-    public void HideSplitStack(ItemData item)
+    public void HideSplitStack()
     {
         Split_Stack_Prefab.SetActive(false);
         Split_Stack_Prefab.GetComponent<SplitStack>().ItemData = null;

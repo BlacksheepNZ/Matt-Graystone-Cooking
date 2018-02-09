@@ -35,7 +35,7 @@ public class ItemData : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
     {
         if (Item != null)
         {
-            Inventory.Instance.HideSplitStack(this);
+            Inventory.Instance.HideSplitStack();
 
             offSet = eventData.position - new Vector2(this.transform.position.x, this.transform.position.y);
             this.transform.SetParent(GameObject.Find("Item_Holder").transform);// this.transform.parent.parent);
@@ -81,7 +81,7 @@ public class ItemData : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
         if (Item != null)
         {
             if (eventData.button == PointerEventData.InputButton.Left)
-                Inventory.Instance.HideSplitStack(this);
+                Inventory.Instance.HideSplitStack();
             else if (eventData.button == PointerEventData.InputButton.Right)
                 Inventory.Instance.ShowSplitStack(this, this.transform.parent.gameObject);
         }
