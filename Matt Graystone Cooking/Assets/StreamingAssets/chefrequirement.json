@@ -1,7 +1,7 @@
 [
   {
     "Name": "Pastry",
-    "Required_Level": 0,
+    "Required_Level": 1,
     "Cost_To_Level": 1,
     "Max_Level": 10
   },
@@ -13,7 +13,7 @@
   },
   {
     "Name": "Sauce",
-    "Required_Level": 2,
+    "Required_Level": 1,
     "Cost_To_Level": 1,
     "Max_Level": 10
   },
@@ -25,7 +25,7 @@
   },
   {
     "Name": "Vegetable",
-    "Required_Level": 1,
+    "Required_Level": 0,
     "Cost_To_Level": 1,
     "Max_Level": 10
   },

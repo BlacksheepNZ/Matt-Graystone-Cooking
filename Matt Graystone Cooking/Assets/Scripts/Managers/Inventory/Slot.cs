@@ -139,6 +139,22 @@ public class Slot : MonoBehaviour, IDropHandler, IPointerClickHandler
     //    else { }
     //}
 
+    //public void OnDrag(PointerEventData eventData)
+    //{
+    //    ItemData droppedItem = eventData.pointerDrag.GetComponent<ItemData>();
+    //    if (droppedItem == null) return;
+
+    //    if(Input.GetMouseButtonDown(1))
+    //    {
+    //        int SlotID = droppedItem.slot;
+
+    //        if (Inventory.Instance.Items[ID].ID == 000)
+    //        {
+    //            Inventory.Instance.AddItemToSlot(SlotID, droppedItem.Item.ID, 1);
+    //        }
+    //    }
+    //}
+
     void IDropHandler.OnDrop(PointerEventData eventData)
     {
         ItemData droppedItem = eventData.pointerDrag.GetComponent<ItemData>();

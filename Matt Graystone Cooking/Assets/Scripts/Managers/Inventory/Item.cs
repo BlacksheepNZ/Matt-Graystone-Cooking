@@ -59,12 +59,45 @@ public class Item
         ResourceType = resourceType;
     }
 
+    private List<RecipeData> recipeData = new List<RecipeData>();
+
     public Item()
     {
-        ID = 000;
+        //ID = 000;
     }
 
     string nl = "\n";
+
+    public void GetAttachedRecipes()
+    {
+        recipeData.Clear();
+
+        List<RecipeData> totalRecipeData = SaveLoad.Instance.Recipe_Data;
+        for (int i = 0; i < totalRecipeData.Count; i++)
+        {
+            RecipeData recipe = totalRecipeData[i];
+            for (int x = 0; x < recipe.recipe.Items.Count; x++)
+            {
+                RecipeItem recipeItem = recipe.recipe.Items[x];
+                if (recipeItem.ItemID == ID)
+                {
+                    recipeData.Add(recipe);
+                }
+            }
+        }
+    }
+
+    public string GetDecription()
+    {
+        string decription = "Used to craft in \n";
+
+        for (int i = 0; i < recipeData.Count; i++)
+        {
+            decription += recipeData[i].recipe.Name + "\n";
+        }
+
+        return decription;
+    }
 
     public void Upgrade(ItemRarity itemRarity)
     {

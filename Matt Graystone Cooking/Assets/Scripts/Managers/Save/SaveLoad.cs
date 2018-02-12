@@ -411,9 +411,6 @@ public class SaveLoad : MonoBehaviour
         save.Current_Date_Time = Current_Date_Time;
         save.Previous_Date_Time = Previous_Date_Time;
 
-        //save.AFKCurrency = ScavangerManager.Instance.GetRewardRate();
-        //save.AFKResource = DrillManager.Instance.GetRewardRate();
-
         save.Total_Gold = Game.Instance.TotalGold;
 
         save.Player_Save_State = new Player_Save_State();
@@ -463,12 +460,14 @@ public class SaveLoad : MonoBehaviour
         SauceManager.Instance.Research_Points = save.Sauce_Manager_Research_Points;
         VegetableManager.Instance.Research_Points = save.Vegetable_Manager_Research_Points;
 
-        ItemSaveState(save.Fish_Manager_Save_Sate, Fish_Item);
-        ItemSaveState(save.Larder_Manager_Save_Sate, Larder_Item);
-        ItemSaveState(save.Meat_Manager_Save_Sate, Meat_Item);
-        ItemSaveState(save.Pastry_Manager_Save_Sate, Pastry_Item);
-        ItemSaveState(save.Sauce_Manager_Save_Sate, Sauce_Item);
-        ItemSaveState(save.Vegetable_Manager_Save_Sate, Vegetable_Item);
+        float afk_difference = Current_Date_Time.Second - Previous_Date_Time.Second;
+
+        ItemSaveState(save.Fish_Manager_Save_Sate, Fish_Item, afk_difference);
+        ItemSaveState(save.Larder_Manager_Save_Sate, Larder_Item, afk_difference);
+        ItemSaveState(save.Meat_Manager_Save_Sate, Meat_Item, afk_difference);
+        ItemSaveState(save.Pastry_Manager_Save_Sate, Pastry_Item, afk_difference);
+        ItemSaveState(save.Sauce_Manager_Save_Sate, Sauce_Item, afk_difference);
+        ItemSaveState(save.Vegetable_Manager_Save_Sate, Vegetable_Item, afk_difference);
 
         RecipeSaveState(save.Recipe_Save_State, Recipe_Item);
 
@@ -516,7 +515,7 @@ public class SaveLoad : MonoBehaviour
         }
     }
 
-    private void ItemSaveState(List<Food_Section_Save_State> save, List<GameObject> purchasable)
+    private void ItemSaveState(List<Food_Section_Save_State> save, List<GameObject> purchasable, float afk_rate)
     {
         for (int i = 0; i < purchasable.Count(); i++)
         {
@@ -549,15 +548,9 @@ public class SaveLoad : MonoBehaviour
             Current_Date_Time = load.Current_Date_Time;
             Previous_Date_Time = load.Previous_Date_Time;
 
-            int currecy = load.AFK_Currency;
             int resource = load.AFK_Resource;
 
             TimeSpan Difference = DateTime.Now - Previous_Date_Time;
-
-            int afkC = Difference.Seconds * currecy;
-            int afkR = Difference.Seconds * resource;
-
-            Game.Instance.AddGold(afkC);
 
             Game.Instance.TotalGold = load.Total_Gold;
 
@@ -572,10 +565,9 @@ public class SaveLoad : MonoBehaviour
             for (int i = 0; i < load.Resource_Save_State.Count; i++)
             {
                 Resource_Save_State itemSave = load.Resource_Save_State[i];
+                Inventory.Instance.AddItemToSlot(itemSave.Slot_ID, itemSave.ID, itemSave.Count);
 
-                Inventory.Instance.AddItemToSlot(itemSave.Slot_ID, itemSave.ID, itemSave.Count + afkR);
-
-                //Debug.Log("added item to slot: " + itemSave.Slot_ID + " (" + itemSave.Count + afkR + ")");
+                //Debug.Log("added item to slot: " + itemSave.Slot_ID + " (" + itemSave.Count + ")");
             }
 
             for (int i = 0; i < load.Item_Save_State.Count; i++)
@@ -603,9 +595,9 @@ public class SaveLoad : MonoBehaviour
                     //}
 
                     //add to database
-                    SaveLoad.Instance.Item_Database.Add(item);
+                    Item_Database.Add(item);
                     Inventory.Instance.Items.Add(item);
-                    Inventory.Instance.AddItemToSlot(item_Save.Slot_ID, item_Save.ID, item_Save.Count + afkR);
+                    Inventory.Instance.AddItemToSlot(item_Save.Slot_ID, item_Save.ID, item_Save.Count);
                 }
             }
 
@@ -625,7 +617,7 @@ public class SaveLoad : MonoBehaviour
 
             RecipeLoadState(load.Recipe_Save_State, Recipe_Item);
 
-            MessageBox.Instance.SetText("Welcome Back!", "You earned $" + afkC + " while you where away.");
+            //MessageBox.Instance.SetText("Welcome Back!", "You earned $" + afkR + " while you where away.");
         }
         else
         {
@@ -677,8 +669,6 @@ class Save_State
     [SerializeField]
     public DateTime Current_Date_Time;
 
-    [SerializeField]
-    public int AFK_Currency;
     [SerializeField]
     public int AFK_Resource;
 

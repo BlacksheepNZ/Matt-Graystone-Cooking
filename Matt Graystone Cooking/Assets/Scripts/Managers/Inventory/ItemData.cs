@@ -21,6 +21,7 @@ public class ItemData : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
     private void Start()
     {
         toolTip = Inventory.Instance.GetComponent<ToolTip>();
+        Item.GetAttachedRecipes();
     }
 
     public void Update()
@@ -62,6 +63,8 @@ public class ItemData : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
             this.transform.position = Inventory.Instance.slots[slot].transform.position;
             GetComponent<CanvasGroup>().blocksRaycasts = true;
         }
+
+        Crafting_DragDrop.Instance.CheckSlot();
 
         Cursor.visible = true;
     }

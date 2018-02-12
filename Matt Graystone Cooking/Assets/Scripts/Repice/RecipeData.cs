@@ -121,11 +121,15 @@ public class RecipeData : MonoBehaviour
             {
                 for (int x = 0; x < Inventory.Instance.slots.Count; x++)
                 {
-                    Item item = Inventory.Instance.slots[x].transform.GetChild(0).GetComponent<ItemData>().Item;
-
-                    if(item.ID == recipe.Items[i].ItemID)
+                    GameObject slot = Inventory.Instance.slots[x];
+                    if (slot.transform.childCount > 0)
                     {
-                        //Inventory.Instance.RemoveItem(recipe.Items[i].ItemID, recipe.Items[i].Count * AmountSellMuiltplyer);
+                        ItemData item = slot.transform.GetChild(0).GetComponent<ItemData>();
+
+                        if (item.Item.ID == recipe.Items[i].ItemID)
+                        {
+                            Inventory.Instance.RemoveItem(recipe.Items[i].ItemID, recipe.Items[i].Count * AmountSellMuiltplyer, Inventory.Instance.slots[item.slot].GetComponent<Slot>());
+                        }
                     }
                 }
             }

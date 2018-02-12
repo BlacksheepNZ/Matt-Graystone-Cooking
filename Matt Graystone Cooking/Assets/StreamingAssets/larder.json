@@ -6,7 +6,7 @@
     "Coefficent": "1.07",
     "Count": 1,
     "ResourceRate": "1",
-    "ItemID": "000",
+    "ItemID": "100",
     "TimeToCompleteTask": "0.6"
   },
   {
@@ -16,7 +16,7 @@
     "Coefficent": "1.15",
     "Count": 1,
     "ResourceRate": "60",
-    "ItemID": "000",
+    "ItemID": "101",
     "TimeToCompleteTask": "3"
   },
   {
@@ -26,7 +26,7 @@
     "Coefficent": "1.14",
     "Count": 1,
     "ResourceRate": "540",
-    "ItemID": "000",
+    "ItemID": "102",
     "TimeToCompleteTask": "6"
   },
   {
@@ -36,7 +36,7 @@
     "Coefficent": "1.13",
     "Count": 1,
     "ResourceRate": "4320",
-    "ItemID": "000",
+    "ItemID": "103",
     "TimeToCompleteTask": "12"
   },
   {
@@ -46,7 +46,7 @@
     "Coefficent": "1.12",
     "Count": 1,
     "ResourceRate": "51840",
-    "ItemID": "000",
+    "ItemID": "104",
     "TimeToCompleteTask": "24"
   },
   {
@@ -56,7 +56,7 @@
     "Coefficent": "1.11",
     "Count": 1,
     "ResourceRate": "622080",
-    "ItemID": "000",
+    "ItemID": "105",
     "TimeToCompleteTask": "96"
   },
   {
@@ -66,7 +66,7 @@
     "Coefficent": "1.10",
     "Count": 1,
     "ResourceRate": "7464960",
-    "ItemID": "000",
+    "ItemID": "106",
     "TimeToCompleteTask": "384"
   },
   {
@@ -76,7 +76,7 @@
     "Coefficent": "1.09",
     "Count": 1,
     "ResourceRate": "89579520",
-    "ItemID": "000",
+    "ItemID": "107",
     "TimeToCompleteTask": "1536"
   },
   {
@@ -86,7 +86,7 @@
     "Coefficent": "1.08",
     "Count": 1,
     "ResourceRate": "1074954240",
-    "ItemID": "000",
+    "ItemID": "108",
     "TimeToCompleteTask": "6144"
   },
   {
@@ -96,7 +96,7 @@
     "Coefficent": "1.07",
     "Count": 1,
     "ResourceRate": "29668737024",
-    "ItemID": "000",
+    "ItemID": "109",
     "TimeToCompleteTask": "36864"
   }
 ]

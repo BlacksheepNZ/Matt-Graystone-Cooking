@@ -1,6 +1,6 @@
 [
   {
-    "Name": "Food 1",
+    "Name": "Potato",
     "BaseCost": "3.738",
     "SpriteName": "Ruby Gem_1",
     "Coefficent": "1.07",
@@ -10,7 +10,7 @@
     "TimeToCompleteTask": "0.6"
   },
   {
-    "Name": "Food 2",
+    "Name": "Onion",
     "BaseCost": "60",
     "SpriteName": "Ruby Gem_1",
     "Coefficent": "1.15",

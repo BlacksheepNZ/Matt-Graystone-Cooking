@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections.Generic;
+using System.Collections;
 
 public class RecipePreviewManager : MonoBehaviour
 {
@@ -9,16 +10,23 @@ public class RecipePreviewManager : MonoBehaviour
 
     public List<GameObject> Recipe_Prefab_GameObject;
 
+    public GameObject Prefab_Recipe_QuickView;
+    public Transform Prefab_Recipe_QuickView_Parent;
+
+    public List<GameObject> Prefab_Recipe_QuickView_GameObject;
+    public List<RecipePreview> RecipePreview = new List<global::RecipePreview>();
+
     public Button Button_Left;
     public Button Button_Right;
-    List<RecipeData> data = new List<RecipeData>();
+    public List<RecipeData> data = new List<RecipeData>();
 
     public void Start()
     {
-        data = SaveLoad.Instance.Recipe_Data;
+        data.AddRange(SaveLoad.Instance.Recipe_Data);
         for (int i = 0; i < data.Count; i++)
         {
             CreatePrefab(data[i]);
+            CreatePrefab_QuickView(data[i], i);
         }
 
         Button_Left.onClick.AddListener(() =>
@@ -30,6 +38,8 @@ public class RecipePreviewManager : MonoBehaviour
         {
             ScrollRight();
         });
+
+        ScrollToIndex(0);
     }
 
     public int currentIndex = 0;
@@ -77,14 +87,16 @@ public class RecipePreviewManager : MonoBehaviour
 
     public void UpdateText()
     {
-        GameObject recipe_preview_gameobject = Recipe_Prefab_GameObject[currentIndex];
-        RecipePreview RecipePreview = recipe_preview_gameobject.GetComponent<RecipePreview>();
+        for (int i = 0; i < Recipe_Prefab_GameObject.Count; i++)
+        {
+            RecipePreview preview = Recipe_Prefab_GameObject[i].GetComponent<RecipePreview>();
 
-        RecipePreview.Text_Sell_Value.text = "$" 
-            + data[currentIndex].recipe.SellValue 
-            * data[currentIndex].AmountSellMuiltplyer;
+            preview.Text_Sell_Value.text = "$"
+                + data[currentIndex].recipe.SellValue
+                * data[currentIndex].AmountSellMuiltplyer;
 
-        RecipePreview.Text_Item.text = StringBuilder(data[currentIndex]);
+            preview.Text_Item.text = StringBuilder(data[currentIndex]);
+        }
     }
 
     public string StringBuilder(RecipeData data)
@@ -129,5 +141,28 @@ public class RecipePreviewManager : MonoBehaviour
         recipe_preview_data.Sell_Value = recipe.recipe.SellValue.ToString();
         recipe_preview_data.SetText();
         UpdateText();
+
+        RecipePreview.Add(recipe_preview_data);
+    }
+
+    public void CreatePrefab_QuickView(RecipeData recipe, int value)
+    {
+        GameObject recipe_preview_prefab = Instantiate(Prefab_Recipe_QuickView);
+        recipe_preview_prefab.transform.SetParent(Prefab_Recipe_QuickView_Parent);
+        recipe_preview_prefab.transform.localScale = new Vector3(1, 1, 1);
+        recipe_preview_prefab.transform.position = Prefab_Recipe_QuickView_Parent.position;
+        Prefab_Recipe_QuickView_GameObject.Add(recipe_preview_prefab);
+
+        RecipePreview_QuickView recipe_preview_data = recipe_preview_prefab.GetComponent<RecipePreview_QuickView>();
+
+        recipe_preview_prefab.name = recipe.recipe.Name + "_Prefab";
+        recipe_preview_data.Name = recipe.recipe.Name;
+        recipe_preview_data.SetText();
+        UpdateText();
+
+        recipe_preview_data.Button.onClick.AddListener(() =>
+        {
+            ScrollToIndex(value);
+        });
     }
 }

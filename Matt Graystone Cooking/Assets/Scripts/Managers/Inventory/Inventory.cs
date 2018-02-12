@@ -226,6 +226,7 @@ public class Inventory : MonoBehaviour
         GameObject local_item = from_slot.transform.GetChild(0).gameObject;
         local_item.transform.SetParent(GameObject.Find(to_slot.name).transform);
         local_item.transform.localPosition = Vector2.zero;
+        local_item.transform.localScale = new Vector3(1, 1, 1);
     }
 
     public void AddItemToSlot(int slot, int id, int amount)

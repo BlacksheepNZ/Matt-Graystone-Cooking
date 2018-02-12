@@ -1,11 +1,23 @@
 [
   {
-    "Name": "Onion Soup",
-    "Key": "400200000000000000000000000",
+    "Name": "Hot Chips",
+    "Key": "400000000000000000000000000",
     "Image_Preview" : "broc",
     "Recipe": [
       {
         "ItemID": 400,
+        "Count": 1
+      }
+    ],
+    "SellValue": 1
+  },
+  {
+    "Name": "Onion Soup",
+    "Key": "401200000000000000000000000",
+    "Image_Preview": "broc",
+    "Recipe": [
+      {
+        "ItemID": 401,
         "Count": 1
       },
       {
@@ -18,7 +30,7 @@
   {
     "Name": "Chicken Burger",
     "Key": "000401101000500000000100000",
-    "Image_Preview" : "broc",
+    "Image_Preview": "broc",
     "Recipe": [
       {
         "ItemID": 401,
@@ -37,12 +49,12 @@
         "Count": 1
       }
     ],
-    "SellValue": 1
+    "SellValue": 100
   },
   {
     "Name": "Chicken Parma",
     "Key": "500101409000000000000000000",
-    "Image_Preview" : "broc",
+    "Image_Preview": "broc",
     "Recipe": [
       {
         "ItemID": 500,
@@ -62,7 +74,7 @@
   {
     "Name": "Eggs on Toast",
     "Key": "101003000000000000000000000",
-    "Image_Preview" : "broc",
+    "Image_Preview": "broc",
     "Recipe": [
       {
         "ItemID": 101,

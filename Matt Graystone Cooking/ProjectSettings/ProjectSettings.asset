@@ -442,8 +442,12 @@ PlayerSettings:
   boolPropertyNames:
   - XboxOne::enus
   XboxOne::enus: 1
-  stringPropertyNames: []
-  cloudProjectId: 
-  projectName: 
-  organizationId: 
+  stringPropertyNames:
+  - Build_ServiceEnabled::Build_ServiceEnabled
+  - UNet_ServiceEnabled::UNet_ServiceEnabled
+  Build_ServiceEnabled::Build_ServiceEnabled: False
+  UNet_ServiceEnabled::UNet_ServiceEnabled: True
+  cloudProjectId: 60229ecf-5a87-40b4-96bf-817d84c8b224
+  projectName: Matt Graystone Cooking (1)
+  organizationId: blacksheepnzl
   cloudEnabled: 0
