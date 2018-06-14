@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections.Generic;
-using System.Collections;
 
 public class RecipePreviewManager : MonoBehaviour
 {
@@ -46,6 +45,7 @@ public class RecipePreviewManager : MonoBehaviour
 
     private void ScrollToIndex(int i)
     {
+        currentIndex = i;
         GameObject recipe_preview_gameobject = Recipe_Prefab_GameObject[i];
         recipe_preview_gameobject.transform.SetAsLastSibling();
     }
@@ -91,11 +91,11 @@ public class RecipePreviewManager : MonoBehaviour
         {
             RecipePreview preview = Recipe_Prefab_GameObject[i].GetComponent<RecipePreview>();
 
-            preview.Text_Sell_Value.text = "$"
+            preview.GUI_Text_Sell_Value.text = "$"
                 + data[currentIndex].recipe.SellValue
                 * data[currentIndex].AmountSellMuiltplyer;
 
-            preview.Text_Item.text = StringBuilder(data[currentIndex]);
+            preview.GUI_Text_Item.text = StringBuilder(data[currentIndex]);
         }
     }
 
@@ -160,7 +160,7 @@ public class RecipePreviewManager : MonoBehaviour
         recipe_preview_data.SetText();
         UpdateText();
 
-        recipe_preview_data.Button.onClick.AddListener(() =>
+        recipe_preview_data.GUI_Button.onClick.AddListener(() =>
         {
             ScrollToIndex(value);
         });

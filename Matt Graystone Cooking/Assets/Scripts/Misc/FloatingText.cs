@@ -1,16 +1,35 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
-public class FloatingText : MonoBehaviour {
+/// <summary>
+/// 
+/// </summary>
+public class FloatingText : MonoBehaviour
+{
+    /// <summary>
+    /// 
+    /// </summary>
+    public Animator animator;
 
-    public Animator Animator;
-    private Text Text;
+    /// <summary>
+    /// 
+    /// </summary>
+    public Text GUI_Text;
 
+    /// <summary>
+    /// Use this for initialization
+    /// </summary>
     private void OnEnable()
     {
-        AnimatorClipInfo[] clipInfo = Animator.GetCurrentAnimatorClipInfo(0);
+        AnimatorClipInfo[] clipInfo = animator.GetCurrentAnimatorClipInfo(0);
         Destroy(gameObject, clipInfo[0].clip.length);
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public void SetText(string text)
+    {
+        GUI_Text.text = text;
     }
 }

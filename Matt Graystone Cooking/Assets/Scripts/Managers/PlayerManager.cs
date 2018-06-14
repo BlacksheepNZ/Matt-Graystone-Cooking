@@ -1,10 +1,15 @@
 ﻿using System;
 using UnityEngine;
 
-[System.Serializable]
+/// <summary>
+/// 
+/// </summary>
+[Serializable]
 public class PlayerManager : MonoBehaviour
 {
-    private static PlayerManager instance;
+    /// <summary>
+    /// Instantiate class object
+    /// </summary>
     public static PlayerManager Instance
     {
         get
@@ -17,29 +22,56 @@ public class PlayerManager : MonoBehaviour
             return PlayerManager.instance;
         }
     }
+    private static PlayerManager instance;
 
-    public float TotalXp;
-    public int CurrentLevel;
-    public int XpTillNextLevel;
-    public float CurrentExperience;
+    /// <summary>
+    /// GUI
+    /// </summary>
+    public ProgressionBar GUI_Progression_Bar;
 
-    public int ResearchPoints;
+    /// <summary>
+    /// 
+    /// </summary>
+    [HideInInspector]
+    public float TotalXp = 0;
 
-    public ProgressionBar progressionBar;
+    /// <summary>
+    /// 
+    /// </summary>
+    [HideInInspector]
+    public int CurrentLevel = 0;
 
+    /// <summary>
+    /// 
+    /// </summary>
+    [HideInInspector]
+    public int XpTillNextLevel = 0;
+
+    /// <summary>
+    /// 
+    /// </summary>
+    [HideInInspector]
+    public float CurrentExperience = 0;
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public int ResearchPoints = 1;
+
+    /// <summary>
+    /// Update is called once per frame
+    /// </summary>
     public void Update()
     {
-        if(Input.GetKeyDown(KeyCode.F10))
-        {
-            AddExperience(100000);
-        }
-
         if (CurrentExperience > 0)
         {
-            progressionBar.Value = (float)CurrentExperience / XpTillNextLevel;
+            GUI_Progression_Bar.Value = (float)CurrentExperience / XpTillNextLevel;
         }
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
     public void AddExperience(float experience)
     {
         CurrentExperience += experience;
@@ -58,6 +90,9 @@ public class PlayerManager : MonoBehaviour
         XpTillNextLevel = 100 * (CurrentLevel + 1) * (CurrentLevel + 1);
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
     public void OnLevelUp()
     {
         if (CurrentLevel != 0)
@@ -67,15 +102,25 @@ public class PlayerManager : MonoBehaviour
         }
     }
 
-    public int GetPrestigePoints()
+    /// <summary>
+    /// 
+    /// </summary>
+    public int GetResearchPoints()
     {
         return ResearchPoints;
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
     public void AddPrestigePoints(int amount)
     {
         ResearchPoints += amount;
     }
+
+    /// <summary>
+    /// 
+    /// </summary>
     public void RemovePrestigePoints(int amount)
     {
         ResearchPoints -= amount;

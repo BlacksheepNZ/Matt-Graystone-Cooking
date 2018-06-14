@@ -1,12 +1,14 @@
 ﻿using UnityEngine;
-using System.Collections;
 using UnityEngine.UI;
-using System.Collections.Generic;
-using System;
 
+/// <summary>
+/// 
+/// </summary>
 public class ChefResearchTree : MonoBehaviour
 {
-    private static ChefResearchTree instance;
+    /// <summary>
+    /// Instantiate class object
+    /// </summary>
     public static ChefResearchTree Instance
     {
         get
@@ -19,13 +21,32 @@ public class ChefResearchTree : MonoBehaviour
             return ChefResearchTree.instance;
         }
     }
+    private static ChefResearchTree instance;
 
-    public Text Text_ChefLevel;
-    public Text Text_ResearchPoints;
+    /// <summary>
+    /// GUI
+    /// </summary>
+    public Text GUI_Text_Chef_Level;
 
+    /// <summary>
+    /// GUI
+    /// </summary>
+    public Text GUI_Text_Research_Points;
+
+    /// <summary>
+    /// Update is called once per frame
+    /// </summary>
     public void Update()
     {
-        Text_ResearchPoints.text = "Prestige Points :"+ PlayerManager.Instance.ResearchPoints.ToString();
-        Text_ChefLevel.text = "Chef Lvl. " + PlayerManager.Instance.CurrentLevel.ToString();
+        UpdateGUI();
+    }
+
+    /// <summary>
+    /// Update GUI is called once per frame
+    /// </summary>
+    public void UpdateGUI()
+    {
+        GUI_Text_Research_Points.text = "Prestige Points :" + PlayerManager.Instance.ResearchPoints.ToString();
+        GUI_Text_Chef_Level.text = "Chef Lvl. " + PlayerManager.Instance.CurrentLevel.ToString();
     }
 }

@@ -2,7 +2,7 @@
   {
     "Name": "Food 1",
     "BaseCost": "3.738",
-    "SpriteName": "broc",
+    "SpriteName": "flour",
     "Coefficent": "1.07",
     "Count": 1,
     "ResourceRate": "1",
@@ -12,7 +12,7 @@
   {
     "Name": "Food 2",
     "BaseCost": "60",
-    "SpriteName": "Ruby Gem_1",
+    "SpriteName": "placeholder",
     "Coefficent": "1.15",
     "Count": 1,
     "ResourceRate": "60",
@@ -22,7 +22,7 @@
   {
     "Name": "Food 3",
     "BaseCost": "720",
-    "SpriteName": "Ruby Gem_1",
+    "SpriteName": "egg",
     "Coefficent": "1.14",
     "Count": 1,
     "ResourceRate": "540",
@@ -32,7 +32,7 @@
   {
     "Name": "Food 4",
     "BaseCost": "8640",
-    "SpriteName": "Ruby Gem_1",
+    "SpriteName": "placeholder",
     "Coefficent": "1.13",
     "Count": 1,
     "ResourceRate": "4320",
@@ -42,7 +42,7 @@
   {
     "Name": "Food 5",
     "BaseCost": "103680",
-    "SpriteName": "Ruby Gem_1",
+    "SpriteName": "placeholder",
     "Coefficent": "1.12",
     "Count": 1,
     "ResourceRate": "51840",
@@ -52,7 +52,7 @@
   {
     "Name": "Food 6",
     "BaseCost": "1244160",
-    "SpriteName": "Ruby Gem_1",
+    "SpriteName": "butter",
     "Coefficent": "1.11",
     "Count": 1,
     "ResourceRate": "622080",
@@ -62,7 +62,7 @@
   {
     "Name": "Food 7",
     "BaseCost": "14929920",
-    "SpriteName": "Ruby Gem_1",
+    "SpriteName": "chocolate",
     "Coefficent": "1.10",
     "Count": 1,
     "ResourceRate": "7464960",
@@ -70,9 +70,9 @@
     "TimeToCompleteTask": "384"
   },
   {
-    "Name": "Food 8",
+    "Name": "Milk",
     "BaseCost": "179159040",
-    "SpriteName": "Ruby Gem_1",
+    "SpriteName": "milk-1",
     "Coefficent": "1.09",
     "Count": 1,
     "ResourceRate": "89579520",
@@ -82,7 +82,7 @@
   {
     "Name": "Food 9",
     "BaseCost": "2149908480",
-    "SpriteName": "Ruby Gem_1",
+    "SpriteName": "placeholder",
     "Coefficent": "1.08",
     "Count": 1,
     "ResourceRate": "1074954240",
@@ -92,7 +92,7 @@
   {
     "Name": "Food 10",
     "BaseCost": "25798901760",
-    "SpriteName": "Ruby Gem_1",
+    "SpriteName": "placeholder",
     "Coefficent": "1.07",
     "Count": 1,
     "ResourceRate": "29668737024",

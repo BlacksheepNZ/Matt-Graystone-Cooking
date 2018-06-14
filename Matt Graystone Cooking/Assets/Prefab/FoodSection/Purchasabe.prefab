@@ -12,7 +12,7 @@ GameObject:
   - 114: {fileID: 11457200}
   - 114: {fileID: 11403268}
   m_Layer: 5
-  m_Name: Text_Reward
+  m_Name: GUI_Text_Reward
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -30,7 +30,7 @@ GameObject:
   - 114: {fileID: 11466326}
   - 114: {fileID: 11446788}
   m_Layer: 5
-  m_Name: Bar_Image
+  m_Name: GUI_Progression_Bar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -100,7 +100,7 @@ GameObject:
   - 222: {fileID: 22288856}
   - 114: {fileID: 11489080}
   m_Layer: 5
-  m_Name: Text_Value
+  m_Name: GUI_Text_Value
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -135,7 +135,7 @@ GameObject:
   - 114: {fileID: 11409688}
   - 114: {fileID: 11478052}
   m_Layer: 5
-  m_Name: Button_Upgrade
+  m_Name: GUI_Button_Upgrade
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -153,7 +153,7 @@ GameObject:
   - 114: {fileID: 11403856}
   - 114: {fileID: 11494954}
   m_Layer: 5
-  m_Name: Button_First_Time_Purchase
+  m_Name: GUI_Button_First_Time_Purchase
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -170,7 +170,7 @@ GameObject:
   - 222: {fileID: 22257912}
   - 114: {fileID: 11442364}
   m_Layer: 5
-  m_Name: Text_Gold_Cost
+  m_Name: GUI_Text_Gold_Cost
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -204,7 +204,7 @@ GameObject:
   - 222: {fileID: 22213442}
   - 114: {fileID: 11431588}
   m_Layer: 5
-  m_Name: Text_ID
+  m_Name: GUI_Text_ID
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -238,7 +238,7 @@ GameObject:
   - 222: {fileID: 22265690}
   - 114: {fileID: 11426236}
   m_Layer: 5
-  m_Name: Text_Name
+  m_Name: GUI_Text_Name
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -256,7 +256,7 @@ GameObject:
   - 114: {fileID: 11495988}
   - 114: {fileID: 11432372}
   m_Layer: 5
-  m_Name: Text_Cost_To_Purchase
+  m_Name: GUI_Text_Cost_To_Purchase
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -291,7 +291,7 @@ GameObject:
   - 222: {fileID: 22226794}
   - 114: {fileID: 11487588}
   m_Layer: 5
-  m_Name: Text_Count
+  m_Name: GUI_Text_Count
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -308,7 +308,7 @@ GameObject:
   - 222: {fileID: 22244590}
   - 114: {fileID: 11446008}
   m_Layer: 5
-  m_Name: Image_Potrait
+  m_Name: GUI_Image_Potrait
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -569,13 +569,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Purchasable:
-    IDText: {fileID: 11431588}
-    ItemNameText: {fileID: 11426236}
-    CountText: {fileID: 11487588}
-    ValueText: {fileID: 11489080}
-    CostToPurchase: {fileID: 11495988}
-    Text_Reward: {fileID: 11457200}
+    GUI_Text_ID: {fileID: 11431588}
+    GUI_Text_Item_Name: {fileID: 11426236}
+    GUI_Text_Count: {fileID: 11487588}
+    GUI_Text_Value: {fileID: 11489080}
+    GUI_Image_Potrait: {fileID: 11446008}
+    GUI_Button_Upgrade: {fileID: 11478052}
+    GUI_Text_Reward: {fileID: 11457200}
+    GUI_Text_Cost_To_Purchase: {fileID: 11495988}
     Cost_To_Purchase_Amount: 0
+    GUI_Button_FirstTime_Purchase: {fileID: 11494954}
+    GUI_Progression_Bar: {fileID: 11446788}
     Image: {fileID: 0}
     ID: 0
     Item_Name: 
@@ -586,9 +590,6 @@ MonoBehaviour:
     Resource_Rate: 0
     Item_ID: 
     Time_To_Complete_Task: 0
-    Progression_Bar: {fileID: 11446788}
-    Button_FirstTime_Purchase: {fileID: 11494954}
-    Button_Upgrade: {fileID: 11478052}
     On_Complete: 0
     Unlocked: 0
     Is_Purchased: 0
@@ -1197,7 +1198,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 22448344}
-  m_RootOrder: 10
+  m_RootOrder: 0
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -280, y: 0}
@@ -1233,7 +1234,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 22448344}
-  m_RootOrder: 0
+  m_RootOrder: 4
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
   m_AnchoredPosition: {x: 70, y: 0}
@@ -1286,17 +1287,17 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
-  - {fileID: 22439006}
+  - {fileID: 22422720}
   - {fileID: 22423022}
-  - {fileID: 22486242}
   - {fileID: 22472940}
   - {fileID: 22459842}
+  - {fileID: 22439006}
+  - {fileID: 22486242}
   - {fileID: 22483032}
   - {fileID: 22457398}
   - {fileID: 22464050}
   - {fileID: 22482592}
   - {fileID: 22471744}
-  - {fileID: 22422720}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -1318,7 +1319,7 @@ RectTransform:
   - {fileID: 22447668}
   - {fileID: 22474288}
   m_Father: {fileID: 22448344}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 250, y: 0}
@@ -1354,7 +1355,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 22448344}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -149.99997, y: -25}
@@ -1373,7 +1374,7 @@ RectTransform:
   m_Children:
   - {fileID: 22402778}
   m_Father: {fileID: 22448344}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 250, y: 0}
@@ -1391,7 +1392,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 22448344}
-  m_RootOrder: 9
+  m_RootOrder: 10
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0}
   m_AnchoredPosition: {x: 0.000015258789, y: 0}
@@ -1409,7 +1410,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 22448344}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -150, y: 5}
@@ -1447,7 +1448,7 @@ RectTransform:
   m_Children:
   - {fileID: 22422420}
   m_Father: {fileID: 22448344}
-  m_RootOrder: 8
+  m_RootOrder: 9
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -100.00006, y: -55}
@@ -1465,7 +1466,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 22448344}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 90, y: 5}
@@ -1483,7 +1484,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 22448344}
-  m_RootOrder: 2
+  m_RootOrder: 5
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 533.6, y: 15}

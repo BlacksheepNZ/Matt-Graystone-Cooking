@@ -1,9 +1,6 @@
-﻿using System;
-using UnityEngine;
-using UnityEngine.EventSystems;
-using UnityEngine.UI;
-
-//make sure these match the id in item database
+﻿/// <summary>
+/// Make sure these match the id in item database
+/// </summary>
 public enum ResourceType
 {
     Empty = -1,
@@ -69,12 +66,18 @@ public enum ResourceType
     Food_10_Meat,
 }
 
+/// <summary>
+/// 
+/// </summary>
 public enum ItemType
 {
     General = 0,
     Consumable = 1,
 }
 
+/// <summary>
+/// 
+/// </summary>
 public enum ItemRarity
 {
     Common = 0,
@@ -84,6 +87,9 @@ public enum ItemRarity
     Legendary= 4,
 }
 
+/// <summary>
+/// Not implemented
+/// </summary>
 public enum BonusType
 {
     Empty,
@@ -97,6 +103,9 @@ public enum BonusType
     Consumable,
 }
 
+/// <summary>
+/// 
+/// </summary>
 public class Resource
 {
     public static int ItemNumberOFStats(ItemRarity ItemRarity)

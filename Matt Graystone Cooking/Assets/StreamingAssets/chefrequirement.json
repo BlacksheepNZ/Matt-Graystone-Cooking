@@ -1,13 +1,13 @@
 [
   {
     "Name": "Pastry",
-    "Required_Level": 1,
+    "Required_Level": 0,
     "Cost_To_Level": 1,
     "Max_Level": 10
   },
   {
     "Name": "Larder",
-    "Required_Level": 1,
+    "Required_Level": 0,
     "Cost_To_Level": 1,
     "Max_Level": 10
   },
@@ -19,7 +19,7 @@
   },
   {
     "Name": "Fish",
-    "Required_Level": 8,
+    "Required_Level": 1,
     "Cost_To_Level": 1,
     "Max_Level": 10
   },

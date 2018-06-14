@@ -1,37 +1,71 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.UI;
+﻿using UnityEngine;
 using UnityEngine.EventSystems;
-using System;
 
-public class ItemData : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
+/// <summary>
+/// 
+/// </summary>
+public class ItemData : MonoBehaviour, 
+                        IBeginDragHandler, 
+                        IDragHandler, 
+                        IEndDragHandler, 
+                        IPointerEnterHandler, 
+                        IPointerExitHandler, 
+                        IPointerClickHandler
 {
+    /// <summary>
+    /// 
+    /// </summary>
+    [HideInInspector]
     public Item Item;
+
+    /// <summary>
+    /// 
+    /// </summary>
+    [HideInInspector]
     public int count;
-    private Vector2 offSet;
+
+    /// <summary>
+    /// 
+    /// </summary>
+    [HideInInspector]
     public int slot;
 
+    /// <summary>
+    /// 
+    /// </summary>
+    private Vector2 offSet;
+
+    /// <summary>
+    /// 
+    /// </summary>
     private ToolTip toolTip;
 
-    public void SetBorderImage(Sprite imageToSet)
-    {
-    }
-
+    /// <summary>
+    /// Use this for initialization
+    /// </summary>
     private void Start()
     {
-        toolTip = Inventory.Instance.GetComponent<ToolTip>();
-        Item.GetAttachedRecipes();
-    }
-
-    public void Update()
-    {
-        if(Inventory.Instance.Split_Stack_Prefab.activeInHierarchy == true)
+        if (Item != null)
         {
-            Inventory.Instance.Split_Stack_Prefab.GetComponent<SplitStack>().OnValueChanged(this);
+            toolTip = Inventory.Instance.GetComponent<ToolTip>();
+            Item.GetAttachedRecipes();
         }
     }
 
+    /// <summary>
+    /// Update is called once per frame
+    /// </summary>
+    public void Update()
+    {
+        if(Inventory.Instance.GUI_Panel_Split_Stack.activeInHierarchy == true)
+        {
+            Inventory.Instance.GUI_Panel_Split_Stack.GetComponent<SplitStack>().OnValueChanged(this);
+        }
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
     public void OnBeginDrag(PointerEventData eventData)
     {
         if (Item != null)
@@ -47,6 +81,9 @@ public class ItemData : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
         }
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
     public void OnDrag(PointerEventData eventData)
     {
         if (Item != null)
@@ -55,6 +92,9 @@ public class ItemData : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
         }
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
     public void OnEndDrag(PointerEventData eventData)
     {
         if (Item != null)
@@ -69,16 +109,25 @@ public class ItemData : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
         Cursor.visible = true;
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
     public void OnPointerEnter(PointerEventData eventData)
     {
-        toolTip.Activate(Item);
+        Inventory.Instance.ActivateToolTip(this);
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
     public void OnPointerExit(PointerEventData eventData)
     {
-        //toolTip.DeActivate();
+        Inventory.Instance.DeActivateToolTip();
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
     public void OnPointerClick(PointerEventData eventData)
     {
         if (Item != null)

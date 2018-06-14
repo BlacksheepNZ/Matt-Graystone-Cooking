@@ -11,7 +11,7 @@ GameObject:
   - 222: {fileID: 22294378}
   - 114: {fileID: 11449740}
   m_Layer: 5
-  m_Name: Text_Name
+  m_Name: GUI_Text_Name
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -28,7 +28,7 @@ GameObject:
   - 222: {fileID: 22276916}
   - 114: {fileID: 11410018}
   m_Layer: 5
-  m_Name: Text_Sell_Value
+  m_Name: GUI_Text_Sell_Value
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -45,7 +45,7 @@ GameObject:
   - 222: {fileID: 22292228}
   - 114: {fileID: 11453568}
   m_Layer: 5
-  m_Name: Text_Cost
+  m_Name: GUI_Text_Cost
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -62,7 +62,7 @@ GameObject:
   - 222: {fileID: 22280914}
   - 114: {fileID: 11432158}
   m_Layer: 5
-  m_Name: Text_Requirement
+  m_Name: GUI_Text_Requirement
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -82,6 +82,23 @@ GameObject:
   - 114: {fileID: 11424760}
   m_Layer: 5
   m_Name: RepicePrefab
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &172026
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 224: {fileID: 22428396}
+  - 222: {fileID: 22277464}
+  - 114: {fileID: 11488726}
+  m_Layer: 5
+  m_Name: GUI_Image_Preview
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -116,7 +133,7 @@ GameObject:
   - 114: {fileID: 11461282}
   - 114: {fileID: 11492962}
   m_Layer: 5
-  m_Name: Button_Purchase
+  m_Name: GUI_Button_Purchase
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -166,17 +183,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f55b00423295bb148b905eeab5ed476e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Text_Name: {fileID: 11449740}
-  Text_Requirement: {fileID: 11432158}
-  Text_Sell_Value: {fileID: 11410018}
-  Button_Purchase: {fileID: 11492962}
+  GUI_Text_Name: {fileID: 11449740}
+  GUI_Text_Requirement: {fileID: 11432158}
+  GUI_Text_Sell_Value: {fileID: 11410018}
+  GUI_Button_Purchase: {fileID: 11492962}
+  GUI_Preview_Sprite: {fileID: 11488726}
   recipe:
     Name: 
     Unlocked: 0
     Items: []
-    ItemIDToRemove: 0
     SellValue: 0
     Key: 
+    Preview_Image: {fileID: 0}
   AmountSellMuiltplyer: 1
 --- !u!114 &11432158
 MonoBehaviour:
@@ -364,6 +382,33 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: Button
+--- !u!114 &11488726
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 172026}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -765806418, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_Sprite: {fileID: 21300000, guid: 98095356b84fb244999ef6fd26641f90, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
 --- !u!114 &11489848
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -447,6 +492,12 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 134804}
+--- !u!222 &22277464
+CanvasRenderer:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 172026}
 --- !u!222 &22280914
 CanvasRenderer:
   m_ObjectHideFlags: 1
@@ -519,6 +570,24 @@ RectTransform:
   m_AnchoredPosition: {x: 235.20001, y: 24.99997}
   m_SizeDelta: {x: 80, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!224 &22428396
+RectTransform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 172026}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_Children: []
+  m_Father: {fileID: 22473518}
+  m_RootOrder: 5
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -347, y: 1}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &22452296
 RectTransform:
   m_ObjectHideFlags: 1
@@ -534,8 +603,8 @@ RectTransform:
   m_RootOrder: 0
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -340, y: 25.500008}
-  m_SizeDelta: {x: 246, y: 51}
+  m_AnchoredPosition: {x: -25, y: 48}
+  m_SizeDelta: {x: 412, y: 51}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &22459680
 RectTransform:
@@ -572,6 +641,7 @@ RectTransform:
   - {fileID: 22411000}
   - {fileID: 22478418}
   - {fileID: 22459680}
+  - {fileID: 22428396}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_AnchorMin: {x: 0, y: 0}
@@ -594,8 +664,8 @@ RectTransform:
   m_RootOrder: 3
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -10.799973, y: -10}
-  m_SizeDelta: {x: 412, y: 120}
+  m_AnchoredPosition: {x: -25, y: -22}
+  m_SizeDelta: {x: 412, y: 89}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1001 &100100000
 Prefab:

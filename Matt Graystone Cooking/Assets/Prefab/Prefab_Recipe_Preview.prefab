@@ -11,7 +11,7 @@ GameObject:
   - 222: {fileID: 22221674}
   - 114: {fileID: 11474880}
   m_Layer: 5
-  m_Name: Text_Sell_Value
+  m_Name: GUI_Text_Sell_Value
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -28,7 +28,7 @@ GameObject:
   - 222: {fileID: 22209130}
   - 114: {fileID: 11422322}
   m_Layer: 5
-  m_Name: Text_Item
+  m_Name: GUI_Text_Item
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -63,7 +63,7 @@ GameObject:
   - 222: {fileID: 22227538}
   - 114: {fileID: 11477110}
   m_Layer: 5
-  m_Name: Text_Name
+  m_Name: GUI_Text_Name
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -140,9 +140,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5614e54727f27a34fad3ecb5b6ab06e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Text_Name: {fileID: 11477110}
-  Text_Item: {fileID: 11422322}
-  Text_Sell_Value: {fileID: 11474880}
+  GUI_Text_Name: {fileID: 11477110}
+  GUI_Text_Item: {fileID: 11422322}
+  GUI_Text_Sell_Value: {fileID: 11474880}
   Name: 
   Item: 
   Sell_Value: 

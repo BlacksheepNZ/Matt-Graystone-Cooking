@@ -1,69 +1,91 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// 5 rows x 15 length
+/// (max char 75)
+/// </summary>
 public class ToolTip : MonoBehaviour
 {
     /// <summary>
-    /// max char 75
-    /// 5 rows x 15 length
+    /// GUI
     /// </summary>
+    public Text GUI_Text_Name;
 
-    private Item item;
+    /// <summary>
+    /// GUI
+    /// </summary>
+    public Text GUI_Text_Decription;
+
+    /// <summary>
+    /// GUI
+    /// </summary>
+    public Text GUI_Text_Count;
+
+    /// <summary>
+    /// 
+    /// </summary>
+    private ItemData item;
+
+    /// <summary>
+    /// 
+    /// </summary>
     private string data;
-    public Text Name;
-    public Text Decription;
 
-    public void Activate(Item item)
+    /// <summary>
+    /// 
+    /// </summary>
+    public void Activate(ItemData item)
     {
         this.item = item;
         ConstructDataString();
-
-        //if(Input.mousePosition.x > Screen.width / 2)
-        //{
-        //    ChangePivot(1);
-        //}
-        //if (Input.mousePosition.x < Screen.width / 2)
-        //{
-        //    ChangePivot(0);
-        //}
     }
 
-    //0 left, 1 right
-    //public void ChangePivot(int pivotValue)
-    //{
-    //    RectTransform rectTransform = ToolTip_GameObject.GetComponent<RectTransform>();
+    /// <summary>
+    /// 
+    /// </summary>
+    public void DeActivate()
+    {
+        GUI_Text_Name.text = "";
+        GUI_Text_Decription.text = "";
+        GUI_Text_Count.text = "";
+    }
 
-    //    rectTransform.offsetMin = new Vector2(pivotValue, 1);
-    //    rectTransform.offsetMax = new Vector2(pivotValue, 1);
-
-    //    rectTransform.pivot = new Vector2(pivotValue, 1);
-    //    rectTransform.position = Vector2.zero;
-
-    //}
-
-    //also could change border
+    /// <summary>
+    /// 
+    /// </summary>
     public void ConstructDataString()
     {
         string itemColor = "FFF";
 
-        if (item.ItemRarity == ItemRarity.Common)
+        ItemRarity itemRarity = item.Item.ItemRarity;
+
+        if (itemRarity == ItemRarity.Common)
             itemColor = "FFF";
-        if (item.ItemRarity == ItemRarity.Uncommon)
+        if (itemRarity == ItemRarity.Uncommon)
             itemColor = "00FF00";
-        if (item.ItemRarity == ItemRarity.Rare)
+        if (itemRarity == ItemRarity.Rare)
             itemColor = "0473f0";
-        if (item.ItemRarity == ItemRarity.Epic)
+        if (itemRarity == ItemRarity.Epic)
             itemColor = "800080";
-        if (item.ItemRarity == ItemRarity.Legendary)
+        if (itemRarity == ItemRarity.Legendary)
             itemColor = "FFA500";
 
-        Name.text = "<color=#" + itemColor + "><b>" + item.Name + "</b></color>";
-        Decription.text = item.GetDecription();
+        GUI_Text_Name.text = "<color=#" + itemColor + "><b>" + item.Item.Name + "</b></color>";
+        GUI_Text_Decription.text = item.Item.ToString();
     }
 
-    public void DeActivate()
+    /// <summary>
+    /// 
+    /// </summary>
+    public IEnumerator UpdateCount()
     {
-        Name.text = "";
-        Decription.text = "";
+        while (true)
+        {
+            GUI_Text_Count.text = CurrencyConverter.Instance.GetCurrencyIntoStringNoSign(item.count);
+
+            yield return null;
+        }
     }
 }

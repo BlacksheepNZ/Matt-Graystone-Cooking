@@ -1,38 +1,63 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// 
+/// </summary>
 public class SplitStack : MonoBehaviour
 {
-    public Text Text_Count;
-    public Text Text_Count_Remaning;
+    /// <summary>
+    /// GUI
+    /// </summary>
+    public Text GUI_Text_Count;
 
-    public Slider Slider;
-    public Button Button_OK;
+    /// <summary>
+    /// GUI
+    /// </summary>
+    public Text GUI_Text_Count_Remaning;
 
-    public float newCount;
+    /// <summary>
+    /// GUI
+    /// </summary>
+    public Slider GUI_Slider;
+
+    /// <summary>
+    /// GUI
+    /// </summary>
+    public Button GUI_Button;
+
+    /// <summary>
+    /// 
+    /// </summary>
+    [HideInInspector]
+    private float amount;
+
+    /// <summary>
+    /// 
+    /// </summary>
+    [HideInInspector]
     public GameObject ItemData;
 
+    /// <summary>
+    /// Use this for initialization
+    /// </summary>
     public void Start()
     {
-        Button_OK.onClick.AddListener(() =>
+        GUI_Button.onClick.AddListener(() =>
         {
-            if (Slider.value > 0 )
+            if (GUI_Slider.value > 0 )
             {
                 if (ItemData != null)
                 {
                     ItemData i = ItemData.transform.GetChild(0).GetComponent<ItemData>();
 
-                    Inventory.Instance.SplitItem(i, (int)newCount);
+                    Inventory.Instance.SplitItem(i, (int)amount);
                     Inventory.Instance.HideSplitStack();
 
-                    newCount = 0;
-                    Text_Count.text = newCount.ToString();
-                    Text_Count_Remaning.text = "0";
-                    Slider.value = 0;
+                    amount = 0;
+                    GUI_Text_Count.text = amount.ToString();
+                    GUI_Text_Count_Remaning.text = "0";
+                    GUI_Slider.value = 0;
                     return;
                 }
             }
@@ -43,30 +68,36 @@ public class SplitStack : MonoBehaviour
         });
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
     public void OnValueChanged(ItemData item)
     {
         if (ItemData != null)
         {
-            Slider.onValueChanged.AddListener(delegate
+            GUI_Slider.onValueChanged.AddListener(delegate
             {
                 ValueChangeCheck(item);
             });
         }
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
     private void ValueChangeCheck(ItemData item)
     {
         if (ItemData != null)
         {
             ItemData i = ItemData.transform.GetChild(0).GetComponent<ItemData>();
 
-            newCount = ((float)i.count * Slider.value) - 1;
+            amount = ((float)i.count * GUI_Slider.value) - 1;
 
-            Text_Count_Remaning.text = CurrencyConverter.Instance.GetCurrencyIntoStringNoSign(i.count - newCount);
-            Text_Count.text = CurrencyConverter.Instance.GetCurrencyIntoStringNoSign(newCount);
+            GUI_Text_Count_Remaning.text = CurrencyConverter.Instance.GetCurrencyIntoStringNoSign(i.count - amount);
+            GUI_Text_Count.text = CurrencyConverter.Instance.GetCurrencyIntoStringNoSign(amount);
 
-            Slider.minValue = 0;
-            Slider.maxValue = 1;
+            GUI_Slider.minValue = 0;
+            GUI_Slider.maxValue = 1;
         }
     }
 }

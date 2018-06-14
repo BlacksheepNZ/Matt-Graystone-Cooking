@@ -1,15 +1,16 @@
-﻿using LitJson;
-using System;
-using System.Collections.Generic;
-using System.IO;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// 
+/// </summary>
 public class Inventory : MonoBehaviour
 {
-    private static Inventory instance;
+    /// <summary>
+    /// Instantiate class object
+    /// </summary>
     public static Inventory Instance
     {
         get
@@ -22,36 +23,91 @@ public class Inventory : MonoBehaviour
             return Inventory.instance;
         }
     }
+    private static Inventory instance;
 
-    public GameObject Inventory_Panel;
-    public GameObject SlotPanel;
-    public GameObject ItemHolder;
+    /// <summary>
+    /// GUI
+    /// </summary>
+    public GameObject GUI_Panel_Inventory;
 
+    /// <summary>
+    /// GUI
+    /// </summary>
+    public GameObject GUI_Panel_Slot;
+
+    /// <summary>
+    /// GUI
+    /// </summary>
+    public GameObject GUI_Item_Holder;
+
+    /// <summary>
+    /// GUI
+    /// </summary>
+    [HideInInspector]
     public Text TotalGold;
 
+    /// <summary>
+    /// GUI
+    /// </summary>
     public int SlotCount = 0;
 
+    /// <summary>
+    /// GUI
+    /// </summary>
     public GameObject InventorySlot;
+
+    /// <summary>
+    /// GUI
+    /// </summary>
+    public GameObject InventoryItem;
+
+    /// <summary>
+    /// GUI
+    /// </summary>
+    public GameObject GUI_Panel_Split_Stack;
+
+    /// <summary>
+    /// GUI
+    /// </summary>
+    public ToolTip GUI_Panel_ToolTip;
+
+    /// <summary>
+    /// 
+    /// </summary>
+    private List<ItemSellValue> ItemSellValue = new List<ItemSellValue>();
+
+    /// <summary>
+    /// 
+    /// </summary>
+    private List<MineralSellValue> MineralSellValue = new List<MineralSellValue>();
+
+    /// <summary>
+    /// 
+    /// </summary>
+    [HideInInspector]
     public List<GameObject> slots = new List<GameObject>();
 
-    public GameObject InventoryItem;
+    /// <summary>
+    /// 
+    /// </summary>
+    [HideInInspector]
     public List<Item> Items = new List<Item>();
 
+    /// <summary>
+    /// 
+    /// </summary>
+    [HideInInspector]
     public List<int> SlotsToCheck = new List<int>();
 
-    private List<ItemSellValue> ItemSellValue = new List<global::ItemSellValue>();
-    private List<MineralSellValue> MineralSellValue = new List<global::MineralSellValue>();
+    /// <summary>
+    /// 
+    /// </summary>
+    [HideInInspector]
+    public bool boolToogleButton = false;
 
-    public GameObject Split_Stack_Prefab;
-
-    //public List<GameObject> Consumable_Slot;
-    //public int Consumable_Slot_Count;
-    //public GameObject Parent_Consumable_Slot;
-    //public GameObject Parent_ShieldGrid_Slot;
-    //public GameObject Parent_WeaponsArray_Slot;
-    //public GameObject Parent_Sensors_Slot;
-    //public GameObject Parent_Transporters_Slot;
-
+    /// <summary>
+    /// Use this for initialization
+    /// </summary>
     private void Start()
     {
         ItemSellValue = SaveLoad.Instance.Item_Sell_Value;
@@ -60,12 +116,15 @@ public class Inventory : MonoBehaviour
         for (int i = 0; i < SlotCount; i++)
         {
             slots.Add(Instantiate(InventorySlot));
-            InISlot(SlotPanel, i, ItemType.General);
+            InISlot(GUI_Panel_Slot, i, ItemType.General);
         }
 
         CreateSplitStack();
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
     public List<int> ReturnSlotIDOfType(ItemType ItemType)
     {
         List<int> value = new List<int>();
@@ -82,6 +141,9 @@ public class Inventory : MonoBehaviour
         return value;
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
     public void AddSlot(GameObject SlotPanelParent, ItemType slotType)
     {
         slots.Add(Instantiate(InventorySlot));
@@ -89,6 +151,9 @@ public class Inventory : MonoBehaviour
         SlotsToCheck.Add(slots.Count() - 1);
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
     public void InISlot(GameObject parentObject, int slotID, ItemType slotType)
     {
         slots[slotID].transform.SetParent(parentObject.transform);
@@ -100,54 +165,110 @@ public class Inventory : MonoBehaviour
         Items.Add(new Item());
     }
 
+    /// <summary>
+    /// Update is called once per frame
+    /// </summary>
     public void Update()
     {
-        //for (int i = 0; i < SlotsToCheck.Count; i++)
-        //{
-        //    int slotId = SlotsToCheck[i];
-        //    //slots[slotId].GetComponent<Slot>().CheckDrillDataItemSlot();
-        //    //slots[slotId].GetComponent<Slot>().CheckScavangerDataItemSlot();
-        //}
-
         TotalGold.text = CurrencyConverter.Instance.GetCurrencyIntoString(
             Game.Instance.TotalGold);
     }
 
-    #region Item_Split_Stack
-
-    private void CreateSplitStack()
+    /// <summary>
+    /// 
+    /// </summary>
+    public void ActivateToolTip(ItemData item)
     {
-        Split_Stack_Prefab.transform.SetAsLastSibling();
-        Split_Stack_Prefab.transform.localScale = new Vector3(1, 1, 1);
-        Split_Stack_Prefab.SetActive(false);
+        GUI_Panel_ToolTip.gameObject.SetActive(true);
+        GUI_Panel_ToolTip.Activate(item);
+        StartCoroutine(GUI_Panel_ToolTip.UpdateCount());
+
+        if (Input.mousePosition.x > Screen.width / 2)
+        {
+            ChangePivot(1);
+        }
+        if (Input.mousePosition.x < Screen.width / 2)
+        {
+            ChangePivot(0);
+        }
+
+        GUI_Panel_ToolTip.transform.position = item.transform.position;
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    public void DeActivateToolTip()
+    {
+        GUI_Panel_ToolTip.gameObject.SetActive(false);
+        GUI_Panel_ToolTip.DeActivate();
+        GUI_Panel_ToolTip.transform.position = Vector3.zero;
+        StopCoroutine(GUI_Panel_ToolTip.UpdateCount());
+    }
+
+    /// <summary>
+    /// Change Pivot (0 left, 1 right)
+    /// </summary>
+    public void ChangePivot(int pivotValue)
+    {
+        RectTransform rectTransform = GUI_Panel_ToolTip.gameObject.GetComponent<RectTransform>();
+
+        rectTransform.offsetMin = new Vector2(pivotValue, 1);
+        rectTransform.offsetMax = new Vector2(pivotValue, 1);
+
+        rectTransform.pivot = new Vector2(pivotValue, 1);
+    }
+
+    #region Item_Split_Stack
+
+    /// <summary>
+    /// 
+    /// </summary>
+    private void CreateSplitStack()
+    {
+        GUI_Panel_Split_Stack.transform.SetAsLastSibling();
+        GUI_Panel_Split_Stack.transform.localScale = new Vector3(1, 1, 1);
+        GUI_Panel_Split_Stack.SetActive(false);
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
     public void ShowSplitStack(ItemData item, GameObject slot)
     {
         if (item.count > 0)
         {
-            Split_Stack_Prefab.SetActive(true);
-            Split_Stack_Prefab.transform.position = item.transform.position;
-            Split_Stack_Prefab.GetComponent<SplitStack>().ItemData =  slot;
-            Split_Stack_Prefab.GetComponent<SplitStack>().Text_Count.text 
+            GUI_Panel_Split_Stack.SetActive(true);
+            GUI_Panel_Split_Stack.transform.position = item.transform.position;
+            GUI_Panel_Split_Stack.GetComponent<SplitStack>().ItemData =  slot;
+            GUI_Panel_Split_Stack.GetComponent<SplitStack>().GUI_Text_Count.text 
                 = CurrencyConverter.Instance.GetCurrencyIntoStringNoSign(item.count);
         }
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
     public void SplitItem(ItemData itemToAdd, int newValue)
     {
         RemoveItem(itemToAdd.Item.ID, (int)newValue, slots[itemToAdd.slot].GetComponent<Slot>());
         AddItemToSlot(GetEmptySlot(), itemToAdd.Item.ID, (int)newValue);
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
     public void HideSplitStack()
     {
-        Split_Stack_Prefab.SetActive(false);
-        Split_Stack_Prefab.GetComponent<SplitStack>().ItemData = null;
+        GUI_Panel_Split_Stack.SetActive(false);
+        GUI_Panel_Split_Stack.GetComponent<SplitStack>().ItemData = null;
     }
 
     #endregion
 
+    /// <summary>
+    /// 
+    /// </summary>
     public int GetEmptySlot()
     {
         //find general slot
@@ -168,6 +289,9 @@ public class Inventory : MonoBehaviour
         return 0;
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
     public int GetSlotWithItem(ItemType itemType)
     {
         //find general slot
@@ -184,6 +308,9 @@ public class Inventory : MonoBehaviour
         return -1;
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
     public int GetEmptySlot(ItemType itemType)
     {
         //find general slot
@@ -200,6 +327,9 @@ public class Inventory : MonoBehaviour
         return -1;
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
     public void AddAmoutToItem(int amount, int slot)
     {
         ItemData data = slots[slot].transform.GetChild(0).GetComponent<ItemData>();
@@ -208,6 +338,9 @@ public class Inventory : MonoBehaviour
         data.transform.Find("Count").GetComponent<Text>().text = CurrencyConverter.Instance.GetCurrencyIntoStringNoSign(data.count);
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
     public Item GetItemFromSlot(int slot_id)
     {
         if (slots[slot_id].transform.childCount > 0)
@@ -221,6 +354,9 @@ public class Inventory : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
     public void MoveItemToSlot(GameObject from_slot, GameObject to_slot)
     {
         GameObject local_item = from_slot.transform.GetChild(0).gameObject;
@@ -229,6 +365,9 @@ public class Inventory : MonoBehaviour
         local_item.transform.localScale = new Vector3(1, 1, 1);
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
     public void AddItemToSlot(int slot, int id, int amount)
     {
         Item itemToAdd = ItemDatabase.Instance.FetchItemByID(id);
@@ -271,6 +410,9 @@ public class Inventory : MonoBehaviour
         Items[slot] = itemToAdd;
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
     public void AddItem(int id, int amount)
     {
         int emptySlot = GetEmptySlot();
@@ -356,6 +498,9 @@ public class Inventory : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
     public bool InventoryFull()
     {
         int MaxCount = 0;
@@ -384,6 +529,9 @@ public class Inventory : MonoBehaviour
             return false;
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
     public int CheckItemCount(int id)
     {
         for (int i = 0; i < SaveLoad.Instance.Item_Database.Count(); i++)
@@ -406,6 +554,9 @@ public class Inventory : MonoBehaviour
         return 0;
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
     public void RemoveItem(int id, int amount, Slot slot)
     {
         if(id == 000)
@@ -445,17 +596,24 @@ public class Inventory : MonoBehaviour
             }
         }
     }
+
+    /// <summary>
+    /// 
+    /// </summary>
     public void DestroyItemFromMerg(ItemData dropedItem)
     {
         if (dropedItem != null)
         {
-            ItemData data = ItemHolder.transform.GetChild(0).GetComponent<ItemData>();
+            ItemData data = GUI_Item_Holder.transform.GetChild(0).GetComponent<ItemData>();
 
-            Destroy(ItemHolder.transform.GetChild(0).gameObject);
+            Destroy(GUI_Item_Holder.transform.GetChild(0).gameObject);
             Items[dropedItem.slot] = new Item();
         }
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
     public int GetSlotByID(int id)
     {
         for (int i = 0; i < Items.Count; i++)
@@ -472,7 +630,10 @@ public class Inventory : MonoBehaviour
         return -1;
     }
 
-    bool CheckInventory(Item item)
+    /// <summary>
+    /// 
+    /// </summary>
+    private bool CheckInventory(Item item)
     {
         for (int i = 0; i < Items.Count; i++)
         {
@@ -484,14 +645,24 @@ public class Inventory : MonoBehaviour
         return false;
     }
 
-    //selling items is broken it removes it from the master list instead of the ingame object
     #region 
 
-    List<int> slotWithItem = new List<int>();
+    /// <summary>
+    /// 
+    /// </summary>
+    private List<int> slotWithItem = new List<int>();
+
+    /// <summary>
+    /// 
+    /// </summary>
     public int SellItemCount()
     {
         return slotWithItem.Count();
     }
+
+    /// <summary>
+    /// 
+    /// </summary>
     public void ConfirmSell()
     {
         for (int x = 0; x < slotWithItem.Count(); x++)
@@ -560,6 +731,9 @@ public class Inventory : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
     public void SelectAll()
     {
         for (int x = 0; x < slotWithItem.Count(); x++)
@@ -575,6 +749,9 @@ public class Inventory : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
     public void UnSelectAll()
     {
         for (int x = 0; x < slotWithItem.Count(); x++)
@@ -592,8 +769,9 @@ public class Inventory : MonoBehaviour
         }
     }
 
-    public bool boolToogleButton = false;
-
+    /// <summary>
+    /// 
+    /// </summary>
     public Item GetItemByID(int id)
     {
         for (int i = 0; i < SaveLoad.Instance.Item_Database.Count; i++)
@@ -608,9 +786,12 @@ public class Inventory : MonoBehaviour
         return null;
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
     public void UseComsumable(int ID)
     {
-        if (SlotPanel.transform.childCount > 0)
+        if (GUI_Panel_Slot.transform.childCount > 0)
         {
             for (int i = 0; i < slots.Count; i++)
             {
@@ -635,12 +816,15 @@ public class Inventory : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
     public void SellItem()
     {
         slotWithItem.Clear();
 
         //get all items in main weapon panel
-        if (SlotPanel.transform.childCount > 0)
+        if (GUI_Panel_Slot.transform.childCount > 0)
         {
             ////make sure the item type are the same weapons to weaponslot
             //for (int i = 0; i < slots.Count; i++)
@@ -678,6 +862,9 @@ public class Inventory : MonoBehaviour
 
     #endregion
 
+    /// <summary>
+    /// 
+    /// </summary>
     public void SellItem(int SlotID, int amount)
     {
         if (slots[SlotID].transform.childCount > 0)
@@ -719,6 +906,9 @@ public class Inventory : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
     public void SellItem(int SlotID, int amount, int sellValue)
     {
         if (slots[SlotID].transform.childCount > 0)

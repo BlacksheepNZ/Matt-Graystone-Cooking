@@ -1,11 +1,14 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class Prestige : MonoBehaviour {
-
-
-    private static Prestige instance;
+/// <summary>
+/// 
+/// </summary>
+public class Prestige : MonoBehaviour
+{
+    /// <summary>
+    /// Instantiate class object
+    /// </summary>
     public static Prestige Instance
     {
         get
@@ -18,30 +21,59 @@ public class Prestige : MonoBehaviour {
             return Prestige.instance;
         }
     }
+    private static Prestige instance;
 
+    /// <summary>
+    /// 
+    /// </summary>
+    [HideInInspector]
     public float RemainingPoints = 0;
-    public float TotalPoints = 0;
+
+    /// <summary>
+    /// 
+    /// </summary>
+    [HideInInspector]
+    public float TotalPoints { get { return totalPoints; } }
+    private float totalPoints = 0;
+
+    /// <summary>
+    /// 
+    /// </summary>
+    [HideInInspector]
     public float LifetimCurrency = 0;
 
-    IEnumerator GetPoints()
+    /// <summary>
+    /// 
+    /// </summary>
+    private IEnumerator GetPoints()
     {
         while (true)
         {
-            TotalPoints = (int)Mathf.Sqrt(LifetimCurrency / 1000000000000000) * 150;
+            totalPoints = (int)Mathf.Sqrt(LifetimCurrency / 1000000000000000) * 150;
 
             yield return new WaitForSeconds(1);
         }
     }
 
-    void Start () {
+    /// <summary>
+    /// Use this for initialization
+    /// </summary>
+    void Start() {
         StartCoroutine(GetPoints());
     }
 	
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="Points"></param>
 	public void AddPoints(float Points)
     {
-        TotalPoints += Points;
+        totalPoints += Points;
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
     public void RemovePoints()
     {
         RemainingPoints -= TotalPoints;

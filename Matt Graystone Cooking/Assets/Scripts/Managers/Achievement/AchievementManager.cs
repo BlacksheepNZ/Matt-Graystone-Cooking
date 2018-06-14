@@ -1,13 +1,16 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using UnityEngine;
 using UnityEngine.UI;
 
-class AchievementManager : MonoBehaviour
+/// <summary>
+/// 
+/// </summary>
+public class AchievementManager : MonoBehaviour
 {
+    /// <summary>
+    /// 
+    /// </summary>
     private static AchievementManager instance;
     public static AchievementManager Instance
     {
@@ -36,11 +39,17 @@ class AchievementManager : MonoBehaviour
 
     public int TotalPoints;
 
+    /// <summary>
+    /// Use this for initialization
+    /// </summary>
     private void Awake()
     {
         //PointsText.text = TotalPoints.ToString();
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
     public void CreateAchievement(bool activate, string title, string decription, int points, int spriteIndex)
     {
         GameObject achievement = (GameObject)Instantiate(AchievementPrefab);
@@ -54,6 +63,9 @@ class AchievementManager : MonoBehaviour
         if (activate) EarnAchievement(title);
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
     public void EarnAchievement(string title)
     {
         if(Achievements[title].EarnAchievement())
@@ -70,6 +82,9 @@ class AchievementManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
     public IEnumerator HideAchievement(GameObject achievement)
     {
         RewardFireworks.Instance.Play();
@@ -77,6 +92,9 @@ class AchievementManager : MonoBehaviour
         Destroy(achievement);
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
     public void SetAchievementInfo(GameObject achievement, string title)
     {
         achievement.transform.SetParent(Parent);

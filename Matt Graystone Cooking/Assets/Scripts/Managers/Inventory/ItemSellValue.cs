@@ -1,18 +1,32 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
+/// <summary>
+/// 
+/// </summary>
+[Serializable]
 public class ItemSellValue
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public ResourceType ResourceType;
+
+    /// <summary>
+    /// 
+    /// </summary>
     public ItemRarity ItemRarity;
+
+    /// <summary>
+    /// 
+    /// </summary>
     public int Value;
 
-    public ItemSellValue(
-        ResourceType resourceType,
-        ItemRarity itemRarity,
-        int value)
+    /// <summary>
+    /// Use this for initialization
+    /// </summary>
+    public ItemSellValue(ResourceType resourceType,
+                         ItemRarity itemRarity,
+                         int value)
     {
         ResourceType = resourceType;
         ItemRarity = itemRarity;

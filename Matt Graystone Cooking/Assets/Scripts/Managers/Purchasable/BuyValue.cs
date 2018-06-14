@@ -1,4 +1,7 @@
-﻿public enum BuyAmountMode
+﻿/// <summary>
+/// 
+/// </summary>
+public enum BuyAmountMode
 {
     Single,
     Fifty,

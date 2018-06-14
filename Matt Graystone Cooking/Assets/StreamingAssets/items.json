@@ -2,7 +2,7 @@
   {
     "Name": "Empty",
     "ID": "000",
-    "SpriteName": "placeholder",
+    "SpriteName": "avocado",
     "Stackable": true,
     "ItemRarity": "Common",
     "ItemType": "Consumable",
@@ -11,7 +11,7 @@
   {
     "Name": "Flour",
     "ID": "001",
-    "SpriteName": "broc",
+    "SpriteName": "flour",
     "Stackable": true,
     "ItemRarity": "Common",
     "ItemType": "Consumable",
@@ -29,7 +29,7 @@
   {
     "Name": "Egg",
     "ID": "003",
-    "SpriteName": "placeholder",
+    "SpriteName": "egg",
     "Stackable": true,
     "ItemRarity": "Common",
     "ItemType": "Consumable",
@@ -56,7 +56,7 @@
   {
     "Name": "Butter",
     "ID": "006",
-    "SpriteName": "placeholder",
+    "SpriteName": "butter",
     "Stackable": true,
     "ItemRarity": "Common",
     "ItemType": "Consumable",
@@ -65,7 +65,7 @@
   {
     "Name": "Chocolate",
     "ID": "007",
-    "SpriteName": "placeholder",
+    "SpriteName": "chocolate",
     "Stackable": true,
     "ItemRarity": "Common",
     "ItemType": "Consumable",
@@ -74,7 +74,7 @@
   {
     "Name": "Milk",
     "ID": "008",
-    "SpriteName": "placeholder",
+    "SpriteName": "milk-1",
     "Stackable": true,
     "ItemRarity": "Common",
     "ItemType": "Consumable",
@@ -101,7 +101,7 @@
   {
     "Name": "Bread",
     "ID": "100",
-    "SpriteName": "placeholder",
+    "SpriteName": "bread",
     "Stackable": true,
     "ItemRarity": "Common",
     "ItemType": "Consumable",
@@ -110,7 +110,7 @@
   {
     "Name": "Cheese",
     "ID": "101",
-    "SpriteName": "placeholder",
+    "SpriteName": "cheese",
     "Stackable": true,
     "ItemRarity": "Common",
     "ItemType": "Consumable",
@@ -272,7 +272,7 @@
   {
     "Name": "Shrimp Stock",
     "ID": "209",
-    "SpriteName": "placeholder",
+    "SpriteName": "shrimp",
     "Stackable": true,
     "ItemRarity": "Common",
     "ItemType": "Consumable",
@@ -281,7 +281,7 @@
   {
     "Name": "Salmon",
     "ID": "300",
-    "SpriteName": "placeholder",
+    "SpriteName": "salmon",
     "Stackable": true,
     "ItemRarity": "Common",
     "ItemType": "Consumable",
@@ -371,7 +371,7 @@
   {
     "Name": "Potato",
     "ID": "400",
-    "SpriteName": "placeholder",
+    "SpriteName": "potatoes-2",
     "Stackable": true,
     "ItemRarity": "Common",
     "ItemType": "Consumable",
@@ -380,16 +380,16 @@
   {
     "Name": "Onion",
     "ID": "401",
-    "SpriteName": "placeholder",
+    "SpriteName": "onion-1",
     "Stackable": true,
     "ItemRarity": "Common",
     "ItemType": "Consumable",
     "ResourceType": "Food_2_Vegetable"
   },
   {
-    "Name": "Watercress",
+    "Name": "Eggplant",
     "ID": "402",
-    "SpriteName": "placeholder",
+    "SpriteName": "aubergine",
     "Stackable": true,
     "ItemRarity": "Common",
     "ItemType": "Consumable",
@@ -398,7 +398,7 @@
   {
     "Name": "Corn",
     "ID": "403",
-    "SpriteName": "placeholder",
+    "SpriteName": "corn",
     "Stackable": true,
     "ItemRarity": "Common",
     "ItemType": "Consumable",
@@ -407,16 +407,16 @@
   {
     "Name": "Apple",
     "ID": "404",
-    "SpriteName": "placeholder",
+    "SpriteName": "apple-1",
     "Stackable": true,
     "ItemRarity": "Common",
     "ItemType": "Consumable",
     "ResourceType": "Food_5_Vegetable"
   },
   {
-    "Name": "Bok Choy",
+    "Name": "Beans",
     "ID": "405",
-    "SpriteName": "placeholder",
+    "SpriteName": "beans",
     "Stackable": true,
     "ItemRarity": "Common",
     "ItemType": "Consumable",
@@ -425,7 +425,7 @@
   {
     "Name": "Broccoli",
     "ID": "406",
-    "SpriteName": "placeholder",
+    "SpriteName": "broccoli",
     "Stackable": true,
     "ItemRarity": "Common",
     "ItemType": "Consumable",
@@ -434,7 +434,7 @@
   {
     "Name": "Pumpkin",
     "ID": "407",
-    "SpriteName": "placeholder",
+    "SpriteName": "pumpkin",
     "Stackable": true,
     "ItemRarity": "Common",
     "ItemType": "Consumable",
@@ -443,7 +443,7 @@
   {
     "Name": "Avocado",
     "ID": "408",
-    "SpriteName": "placeholder",
+    "SpriteName": "avocado",
     "Stackable": true,
     "ItemRarity": "Common",
     "ItemType": "Consumable",
@@ -452,7 +452,7 @@
   {
     "Name": "Tomato",
     "ID": "409",
-    "SpriteName": "placeholder",
+    "SpriteName": "tomato",
     "Stackable": true,
     "ItemRarity": "Common",
     "ItemType": "Consumable",

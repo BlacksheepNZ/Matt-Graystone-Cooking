@@ -1,26 +1,68 @@
 ﻿using UnityEngine;
-using System.Collections;
 using UnityEngine.UI;
-using System.Collections.Generic;
-using System;
 
+/// <summary>
+/// 
+/// </summary>
 public class Chef : MonoBehaviour
 {
+    /// <summary>
+    /// GUI
+    /// </summary>
     public Text Text_Name;
+    /// <summary>
+    /// GUI
+    /// </summary>
     public Text Text_Cost;
+    /// <summary>
+    /// GUI
+    /// </summary>
     public Text Text_Level;
 
+    /// <summary>
+    /// 
+    /// </summary>
+    [HideInInspector]
     public string Name;
 
+    /// <summary>
+    /// 
+    /// </summary>
+    [HideInInspector]
     public int RequiredLevel = 100;
+
+    /// <summary>
+    /// 
+    /// </summary>
+    [HideInInspector]
     public bool Unlocked = false;
 
+    /// <summary>
+    /// 
+    /// </summary>
+    [HideInInspector]
     public int CostToLevel;
+
+    /// <summary>
+    /// 
+    /// </summary>
+    [HideInInspector]
     public int MaxLevel;
+
+    /// <summary>
+    /// 
+    /// </summary>
+    [HideInInspector]
     public int CurrentLevel;
 
+    /// <summary>
+    /// 
+    /// </summary>
     private Button button;
 
+    /// <summary>
+    /// Use this for initialization
+    /// </summary>
     private void Start()
     {
         button = GetComponent<Button>();
@@ -39,12 +81,18 @@ public class Chef : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Update is called once per frame
+    /// </summary>
     public void Update()
     {
-        UpdateText();
+        UpdateGUI();
         Unlock();
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
     public void Unlock()
     {
         if(PlayerManager.Instance.CurrentLevel >= RequiredLevel)
@@ -59,19 +107,25 @@ public class Chef : MonoBehaviour
         }
     }
 
-    public void UpdateText()
+    /// <summary>
+    /// Update GUI is called once per frame
+    /// </summary>
+    public void UpdateGUI()
     {
         Text_Name.text = Name;
         Text_Cost.text = "Cost. " + CostToLevel.ToString();
         Text_Level.text = CurrentLevel.ToString() + "/" + MaxLevel.ToString();
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
     public void Purchasable()
     {
         if (Unlocked == true)
         {
             if (CurrentLevel < MaxLevel &&
-                PlayerManager.Instance.GetPrestigePoints() >= CostToLevel)
+                PlayerManager.Instance.GetResearchPoints() >= CostToLevel)
             {
 
                 CurrentLevel++;
@@ -79,6 +133,6 @@ public class Chef : MonoBehaviour
             }
         }
 
-        UpdateText();
+        UpdateGUI();
     }
 }

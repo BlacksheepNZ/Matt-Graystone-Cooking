@@ -1,9 +1,13 @@
 ﻿using UnityEngine;
 
+/// <summary>
+/// 
+/// </summary>
 public class CurrencyConverter : MonoBehaviour
 {
-
-    private static CurrencyConverter instance;
+    /// <summary>
+    /// Instantiate class object
+    /// </summary>
     public static CurrencyConverter Instance
     {
         get
@@ -16,13 +20,22 @@ public class CurrencyConverter : MonoBehaviour
             return CurrencyConverter.instance;
         }
     }
+    private static CurrencyConverter instance;
 
-    void Awake()
-    {
-        CreateInstance();
-    }
+    /// <summary>
+    /// 
+    /// </summary>
+    string format = "0.##";
 
-    void CreateInstance()
+    /// <summary>
+    /// 
+    /// </summary>
+    string dollar = "$";
+
+    /// <summary>
+    /// Use this for initialization
+    /// </summary>
+    public void Awake()
     {
         if (instance == null)
         {
@@ -30,9 +43,9 @@ public class CurrencyConverter : MonoBehaviour
         }
     }
 
-    string format = "0.##";
-    string dollar = "$";
-
+    /// <summary>
+    /// 
+    /// </summary>
     public string GetCurrencyIntoString(float valueToConvert)
     {
         valueToConvert = Mathf.Clamp(valueToConvert, 0.0f, float.MaxValue);
@@ -67,6 +80,10 @@ public class CurrencyConverter : MonoBehaviour
 
         return converted;
     }
+
+    /// <summary>
+    /// 
+    /// </summary>
     public string GetCurrencyIntoStringNoSign(float valueToConvert)
     {
         valueToConvert = Mathf.Clamp(valueToConvert, 0.0f, float.MaxValue);

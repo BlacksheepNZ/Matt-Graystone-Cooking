@@ -1,14 +1,16 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
-using System.Collections.Generic;
-using LitJson;
-using System.IO;
 using System;
 using System.Linq;
 
+/// <summary>
+/// 
+/// </summary>
 public class MeatManager : MonoBehaviour
 {
-    private static MeatManager instance;
+    /// <summary>
+    /// Instantiate class object
+    /// </summary>
     public static MeatManager Instance
     {
         get
@@ -21,16 +23,44 @@ public class MeatManager : MonoBehaviour
             return MeatManager.instance;
         }
     }
+    private static MeatManager instance;
 
+    /// <summary>
+    /// GUI button chef
+    /// </summary>
     public Chef Button_Chef_Meat;
+
+    /// <summary>
+    /// GUI
+    /// </summary>
     public Text Text_Level;
 
+    /// <summary>
+    /// GUI
+    /// </summary>
     public Button Switch_Buy_Amount;
+
+    /// <summary>
+    /// GUI
+    /// </summary>
     public Text Switch_Button_Text;
+
+
+    /// <summary>
+    /// 
+    /// </summary>
+    [HideInInspector]
     public BuyAmountMode Buy_Amount_Mode = BuyAmountMode.Single;
 
+    /// <summary>
+    /// 
+    /// </summary>
+    [HideInInspector]
     public int Research_Points;
 
+    /// <summary>
+    /// Use this for initialization
+    /// </summary>
     private void Start()
     {
         Switch_Button_Text.text = Buy_Amount_Mode.ToString();
@@ -71,6 +101,9 @@ public class MeatManager : MonoBehaviour
         });
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
     public float GetRewardRate()
     {
         float value = 0;
@@ -87,6 +120,9 @@ public class MeatManager : MonoBehaviour
         return value;
     }
 
+    /// <summary>
+    /// Update is called once per frame
+    /// </summary>
     private void Update()
     {
         Text_Level.text = "lvl. " + Button_Chef_Meat.CurrentLevel.ToString();

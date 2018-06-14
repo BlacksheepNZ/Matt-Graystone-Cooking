@@ -1,20 +1,44 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
-class Achievement
+/// <summary>
+/// 
+/// </summary>
+public class Achievement
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public string Title;
+
+    /// <summary>
+    /// 
+    /// </summary>
     public string Decription;
+
+    /// <summary>
+    /// 
+    /// </summary>
     public int Points;
+
+    /// <summary>
+    /// 
+    /// </summary>
     public int SpriteIndex;
+
+    /// <summary>
+    /// 
+    /// </summary>
     public bool Unlocked;
 
+    /// <summary>
+    /// 
+    /// </summary>
     public GameObject AchievementReference;
 
+    /// <summary>
+    /// Use this for initialization
+    /// </summary>
     public Achievement(string title, string decription, int points, int spriteIndex, GameObject achievementReference)
     {
         Title = title;
@@ -27,6 +51,9 @@ class Achievement
         //LoadAchievements(); 
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
     public bool EarnAchievement()
     {
         if(!Unlocked)
@@ -40,6 +67,9 @@ class Achievement
         return false;
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
     public void SaveAchievements(bool value)
     {
         Unlocked = value;
@@ -53,6 +83,9 @@ class Achievement
         PlayerPrefs.Save();
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
     public void LoadAchievements()
     {
         Unlocked = PlayerPrefs.GetInt(Title) == 1 ? true : false;

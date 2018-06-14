@@ -1,12 +1,16 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
 using System.Diagnostics;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Calendar : MonoBehaviour {
-
+/// <summary>
+/// 
+/// </summary>
+public class Calendar : MonoBehaviour
+{
+    /// <summary>
+    /// Instantiate class object
+    /// </summary>
     private static Calendar instance;
     public static Calendar Instance
     {
@@ -21,34 +25,61 @@ public class Calendar : MonoBehaviour {
         }
     }
 
+    /// <summary>
+    /// GUI
+    /// </summary>
     public Text StarDate;
 
-    public float DateRate;
+    /// <summary>
+    /// Time in seconds for 1 day
+    /// </summary>
+    [HideInInspector]
+    public float DayRate;
+
+    /// <summary>
+    /// 
+    /// </summary>
+    [HideInInspector]
     private Stopwatch watch;
 
+    /// <summary>
+    /// Current date time
+    /// </summary>
+    [HideInInspector]
     public DateTime Date = new DateTime(2100, 1, 1);
 
+    /// <summary>
+    /// Add a day to the current date
+    /// </summary>
     public void AddDay()
     {
         Date = Date.AddDays(1);
     }
 
+    /// <summary>
+    /// Reads out the current datetime.
+    /// </summary>
     public override string ToString()
     {
         // for formating see https://msdn.microsoft.com/de-de/library/zdtaw1bw(v=vs.110).aspx
         return Date.ToString("yyy.MM.dd");
     }
 
-    // Use this for initialization
-    void Start () {
+    /// <summary>
+    /// Use this for initialization
+    /// </summary>
+    void Start()
+    {
         watch = new Stopwatch();
         watch.Start();
     }
-	
-	// Update is called once per frame
-	void Update () {
 
-        if(watch.Elapsed.Seconds > DateRate)
+    /// <summary>
+    /// Update is called once per frame
+    /// </summary>
+    void Update()
+    {
+        if(watch.Elapsed.Seconds > DayRate)
         {
             AddDay();
             watch.Reset();

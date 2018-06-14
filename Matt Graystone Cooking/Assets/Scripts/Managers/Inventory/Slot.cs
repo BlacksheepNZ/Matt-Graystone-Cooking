@@ -1,14 +1,29 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class Slot : MonoBehaviour, IDropHandler, IPointerClickHandler
+/// <summary>
+/// 
+/// </summary>
+public class Slot : MonoBehaviour, 
+                    IDropHandler, 
+                    IPointerClickHandler
 {
+    /// <summary>
+    /// 
+    /// </summary>
+    [HideInInspector]
     public int ID;
 
+    /// <summary>
+    /// 
+    /// </summary>
+    [HideInInspector]
     public ItemType ItemType;
 
-    void SetNewItem(ItemData dropedItem)
+    /// <summary>
+    /// 
+    /// </summary>
+    private void SetNewItem(ItemData dropedItem)
     {
         //move item to new slot
         dropedItem.transform.SetParent(this.transform);
@@ -18,7 +33,10 @@ public class Slot : MonoBehaviour, IDropHandler, IPointerClickHandler
         dropedItem.slot = ID;
     }
 
-    void MergItem(ItemData dropedItem)
+    /// <summary>
+    /// 
+    /// </summary>
+    private void MergItem(ItemData dropedItem)
     {
         if (this.transform.childCount > 0)
         {
@@ -33,7 +51,10 @@ public class Slot : MonoBehaviour, IDropHandler, IPointerClickHandler
         }
     }
 
-    void SwapItem(ItemData dropedItem)
+    /// <summary>
+    /// 
+    /// </summary>
+    private void SwapItem(ItemData dropedItem)
     {
         if (this.transform.childCount > 0)
         {
@@ -50,7 +71,10 @@ public class Slot : MonoBehaviour, IDropHandler, IPointerClickHandler
         }
     }
 
-    bool InventoryType(int slotID, ItemData item, ItemType itemType)
+    /// <summary>
+    /// 
+    /// </summary>
+    private bool InventoryType(int slotID, ItemData item, ItemType itemType)
     {
         if (item.Item.ItemType == ItemType
             || ItemType == ItemType.General)
@@ -61,100 +85,9 @@ public class Slot : MonoBehaviour, IDropHandler, IPointerClickHandler
         return false;
     }
 
-    //public void CheckDrillDataItemSlot()
-    //{
-    //    //2 slots one is overiding the other.
-
-    //    if (this.transform.childCount <= 0) //what does this do???
-    //    {
-    //        //get the parent item of the slot
-    //        GameObject parent = this.gameObject.transform.parent.transform.parent.gameObject;
-    //        //get the purchasable data from parent so we can modify it.
-    //        PurchasableData DrillData = parent.GetComponent<PurchasableData>();
-
-    //        return;
-    //    }
-    //    if (this.transform.childCount > 0)
-    //    {
-    //        //get the parent item of the slot
-    //        GameObject parent = this.gameObject.transform.parent.transform.parent.gameObject;
-    //        //get the purchasable data from parent so we can modify it.
-    //        PurchasableData DrillData = parent.GetComponent<PurchasableData>();
-
-    //        //get the item in our child
-    //        GameObject child = this.gameObject.transform.GetChild(0).gameObject;
-    //        //get child item data
-    //        Item childItem = child.GetComponent<ItemData>().Item;
-
-    //        //this will throw error for slots that are not part of an parent with Purchasable, ie inventory items
-
-    //        if (DrillData != null)
-    //        {
-    //            DrillData.Purchasable.AddRewards(childItem);
-    //        }
-    //        return;
-
-    //    }
-    //    else { }
-    //}
-
-    //public void CheckScavangerDataItemSlot()
-    //{
-    //    //2 slots one is overiding the other.
-
-    //    if (this.transform.childCount <= 0)
-    //    {
-    //        //get the parent item of the slot
-    //        GameObject parent = this.gameObject.transform.parent.transform.parent.gameObject;
-    //        //get the purchasable data from parent so we can modify it.
-    //        ScavangerData ScavangerData = parent.GetComponent<ScavangerData>();
-
-    //        if (ScavangerData != null)
-    //        {
-    //            ScavangerData.Purchasable.RemoveRewards();
-    //        }
-    //        return;
-    //    }
-    //    if (this.transform.childCount > 0)
-    //    {
-    //        //get the parent item of the slot
-    //        GameObject parent = this.gameObject.transform.parent.transform.parent.gameObject;
-    //        //get the purchasable data from parent so we can modify it.
-    //        ScavangerData ScavangerData = parent.GetComponent<ScavangerData>();
-
-    //        //get the item in our child
-    //        GameObject child = this.gameObject.transform.GetChild(0).gameObject;
-    //        //get child item data
-    //        Item childItem = child.GetComponent<ItemData>().Item;
-
-    //        //this will throw error for slots that are not part of an parent with Purchasable, ie inventory items
-
-    //        if (ScavangerData != null)
-    //        {
-    //            ScavangerData.Purchasable.AddRewards(childItem);
-    //        }
-    //        return;
-
-    //    }
-    //    else { }
-    //}
-
-    //public void OnDrag(PointerEventData eventData)
-    //{
-    //    ItemData droppedItem = eventData.pointerDrag.GetComponent<ItemData>();
-    //    if (droppedItem == null) return;
-
-    //    if(Input.GetMouseButtonDown(1))
-    //    {
-    //        int SlotID = droppedItem.slot;
-
-    //        if (Inventory.Instance.Items[ID].ID == 000)
-    //        {
-    //            Inventory.Instance.AddItemToSlot(SlotID, droppedItem.Item.ID, 1);
-    //        }
-    //    }
-    //}
-
+    /// <summary>
+    /// 
+    /// </summary>
     void IDropHandler.OnDrop(PointerEventData eventData)
     {
         ItemData droppedItem = eventData.pointerDrag.GetComponent<ItemData>();
@@ -209,6 +142,9 @@ public class Slot : MonoBehaviour, IDropHandler, IPointerClickHandler
         
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
     public void OnPointerClick(PointerEventData eventData)
     {
         for (int x = 0; x < Inventory.Instance.SlotsToCheck.Count; x++)

@@ -1,29 +1,64 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using UnityEngine;
 using UnityEngine.UI;
 
-[System.Serializable]
+/// <summary>
+/// 
+/// </summary>
+[Serializable]
 public class RecipeData : MonoBehaviour
 {
-    public Text Text_Name;
-    public Text Text_Requirement;
-    public Text Text_Sell_Value;
+    /// <summary>
+    /// GUI
+    /// </summary>
+    public Text GUI_Text_Name;
 
-    public Button Button_Purchase;
+    /// <summary>
+    /// GUI
+    /// </summary>
+    public Text GUI_Text_Requirement;
 
+    /// <summary>
+    /// GUI
+    /// </summary>
+    public Text GUI_Text_Sell_Value;
+
+    /// <summary>
+    /// GUI
+    /// </summary>
+    public Button GUI_Button_Purchase;
+
+    /// <summary>
+    /// GUI
+    /// </summary>
+    public Image GUI_Preview_Sprite;
+
+    /// <summary>
+    /// 
+    /// </summary>
+    [HideInInspector]
     public Recipe recipe;
 
+    /// <summary>
+    /// 
+    /// </summary>
+    [HideInInspector]
+    public int AmountSellMuiltplyer = 1;
+
+    /// <summary>
+    /// Use this for initialization
+    /// </summary>
     public void Start()
     {
-        Text_Name.text = recipe.Name;
+        GUI_Text_Name.text = recipe.Name;
+        GUI_Preview_Sprite.sprite = recipe.Preview_Image;
 
-        Button_Purchase.onClick.AddListener(() => Purchase());
+        GUI_Button_Purchase.onClick.AddListener(() => Purchase());
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
     public void Unlock()
     {
         if (recipe.Unlocked == true)
@@ -36,17 +71,34 @@ public class RecipeData : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Update is called once per frame
+    /// </summary>
     public void Update()
     {
         UpdateText();
     }
 
-    public void UpdateText()
+    /// <summary>
+    /// 
+    /// </summary>
+    public override string ToString()
     {
-        Text_Sell_Value.text = "$" + recipe.SellValue * AmountSellMuiltplyer;
-        Text_Requirement.text = StringBuilder();
+        return (recipe.SellValue * AmountSellMuiltplyer).ToString();
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    public void UpdateText()
+    {
+        GUI_Text_Sell_Value.text = "$" + recipe.SellValue * AmountSellMuiltplyer;
+        GUI_Text_Requirement.text = StringBuilder();
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
     public string StringBuilder()
     {
         string x = "";
@@ -73,11 +125,17 @@ public class RecipeData : MonoBehaviour
         return x;
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
     public string ColorString(string color, string input)
     {
        return "<color=#" + color + ">" + input + "</color>";
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
     public Item GetItemByID(int id)
     {
         for (int y = 0; y < SaveLoad.Instance.Item_Database.Count; y++)
@@ -91,14 +149,10 @@ public class RecipeData : MonoBehaviour
         return null;
     }
 
-    private void Purchase()
-    {
-        Sell();
-    }
-
-    public int AmountSellMuiltplyer = 1;
-
-    void Sell()
+    /// <summary>
+    /// 
+    /// </summary>
+    public void Purchase()
     {
         int have_item_count = 0;
 

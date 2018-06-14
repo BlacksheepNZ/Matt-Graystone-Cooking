@@ -1,14 +1,14 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
-using System;
-using System.IO;
-using System.Runtime.Serialization.Formatters.Binary;
-using System.Collections.Generic;
-using System.Collections;
 
+/// <summary>
+/// 
+/// </summary>
 public class Game : MonoBehaviour
 {
-    private static Game instance;
+    /// <summary>
+    /// Instantiate class object
+    /// </summary>
     public static Game Instance
     {
         get
@@ -22,90 +22,67 @@ public class Game : MonoBehaviour
             return Game.instance;
         }
     }
+    private static Game instance;
 
-    //UI
-    //public Text GoldPerSecondText;
-    public Text GoldDisplayText;
-    //public Text GoldPerClickText;
+    /// <summary>
+    /// GUI
+    /// </summary>
+    public Text GUI_Text_TotalGold;
 
-    //public Text UserLevelText;
-    //public Text UserExperienceText;
+    /// <summary>
+    /// GUI
+    /// </summary>
+    [HideInInspector]
+    public float TotalGold
+    {
+        get { return totalGold; }
+    }
+    private float totalGold;
 
-    //Game Values
-    public float TotalGold;
-    //public float TotalGoldPerClick;
-
-    //public ProgressionBar xpBar;
-
-    //public Text CurrentPlanetName;
-
+    /// <summary>
+    /// Use this for initialization
+    /// </summary>
     private void Awake()
     {
         Application.targetFrameRate = 60;
     }
 
+    /// <summary>
+    /// Update is called once per frame
+    /// </summary>
     private void Update()
     {
-        UpdateUI();
+        if (GUI_Text_TotalGold != null)
+            GUI_Text_TotalGold.text =
+                CurrencyConverter.Instance.GetCurrencyIntoStringNoSign(totalGold);
     }
 
-    private void UpdateUI()
-    {
-        //if (xpBar != null)
-        //{
-        //    xpBar.Max = PlayerManager.Instance.XpTillNextLevel;
-        //    xpBar.Current = PlayerManager.Instance.CurrentExperience;
-        //}
-
-        //if (UserLevelText != null)
-        //    UserLevelText.text = PlayerManager.Instance.CurrentLevel.ToString();
-        //if (UserExperienceText != null)
-        //    UserExperienceText.text = PlayerManager.Instance.CurrentExperience.ToString() + " / " + PlayerManager.Instance.XpTillNextLevel.ToString();
-
-        //if(GoldPerClickText != null)
-        //    GoldPerClickText.text = TotalGoldPerClick.ToString();
-        if (GoldDisplayText != null)
-            GoldDisplayText.text = CurrencyConverter.Instance.GetCurrencyIntoStringNoSign(TotalGold);
-
-        //CurrentPlanetName.text = Map.Instance.CurrentPlanetName;
-    }
-
+    /// <summary>
+    /// Add gold to total.
+    /// </summary>
     public void AddGold(float amount)
     {
-        //Prestige.Instance.LifetimCurrency += amount;
-        TotalGold += amount;
+        PlayerManager.Instance.AddExperience(amount);
+        totalGold += amount;
     }
+
+    /// <summary>
+    /// Remove gold from total.
+    /// </summary>
     public void RemoveGold(float amount)
     {
-        TotalGold -= amount;
-    }
-    public void AddGoldPerClick(float amount)
-    {
-        //Prestige.Instance.LifetimCurrency += amount;
-        //TotalGoldPerClick += amount;
-    }
-    public void RemoveGoldPerClick(float amount)
-    {
-        //TotalGoldPerClick -= amount;
+        totalGold -= amount;
     }
 
+    /// <summary>
+    /// Have enough gold to purchase.
+    /// </summary>
     public bool CanPurchase(float cost)
     {
-        if(TotalGold >= cost)
-        {
+        if (totalGold >= cost)
             return true;
-        }
         else
-        {
             return false;
-        }
-    }
-
-    public void AddClick()
-    {
-        //float PercentOfTotalClicks = TotalGold * 0.01f; //1 Percent
-        ////AddGold(TotalGoldPerClick + PercentOfTotalClicks);
-
-        //PlayerManager.Instance.AddExperience(25);
     }
 }
+ 

@@ -71,7 +71,7 @@ public class DebugMode : MonoBehaviour
 
             if (GUI.Button(new Rect(0, 200, 200, 50), "Add Buff"))
             {
-                BuffManager.Instance.AddBuff(BuffEffect.Buff1, 5.0f);
+                //BuffManager.Instance.AddBuff(BuffEffect.Buff1, 5.0f);
             };
 
             if (GUI.Button(new Rect(0, 250, 200, 50), "Add Building"))

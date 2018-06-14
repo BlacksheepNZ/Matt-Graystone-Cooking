@@ -1,55 +1,172 @@
 ﻿using System;
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.UI;
-using System.Diagnostics;
-using System.Collections.Generic;
-using LitJson;
-using System.IO;
 using System.Collections;
 
-[System.Serializable]
+/// <summary>
+/// 
+/// </summary>
+[Serializable]
 public class Purchasable
 {
-    public Text IDText;
-    public Text ItemNameText;
-    public Text CountText;
-    public Text ValueText;
-    public Text CostToPurchase;
-    public Text Text_Reward;
+    /// <summary>
+    /// GUI
+    /// </summary>
+    public Text GUI_Text_ID;
+
+    /// <summary>
+    /// GUI
+    /// </summary>
+    public Text GUI_Text_Item_Name;
+
+    /// <summary>
+    /// GUI
+    /// </summary>
+    public Text GUI_Text_Count;
+
+    /// <summary>
+    /// GUI
+    /// </summary>
+    public Text GUI_Text_Value;
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public Image GUI_Image_Potrait;
+
+    /// <summary>
+    /// GUI
+    /// </summary>
+    public Button GUI_Button_Upgrade;
+
+    /// <summary>
+    /// GUI
+    /// </summary>
+    public Text GUI_Text_Reward;
+
+    /// <summary>
+    /// GUI
+    /// </summary>
+    public Text GUI_Text_Cost_To_Purchase;
+
+    /// <summary>
+    /// GUI
+    /// </summary>
+    public Button GUI_Button_FirstTime_Purchase;
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public ProgressionBar GUI_Progression_Bar;
+
+    /// <summary>
+    /// 
+    /// </summary>
+    [HideInInspector]
     public int Cost_To_Purchase_Amount;
 
+    /// <summary>
+    /// 
+    /// </summary>
+    [HideInInspector]
     public Sprite Image;
 
+    /// <summary>
+    /// 
+    /// </summary>
+    [HideInInspector]
     public int ID;
+
+    /// <summary>
+    /// 
+    /// </summary>
+    [HideInInspector]
     public string Item_Name;
+
+    /// <summary>
+    /// 
+    /// </summary>
+    [HideInInspector]
     public float Base_Cost;
+
+    /// <summary>
+    /// 
+    /// </summary>
+    [HideInInspector]
     public float Cost;
+
+    /// <summary>
+    /// 
+    /// </summary>
+    [HideInInspector]
     public float Coefficent;
+
+    /// <summary>
+    /// 
+    /// </summary>
+    [HideInInspector]
     public int Count;
+
+    /// <summary>
+    /// 
+    /// </summary>
+    [HideInInspector]
     public float Resource_Rate;
+
+    /// <summary>
+    /// 
+    /// </summary>
+    [HideInInspector]
     public string Item_ID;
+
+    /// <summary>
+    /// 
+    /// </summary>
+    [HideInInspector]
     public float Time_To_Complete_Task = 1.0f;
 
-    public ProgressionBar Progression_Bar;
-
-    public Button Button_FirstTime_Purchase;
-    public Button Button_Upgrade;
-
+    /// <summary>
+    /// 
+    /// </summary>
+    [HideInInspector]
     public bool On_Complete;
+
+    /// <summary>
+    /// 
+    /// </summary>
+    [HideInInspector]
     public bool Unlocked = false;
+
+    /// <summary>
+    /// 
+    /// </summary>
+    [HideInInspector]
     public bool Is_Purchased;
 
-    public Purchasable(
-        int id, 
-        string itemName,
-     float baseCost,
-     Sprite image,
-     float coefficent,
-     int count,
-     float resourceRate,
-     string itemID,
-     float timeToCompleteTask)
+    /// <summary>
+    /// 
+    /// </summary>
+    [HideInInspector]
+    public bool Started_Timer;
+
+    /// <summary>
+    /// 
+    /// </summary>
+    [HideInInspector]
+    public float Current_Time = 0;
+
+    /// <summary>
+    /// Use this for initialization
+    /// </summary>
+    public Purchasable( int id, 
+                        string itemName,
+                        float baseCost,
+                        Sprite image,
+                        float coefficent,
+                        int count,
+                        float resourceRate,
+                        string itemID,
+                        float timeToCompleteTask)
     {
         ID = id;
         Item_Name = itemName;
@@ -65,6 +182,9 @@ public class Purchasable
         Is_Purchased = false;
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
     public bool Can_Purchase()
     {
         if (Game.Instance.CanPurchase(Cost))
@@ -75,18 +195,30 @@ public class Purchasable
         return false;
     }
 
+    /// <summary>
+    /// Update is called once per frame
+    /// </summary>
     public void Update()
     {
-        CostToPurchase.text = CurrencyConverter.Instance.GetCurrencyIntoString(Cost_To_Buy());
-        ItemNameText.text = Inventory.Instance.GetItemByID(int.Parse(Item_ID)).Name;
-        CountText.text = "LVL. " + Count.ToString("0");
-
-        Text_Reward.text = "+ " + CurrencyConverter.Instance.GetCurrencyIntoString(Resource_Rate);
-        ValueText.text = CurrencyConverter.Instance.GetCurrencyIntoStringNoSign(Resource_Rate * Count);
-
-        //ProgressionBar.progressText.text = CurrencyConverter.Instance.GetCurrencyIntoStringNoSign(ProgressionBar.Current) + "/" + CurrencyConverter.Instance.GetCurrencyIntoStringNoSign(ProgressionBar.Max) + DisplayText(B_DecreaseTimeToCompleteTask);
+        UpdateGUI();
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    private void UpdateGUI()
+    {
+        GUI_Text_Cost_To_Purchase.text = CurrencyConverter.Instance.GetCurrencyIntoString(Cost_To_Buy());
+        GUI_Text_Item_Name.text = Inventory.Instance.GetItemByID(int.Parse(Item_ID)).Name;
+        GUI_Text_Count.text = "LVL. " + Count.ToString("0");
+
+        GUI_Text_Reward.text = "+ " + CurrencyConverter.Instance.GetCurrencyIntoString(Resource_Rate);
+        GUI_Text_Value.text = CurrencyConverter.Instance.GetCurrencyIntoStringNoSign(Resource_Rate * Count);
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
     private string Display_Text(float bonus)
     {
         if (bonus != 0)
@@ -95,6 +227,9 @@ public class Purchasable
             return "";
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
     public float Decrease_Value(float cost, float decrease)
     {
         if(decrease == 0)
@@ -108,6 +243,10 @@ public class Purchasable
         Mathf.Clamp(value, 0.001f, value);
         return value;
     }
+
+    /// <summary>
+    /// 
+    /// </summary>
     public float Increase_Value(float cost, float increase)
     {
         if (increase == 0)
@@ -121,6 +260,9 @@ public class Purchasable
         return value;
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
     public void First_Time_Purchase()
     {
         if (Can_Purchase() == true)
@@ -131,6 +273,9 @@ public class Purchasable
         }
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
     public float Cost_To_Buy()
     {
         float value = 0;
@@ -142,6 +287,9 @@ public class Purchasable
         return value;
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
     public void Upgrade()
     {
         float value = Cost_To_Buy();
@@ -159,11 +307,9 @@ public class Purchasable
         }
     }
 
-    #region Timer
-
-    public bool Started_Timer;
-    public float Current_Time = 0;
-
+    /// <summary>
+    /// 
+    /// </summary>
     public IEnumerator Update_Timer()
     {
         Started_Timer = true;
@@ -171,18 +317,21 @@ public class Purchasable
 
         float speed = (Time.fixedDeltaTime / Time_To_Complete_Task);
 
-        while (Progression_Bar.Value < 1)
+        while (GUI_Progression_Bar.Value < 1)
         {
-            Progression_Bar.Value += speed;
-            Current_Time = Progression_Bar.Value;
+            GUI_Progression_Bar.Value += speed;
+            Current_Time = GUI_Progression_Bar.Value;
 
             yield return null;
         }
 
-        Progression_Bar.Value = 0;
+        GUI_Progression_Bar.Value = 0;
         Reset_Timer();
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
     private void Reset_Timer()
     {
         if (!Inventory.Instance.InventoryFull())
@@ -192,6 +341,4 @@ public class Purchasable
             On_Complete = true;
         }
     }
-
-    #endregion
 }
