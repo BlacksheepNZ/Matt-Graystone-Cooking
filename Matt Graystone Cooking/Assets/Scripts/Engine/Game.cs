@@ -55,6 +55,35 @@ public class Game : MonoBehaviour
         if (GUI_Text_TotalGold != null)
             GUI_Text_TotalGold.text =
                 CurrencyConverter.Instance.GetCurrencyIntoStringNoSign(totalGold);
+
+        //unlock all
+        if(Input.GetKeyDown(KeyCode.F12))
+        {
+            AddGold(float.MaxValue);
+            PlayerManager.Instance.TotalXp = float.MaxValue;
+            PlayerManager.Instance.CurrentLevel = int.MaxValue;
+            PlayerManager.Instance.CurrentExperience = float.MaxValue;
+            PlayerManager.Instance.ResearchPoints = int.MaxValue;
+
+            //for (int i = 0; i < ; i++)
+            //{
+                //SaveLoad.Instance.Recipe_Prefab
+            //}
+
+            //for (int i = 0; i < SaveLoad.Instance.Item_Database.Count; i++)
+            //{
+            //    Inventory.Instance.AddItem(
+            //        SaveLoad.Instance.Item_Database[i].ID, 
+            //        int.MaxValue);
+            //}
+
+            for (int i = 0; i < ChefResearchTree.Instance.GUI_Chef_Button.Count; i++)
+            {
+                GameObject chefObject = ChefResearchTree.Instance.GUI_Chef_Button[i];
+                Chef chef = chefObject.GetComponent<Chef>();
+                chef.CurrentLevel = int.MaxValue;
+            }
+        }
     }
 
     /// <summary>

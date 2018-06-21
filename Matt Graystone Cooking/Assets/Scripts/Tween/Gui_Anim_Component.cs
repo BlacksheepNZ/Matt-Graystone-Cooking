@@ -9,50 +9,15 @@ public class Gui_Anim_Component
     [HideInInspector]
     private GameObject Game_Object;
     public bool Enabled;
-    public Vector3 Move_To_Position;
+    /// <summary>
+    /// 0 slow, 10 instant
+    /// </summary>
+    [Range(0, 1)]
     public float Speed;
-    public float Delay;
 
     public void SetGameObject(GameObject gameObject)
     {
         Game_Object = gameObject;
-    }
-
-    public void MoveInstant(bool rayCast)
-    {
-        Game_Object.transform.localPosition = Move_To_Position;
-    }
-
-    public IEnumerator MoveOverSeconds(bool rayCast)
-    {
-        if (Enabled == true)
-        {
-            RaycastTarget(rayCast);
-
-            yield return new WaitForSeconds(Delay);
-
-            float elapsedTime = 0;
-            Vector3 startingPos = Game_Object.transform.localPosition;
-            while (elapsedTime < Speed)
-            {
-                Game_Object.transform.localPosition = Vector3.Lerp(startingPos, Move_To_Position, (elapsedTime / Speed));
-                elapsedTime += Time.deltaTime;
-                yield return new WaitForEndOfFrame();
-            }
-
-            Game_Object.transform.localPosition = Move_To_Position;
-        }
-    }
-
-    public IEnumerator Move(bool rayCast)
-    {
-        if (Enabled == true)
-        {
-            RaycastTarget(rayCast);
-
-            Game_Object.transform.localPosition = Move_To_Position;
-            yield return null;
-        }
     }
 
     /// <summary>
@@ -70,12 +35,19 @@ public class Gui_Anim_Component
                 //RaycastTarget(rayCast);
 
                 t += Time.deltaTime * Speed;
+
+                //fix
+                if (Game_Object == null)
+                    break;
+
                 Game_Object.GetComponent<CanvasGroup>().alpha = t;
 
                 yield return null;
             }
 
-            Game_Object.GetComponent<CanvasGroup>().alpha = 1;
+            //fix
+            if (Game_Object != null)
+                Game_Object.GetComponent<CanvasGroup>().alpha = 1;
         }
     }
     public IEnumerator FadeOut(bool rayCast)

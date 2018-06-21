@@ -55,7 +55,10 @@ public class Item
     /// <summary>
     /// Use this for initialization
     /// </summary>
-    public Item() { }
+    public Item()
+    {
+        ID = 000;
+    }
 
     /// <summary>
     /// Use this for initialization

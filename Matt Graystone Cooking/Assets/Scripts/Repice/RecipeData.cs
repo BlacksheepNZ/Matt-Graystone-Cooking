@@ -156,6 +156,12 @@ public class RecipeData : MonoBehaviour
     {
         int have_item_count = 0;
 
+        if (recipe == null)
+        {
+            Debug.Log("No recipe found.");
+            return;
+        }
+
         for (int i = 0; i < recipe.Items.Count; i++)
         {
             Item item = GetItemByID(recipe.Items[i].ItemID);

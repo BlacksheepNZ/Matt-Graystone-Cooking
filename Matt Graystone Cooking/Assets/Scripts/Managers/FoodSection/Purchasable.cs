@@ -12,11 +12,6 @@ public class Purchasable
     /// <summary>
     /// GUI
     /// </summary>
-    public Text GUI_Text_ID;
-
-    /// <summary>
-    /// GUI
-    /// </summary>
     public Text GUI_Text_Item_Name;
 
     /// <summary>
@@ -30,7 +25,22 @@ public class Purchasable
     public Text GUI_Text_Value;
 
     /// <summary>
-    /// 
+    /// GUI
+    /// </summary>
+    public Button GUI_Button_Sell_All;
+
+    /// <summary>
+    /// GUI
+    /// </summary>
+    public Text GUI_Text_Total_Count;
+
+    /// <summary>
+    /// GUI
+    /// </summary>
+    public Text GUI_Text_Sell_Value;
+
+    /// <summary>
+    /// GUI
     /// </summary>
     public Image GUI_Image_Potrait;
 
@@ -60,7 +70,7 @@ public class Purchasable
     public ProgressionBar GUI_Progression_Bar;
 
     /// <summary>
-    /// 
+    /// Buy Amount Mode (1, 50 , 100);
     /// </summary>
     [HideInInspector]
     public int Cost_To_Purchase_Amount;
@@ -72,49 +82,54 @@ public class Purchasable
     public Sprite Image;
 
     /// <summary>
-    /// 
+    /// Current Level
     /// </summary>
     [HideInInspector]
-    public int ID;
+    public int ID
+    {
+        get { return this._id; }
+        set { this._id = value; }
+    }
+    private int _id;
 
     /// <summary>
-    /// 
+    /// Name
     /// </summary>
     [HideInInspector]
     public string Item_Name;
 
     /// <summary>
-    /// 
+    /// Base cost to purchase
     /// </summary>
     [HideInInspector]
     public float Base_Cost;
 
     /// <summary>
-    /// 
+    /// current cost
     /// </summary>
     [HideInInspector]
     public float Cost;
 
     /// <summary>
-    /// 
+    /// cost muiltplyer
     /// </summary>
     [HideInInspector]
     public float Coefficent;
 
     /// <summary>
-    /// 
+    /// current count
     /// </summary>
     [HideInInspector]
     public int Count;
 
     /// <summary>
-    /// 
+    /// amount of resources per tick
     /// </summary>
     [HideInInspector]
     public float Resource_Rate;
 
     /// <summary>
-    /// 
+    /// associated item gained at the end of the timer
     /// </summary>
     [HideInInspector]
     public string Item_ID;
@@ -168,7 +183,7 @@ public class Purchasable
                         string itemID,
                         float timeToCompleteTask)
     {
-        ID = id;
+        this._id = id;
         Item_Name = itemName;
         Base_Cost = baseCost;
         Image = image;
@@ -206,14 +221,30 @@ public class Purchasable
     /// <summary>
     /// 
     /// </summary>
-    private void UpdateGUI()
+    public void UpdateGUI()
     {
-        GUI_Text_Cost_To_Purchase.text = CurrencyConverter.Instance.GetCurrencyIntoString(Cost_To_Buy());
-        GUI_Text_Item_Name.text = Inventory.Instance.GetItemByID(int.Parse(Item_ID)).Name;
+        Item item = ItemDatabase.Instance.FetchItemByID(int.Parse(Item_ID));
+
+        if (item == null)
+            return;
+
+        //GUI_Text_Cost_To_Purchase.text = CurrencyConverter.Instance.GetCurrencyIntoString(Cost_To_Buy());
+        GUI_Text_Item_Name.text = item.Name;
         GUI_Text_Count.text = "LVL. " + Count.ToString("0");
 
+        ItemData itemData = Inventory.Instance.GetItemData(item);
+
+        if (itemData == null)
+            return;
+
+        GUI_Text_Total_Count.text = CurrencyConverter.Instance.GetCurrencyIntoStringNoSign
+                                    (itemData.count) + "\n" + "Sell All";
+
+        GUI_Text_Sell_Value.text = CurrencyConverter.Instance.GetCurrencyIntoString(
+                                   (float)Inventory.Instance.ItemValue(item));
+
         GUI_Text_Reward.text = "+ " + CurrencyConverter.Instance.GetCurrencyIntoString(Resource_Rate);
-        GUI_Text_Value.text = CurrencyConverter.Instance.GetCurrencyIntoStringNoSign(Resource_Rate * Count);
+        GUI_Text_Value.text = "x"+CurrencyConverter.Instance.GetCurrencyIntoStringNoSign(Resource_Rate * Count);
     }
 
     /// <summary>
@@ -292,6 +323,16 @@ public class Purchasable
     /// </summary>
     public void Upgrade()
     {
+        Item item = ItemDatabase.Instance.FetchItemByID(int.Parse(Item_ID));
+
+        if (item == null)
+            return;
+
+        ItemData itemData = Inventory.Instance.GetItemData(item);
+
+        if (itemData == null)
+            return;
+
         float value = Cost_To_Buy();
 
         if (Game.Instance.CanPurchase(value))

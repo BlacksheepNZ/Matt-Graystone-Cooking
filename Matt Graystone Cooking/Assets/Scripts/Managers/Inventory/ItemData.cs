@@ -73,7 +73,7 @@ public class ItemData : MonoBehaviour,
             Inventory.Instance.HideSplitStack();
 
             offSet = eventData.position - new Vector2(this.transform.position.x, this.transform.position.y);
-            this.transform.SetParent(GameObject.Find("Item_Holder").transform);// this.transform.parent.parent);
+            this.transform.SetParent(GameObject.Find("GUI_Item_Holder").transform);// this.transform.parent.parent);
             this.transform.position = eventData.position; //+offset
             GetComponent<CanvasGroup>().blocksRaycasts = false;
 
@@ -104,7 +104,7 @@ public class ItemData : MonoBehaviour,
             GetComponent<CanvasGroup>().blocksRaycasts = true;
         }
 
-        Crafting_DragDrop.Instance.CheckSlot();
+        //Crafting_DragDrop.Instance.CheckSlot();
 
         Cursor.visible = true;
     }

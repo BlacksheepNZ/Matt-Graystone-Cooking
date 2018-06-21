@@ -13,7 +13,6 @@ public class RefrigeratorsManager : MonoBehaviour {
         // We check if user pressed PickUp key and character is inside trigger
         if (Input.GetButtonDown("PickUp") && triggerEntered == true)
         {
-            Inventory.GetComponent<Gui_Anim>().Move_In();
             PickupDialog.Instance.DeActivate();
         }
     }
@@ -31,6 +30,5 @@ public class RefrigeratorsManager : MonoBehaviour {
     {
         PickupDialog.Instance.DeActivate();
         triggerEntered = false;
-        Inventory.GetComponent<Gui_Anim>().Move_Out_Instant();
     }
 }

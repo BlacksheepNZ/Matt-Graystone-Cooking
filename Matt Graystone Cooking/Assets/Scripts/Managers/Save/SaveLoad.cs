@@ -48,6 +48,11 @@ public class SaveLoad : MonoBehaviour
     }
 
     /// <summary>
+    /// Main GUI Title Screen
+    /// </summary>
+    public GameObject GUI_Opening_Menu;
+
+    /// <summary>
     /// Use this for initialization
     /// </summary>
     public void Start()
@@ -58,7 +63,7 @@ public class SaveLoad : MonoBehaviour
         LoadAllImages();
 
         Json();
-        LoadFile();
+        //LoadFile();
 
         Current_Date_Time = DateTime.Now;
 
@@ -66,6 +71,8 @@ public class SaveLoad : MonoBehaviour
         {
             Previous_Date_Time = Current_Date_Time;
         }
+
+        ScreenManager.Instance.OpenScreen();
     }
 
     /// <summary>
@@ -534,6 +541,11 @@ public class SaveLoad : MonoBehaviour
 
         Save_State save = new Save_State();
 
+        if(FirstTime == true)
+            save.FirstTime = 0;
+        else
+            save.FirstTime = 1;
+
         //save.Date_Time = Calendar.Instance.Date;
 
         save.Current_Date_Time = Current_Date_Time;
@@ -689,6 +701,11 @@ public class SaveLoad : MonoBehaviour
             Save_State load = (Save_State)format.Deserialize(file);
             file.Close();
 
+            if (load.FirstTime == 0)
+                FirstTime = true;
+            else
+                FirstTime = false;
+
             //Calendar.Instance.Date = load.Date_Time;
 
             Current_Date_Time = load.Current_Date_Time;
@@ -810,6 +827,27 @@ public class SaveLoad : MonoBehaviour
             item.Unlock();
         }
     }
+
+
+    public GameObject GUI_Chef_Selection;
+
+    private bool FirstTime = true;
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public void CheckFirstTime()
+    {
+        //check if we have a new user
+        if (FirstTime == true)
+        {
+            //show new profession screen
+            GUI_Chef_Selection.SetActive(true);
+            GUI_Chef_Selection.GetComponent<Gui_Anim>().Fade_In();
+
+            FirstTime = false;
+        }
+    }
 }
 
 /// <summary>
@@ -818,6 +856,12 @@ public class SaveLoad : MonoBehaviour
 [Serializable]
 public class Save_State
 {
+    /// <summary>
+    /// 0 = ture, 1 = false
+    /// </summary>
+    [SerializeField]
+    public int FirstTime;
+
     [SerializeField]
     public DateTime Date_Time;
 
@@ -1032,4 +1076,3 @@ public class Bonus_Save_State
     [SerializeField]
     public float Amount;
 }
-

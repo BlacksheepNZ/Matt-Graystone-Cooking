@@ -425,6 +425,7 @@ public class Inventory : MonoBehaviour
             return;
         }
 
+        //if have the the item in the inventory already
         if (itemToAdd.Stackable == true && CheckInventory(itemToAdd))
         {
             for (int i = 0; i < Items.Count; i++)
@@ -443,6 +444,7 @@ public class Inventory : MonoBehaviour
         }
         else
         {
+            //no item in inventory
             for (int i = 0; i < Items.Count(); i++)
             {
                 //gets the first slot thats empty
@@ -491,7 +493,8 @@ public class Inventory : MonoBehaviour
                     toggle.SetActive(false);
                     toggle.GetComponent<Toggle>().isOn = false;
 
-                    itemObject.GetComponent<ItemData>().count = 1;
+                    ItemData itemData = itemObject.GetComponent<ItemData>();
+                    itemData.count = 1;
                     break;
                 }
             }
@@ -574,8 +577,8 @@ public class Inventory : MonoBehaviour
                 item_data_in_slot.transform.Find("Count").GetComponent<Text>().text = CurrencyConverter.Instance.GetCurrencyIntoStringNoSign(item_data_in_slot.count);
                 if (item_data_in_slot.count <= 0)
                 {
-                    Destroy(slot.transform.GetChild(0).gameObject);
-                    Items[slot.ID] = new Item();
+                    //Destroy(slot.transform.GetChild(0).gameObject);
+                    //Items[slot.ID] = new Item();
                 }
                 else if (item_data_in_slot.count == 1)
                 {
@@ -614,11 +617,11 @@ public class Inventory : MonoBehaviour
     /// <summary>
     /// 
     /// </summary>
-    public int GetSlotByID(int id)
+    public int GetSlotByItemID(int itemID)
     {
         for (int i = 0; i < Items.Count; i++)
         {
-            if (Items[i].ID == id)
+            if (Items[i].ID == itemID)
             {
                 if (slots[i].transform.childCount > 0)
                 {
@@ -772,23 +775,6 @@ public class Inventory : MonoBehaviour
     /// <summary>
     /// 
     /// </summary>
-    public Item GetItemByID(int id)
-    {
-        for (int i = 0; i < SaveLoad.Instance.Item_Database.Count; i++)
-        {
-            Item item = SaveLoad.Instance.Item_Database[i];
-            if (item.ID == id)
-            {
-                return item;
-            }
-        }
-
-        return null;
-    }
-
-    /// <summary>
-    /// 
-    /// </summary>
     public void UseComsumable(int ID)
     {
         if (GUI_Panel_Slot.transform.childCount > 0)
@@ -863,19 +849,75 @@ public class Inventory : MonoBehaviour
     #endregion
 
     /// <summary>
-    /// 
+    ///   
     /// </summary>
-    public void SellItem(int SlotID, int amount)
+    public int ItemValue(Item item)
     {
-        if (slots[SlotID].transform.childCount > 0)
-        {
-            ItemData itemData = slots[SlotID].transform.GetChild(0).GetComponent<ItemData>();
+        ItemData itemData = GetItemData(item);
 
+        if (itemData == null)
+            return 0;
+
+        ItemType itemType = itemData.Item.ItemType;
+        ResourceType resourceType = itemData.Item.ResourceType;
+
+        for (int i = 0; i < MineralSellValue.Count(); i++)
+        {
+            if (MineralSellValue[i].ResourceType == resourceType)
+            {
+                if (itemData.count <= 0)
+                {
+                    return MineralSellValue[i].Value;
+                }
+                else
+                {
+                    return MineralSellValue[i].Value * itemData.count;
+                }
+            }
+        }
+
+        return 0;
+    }
+
+    public ItemData GetItemData(Item item)
+    {
+        if (item == null)
+            return null;
+
+        int slotID = GetSlotByItemID(item.ID);
+
+        if (slotID == -1)
+            return null;
+
+        GameObject slot = slots[slotID];
+
+        if (slot == null)
+            return null;
+
+        if (slot.transform.childCount > 0)
+        {
+            ItemData itemData = slot.transform.GetChild(0).GetComponent<ItemData>();
+
+            return itemData;
+        }
+
+        return null;
+    }
+
+    /// <summary>
+    /// Set amount to 0 to sell all
+    /// </summary>
+    public void SellItem(Item item, int amount)
+    {
+        ItemData itemData = GetItemData(item);
+
+        if (slots[itemData.slot].transform.childCount > 0)
+        {
             int count = 0;
 
             int value = itemData.count - amount;
 
-            if(value >= 0)
+            if(value > 0)
             {
                 count = amount;
             }
@@ -894,8 +936,8 @@ public class Inventory : MonoBehaviour
                     float sellValue = MineralSellValue[i].Value * count;
 
                     Game.Instance.AddGold(sellValue);
-                    Debug.Log("Sold " + count + "@" + MineralSellValue[i].Value + " " + resourceType + " Gold added: " + value + " from slot " + SlotID);
-                    RemoveItem(itemData.Item.ID, count, slots[SlotID].GetComponent<Slot>());
+                    //Debug.Log("Sold " + count + "@" + MineralSellValue[i].Value + " " + resourceType + " Gold added: " + sellValue + " from slot " + SlotID);
+                    RemoveItem(itemData.Item.ID, count, slots[itemData.slot].GetComponent<Slot>());
                     break;
                 }
             }

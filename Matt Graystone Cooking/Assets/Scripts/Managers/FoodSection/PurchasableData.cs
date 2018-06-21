@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.UI;
 
 /// <summary>
@@ -37,12 +38,12 @@ public class PurchasableData : MonoBehaviour
         Purchasable.GUI_Button_Upgrade.onClick.AddListener(Upgrade);
         Purchasable.Cost_To_Purchase_Amount = 1;
 
+        Purchasable.GUI_Button_Sell_All.onClick.AddListener(SellALL);
+
         Text Costtext = Purchasable.GUI_Button_FirstTime_Purchase.GetComponentInChildren<Text>();
         Costtext.text = CurrencyConverter.Instance.GetCurrencyIntoString(Purchasable.Cost);
 
         Purchasable.On_Complete = true;
-
-        Purchasable.GUI_Text_ID.text = Purchasable.ID.ToString("00");
 
         if (Purchasable.Started_Timer == true)
         {
@@ -54,6 +55,18 @@ public class PurchasableData : MonoBehaviour
         Purchasable.Cost_To_Purchase_Amount = 1;
 
         Purchasable.GUI_Image_Potrait.sprite = Purchasable.Image;
+    }
+
+    private void SellALL()
+    {
+        Item item = ItemDatabase.Instance.FetchItemByID(int.Parse(Purchasable.Item_ID));
+        ItemData itemData = Inventory.Instance.GetItemData(item);
+        if (itemData == null)
+            return;
+
+        Inventory.Instance.SellItem(item, itemData.count);
+
+        Purchasable.UpdateGUI();
     }
 
     /// <summary>
@@ -83,6 +96,8 @@ public class PurchasableData : MonoBehaviour
     /// </summary>
     public void FirstTimePurchase()
     {
+        StartCoroutine(Purchasable.Update_Timer());
+
         Purchasable.First_Time_Purchase();
     }
 

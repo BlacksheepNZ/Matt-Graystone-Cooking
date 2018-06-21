@@ -14,7 +14,6 @@ public class LarderChef : MonoBehaviour
         // We check if user pressed PickUp key and character is inside trigger
         if (Input.GetButtonDown("PickUp") && triggerEntered == true)
         {
-            TabHolder_Larder.GetComponent<Gui_Anim>().Move_In();
             PickupDialog.Instance.DeActivate();
         }
     }
@@ -32,6 +31,5 @@ public class LarderChef : MonoBehaviour
     {
         PickupDialog.Instance.DeActivate();
         triggerEntered = false;
-        TabHolder_Larder.GetComponent<Gui_Anim>().Move_Out_Instant();
     }
 }

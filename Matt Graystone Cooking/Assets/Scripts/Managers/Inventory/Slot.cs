@@ -147,13 +147,13 @@ public class Slot : MonoBehaviour,
     /// </summary>
     public void OnPointerClick(PointerEventData eventData)
     {
-        for (int x = 0; x < Inventory.Instance.SlotsToCheck.Count; x++)
-        {
-            //change this to slot type?
-            if (Inventory.Instance.SlotsToCheck[x] == ID)
-            {
-                Tabs.Instance.Open_Inventory();
-            }
-        }
+        //for (int x = 0; x < Inventory.Instance.SlotsToCheck.Count; x++)
+        //{
+        //    //change this to slot type?
+        //    if (Inventory.Instance.SlotsToCheck[x] == ID)
+        //    {
+        //        Tabs.Instance.Open_Inventory();
+        //    }
+        //}
     }
 }

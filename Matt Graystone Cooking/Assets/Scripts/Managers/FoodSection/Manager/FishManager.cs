@@ -90,6 +90,7 @@ public class FishManager : MonoBehaviour
                     break;
             }
 
+            //loop through all purchasables and change buy amount
             for (int i = 0; i < SaveLoad.Instance.Fish_Item.Count; i++)
             {
                 Purchasable purchasable = SaveLoad.Instance.Fish_Item[i].GetComponent<PurchasableData>().Purchasable;
