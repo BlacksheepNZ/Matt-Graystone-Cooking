@@ -125,7 +125,7 @@ public class FishManager : MonoBehaviour
     /// </summary>
     private void Update()
     {
-        Text_Level.text = "lvl. " + Button_Chef_Fish.CurrentLevel.ToString();
+        //Text_Level.text = "lvl. " + Button_Chef_Fish.CurrentLevel.ToString();
 
         for (int i = 0; i < SaveLoad.Instance.Fish_Item.Count; i++)
         {

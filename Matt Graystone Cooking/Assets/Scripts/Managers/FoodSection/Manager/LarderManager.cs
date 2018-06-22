@@ -124,7 +124,7 @@ public class LarderManager : MonoBehaviour
     /// </summary>
     private void Update()
     {
-        Text_Level.text = "lvl. " + Button_Chef_Larder.CurrentLevel.ToString();
+        //Text_Level.text = "lvl. " + Button_Chef_Larder.CurrentLevel.ToString();
 
         for (int i = 0; i < SaveLoad.Instance.Larder_Item.Count; i++)
         {

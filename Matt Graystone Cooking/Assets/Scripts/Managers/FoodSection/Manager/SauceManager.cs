@@ -124,7 +124,7 @@ public class SauceManager : MonoBehaviour
     /// </summary>
     private void Update()
     {
-        Text_Level.text = "lvl. " + Button_Chef_Sauce.CurrentLevel.ToString();
+        //Text_Level.text = "lvl. " + Button_Chef_Sauce.CurrentLevel.ToString();
 
         for (int i = 0; i < SaveLoad.Instance.Sauce_Item.Count; i++)
         {

@@ -124,7 +124,7 @@ public class PastryManager : MonoBehaviour
     /// </summary>
     private void Update()
     {
-        Text_Level.text = "lvl. " + Button_Chef_Pastry.CurrentLevel.ToString();
+        //Text_Level.text = "lvl. " + Button_Chef_Pastry.CurrentLevel.ToString();
 
         for (int i = 0; i < SaveLoad.Instance.Pastry_Item.Count; i++)
         {

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -34,6 +35,21 @@ public class RecipeData : MonoBehaviour
     public Image GUI_Preview_Sprite;
 
     /// <summary>
+    /// GUI
+    /// </summary>
+    public ProgressionBar GUI_Progress_Bar;
+
+    /// <summary>
+    /// GUI
+    /// </summary>
+    public Button GUI_Button_Start;
+
+    /// <summary>
+    /// GUI
+    /// </summary>
+    public Button GUI_Button_Stop;
+
+    /// <summary>
     /// 
     /// </summary>
     [HideInInspector]
@@ -46,6 +62,24 @@ public class RecipeData : MonoBehaviour
     public int AmountSellMuiltplyer = 1;
 
     /// <summary>
+    /// 
+    /// </summary>
+    [HideInInspector]
+    public bool OnComplete;
+
+    /// <summary>
+    /// 
+    /// </summary>
+    [HideInInspector]
+    public bool StartedTimer;
+
+    /// <summary>
+    /// 
+    /// </summary>
+    [HideInInspector]
+    public float CurrentTime = 0;
+
+    /// <summary>
     /// Use this for initialization
     /// </summary>
     public void Start()
@@ -53,7 +87,54 @@ public class RecipeData : MonoBehaviour
         GUI_Text_Name.text = recipe.Name;
         GUI_Preview_Sprite.sprite = recipe.Preview_Image;
 
-        GUI_Button_Purchase.onClick.AddListener(() => Purchase());
+        //GUI_Button_Purchase.onClick.AddListener(() => Purchase());
+
+        GUI_Button_Start.onClick.AddListener(() => OnStart());
+        GUI_Button_Stop.onClick.AddListener(() => OnStop());
+    }
+
+    Coroutine co;
+
+    private void OnStart()
+    {
+        GUI_Button_Start.gameObject.SetActive(false);
+        GUI_Button_Stop.gameObject.SetActive(true);
+        co = StartCoroutine(UpdateTimer());
+    }
+
+    private void OnStop()
+    {
+        GUI_Button_Start.gameObject.SetActive(true);
+        GUI_Button_Stop.gameObject.SetActive(false);
+        StopCoroutine(co);
+    }
+
+    public IEnumerator UpdateTimer()
+    {
+        StartedTimer = true;
+        OnComplete = false;
+
+        float speed = (Time.fixedDeltaTime / 1);
+
+        while (GUI_Progress_Bar.Value < 1)
+        {
+            GUI_Progress_Bar.Value += speed;
+            CurrentTime = GUI_Progress_Bar.Value;
+
+            yield return null;
+        }
+
+        GUI_Progress_Bar.Value = 0;
+        ResetTimer();
+    }
+
+    void ResetTimer()
+    {
+        if (!Inventory.Instance.InventoryFull())
+        {
+            Purchase();
+            OnComplete = true;
+        }
     }
 
     /// <summary>
@@ -169,8 +250,15 @@ public class RecipeData : MonoBehaviour
             {
                 int count = Inventory.Instance.CheckItemCount(item.ID);
 
-                if (count > AmountSellMuiltplyer) { have_item_count += 1; }
-                else { Debug.Log("need more resources"); break; }//ok
+                if (count > AmountSellMuiltplyer)
+                {
+                    have_item_count += 1;
+                }
+                else
+                {
+                    Debug.Log("need more resources");
+                    break;
+                }//ok
             }
         }
 
@@ -194,11 +282,13 @@ public class RecipeData : MonoBehaviour
                 }
             }
 
+            OnStart();
             Game.Instance.AddGold(recipe.SellValue * AmountSellMuiltplyer);
             Debug.Log("AddGold :" + recipe.SellValue * AmountSellMuiltplyer);
         }
         else
         {
+            OnStop();
             Debug.Log("no item");
         }
     }

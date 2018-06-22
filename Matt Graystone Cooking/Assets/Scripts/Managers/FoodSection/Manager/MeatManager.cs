@@ -125,7 +125,7 @@ public class MeatManager : MonoBehaviour
     /// </summary>
     private void Update()
     {
-        Text_Level.text = "lvl. " + Button_Chef_Meat.CurrentLevel.ToString();
+        //Text_Level.text = "lvl. " + Button_Chef_Meat.CurrentLevel.ToString();
 
         for (int i = 0; i < SaveLoad.Instance.Meat_Item.Count; i++)
         {
