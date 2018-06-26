@@ -55,6 +55,10 @@ public class PurchasableData : MonoBehaviour
         Purchasable.Cost_To_Purchase_Amount = 1;
 
         Purchasable.GUI_Image_Potrait.sprite = Purchasable.Image;
+
+        Inventory.Instance.AddSlot(Purchasable.GUI_Slot, ItemType.Item);
+
+        Purchasable.BonusStats = new BonusStats();
     }
 
     private void SellALL()
@@ -76,6 +80,7 @@ public class PurchasableData : MonoBehaviour
     {
         Purchasable.Update();
 
+        //check if this has run before, and start it if it has.
         if (Purchasable.Is_Purchased == true)
         {
             Purchasable.GUI_Button_FirstTime_Purchase.gameObject.SetActive(false);
@@ -85,9 +90,20 @@ public class PurchasableData : MonoBehaviour
             Purchasable.GUI_Button_FirstTime_Purchase.gameObject.SetActive(true);
         }
 
+        //check if this has run before, and start it if it has.
         if(Purchasable.Unlocked == true && Purchasable.On_Complete == true)
         {
             StartCoroutine(Purchasable.Update_Timer());
+        }
+
+        //update items that are droped into our slot
+        if (Purchasable.GUI_Slot.transform.childCount > 0)
+        {
+            GameObject gObject = Purchasable.GUI_Slot.transform.GetChild(0).gameObject;
+            if (gObject != null)
+            {
+                gObject.GetComponent<Slot>().CheckSlotForItem();
+            }
         }
     }
 

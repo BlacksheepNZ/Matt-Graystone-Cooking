@@ -85,8 +85,9 @@ public class CraftingData : MonoBehaviour
     public void AddItem()
     {
         //todo these will change on user input
-        //ItemRarity = ItemRarity.Uncommon;
-        //ItemType = ItemType.DrillItem;
+        Crafting.ItemRarity = ItemRarity.Legendary;
+        Crafting.ItemType = ItemType.Item;
+        Crafting.ResourceType = global::ResourceType.Food_1_Pastry;
         ////
 
         Crafting.ID = SaveLoad.Instance.Item_Database.Count;
@@ -134,6 +135,10 @@ public class CraftingData : MonoBehaviour
                         StartCoroutine(UpdateTimer());
 
                         break;
+                    }
+                    else
+                    {
+                        Debug.Log("need more resources");
                     }
                 }
             }

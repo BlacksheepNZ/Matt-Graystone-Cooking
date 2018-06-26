@@ -42,7 +42,7 @@ public class CraftingManager : MonoBehaviour
         Button.interactable = false;
 
         //direct add
-        UnlockRecipe(SaveLoad.Instance.Recipe_Data[0].recipe, true);
+        //UnlockRecipe(SaveLoad.Instance.Recipe_Data[0].recipe, true);
     }
 
     private string KeyBuilder()

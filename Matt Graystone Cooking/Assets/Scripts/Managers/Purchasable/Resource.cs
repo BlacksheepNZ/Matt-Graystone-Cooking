@@ -73,6 +73,7 @@ public enum ItemType
 {
     General = 0,
     Consumable = 1,
+    Item = 2,
 }
 
 /// <summary>
@@ -88,22 +89,6 @@ public enum ItemRarity
 }
 
 /// <summary>
-/// Not implemented
-/// </summary>
-public enum BonusType
-{
-    Empty,
-    DecreseSpeed, //implemented
-    DecreasePurchaseCost, //implemented
-    IncreaseCurrency, //implemented
-    IncreaseResource, //implemeted
-    CritChance,
-    MineNextTeir,
-    PowerNode,
-    Consumable,
-}
-
-/// <summary>
 /// 
 /// </summary>
 public class Resource
@@ -112,8 +97,6 @@ public class Resource
     {
         switch (ItemRarity)
         {
-            default:
-                return 0;
             case ItemRarity.Common:
                 return 1;
             case ItemRarity.Uncommon:
@@ -125,6 +108,8 @@ public class Resource
             case ItemRarity.Legendary:
                 return 5;
         }
+
+        return 0;
     }
 
     public static string ItemRarityColor(ItemRarity ItemRarity)

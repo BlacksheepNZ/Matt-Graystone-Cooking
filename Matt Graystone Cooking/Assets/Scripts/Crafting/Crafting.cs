@@ -115,11 +115,6 @@ public class Crafting
     /// <summary>
     /// 
     /// </summary>
-    private BonusType BonusType = BonusType.Empty;
-
-    /// <summary>
-    /// 
-    /// </summary>
     public float InitialCost = 0;
 
     /// <summary>
@@ -145,7 +140,7 @@ public class Crafting
     /// <summary>
     /// 
     /// </summary>
-    public List<Bonus> Bonus = new List<global::Bonus>();
+    public BonusStats BonusStats = new BonusStats();
 
     /// <summary>
     /// Interface updates on call
@@ -209,77 +204,6 @@ public class Crafting
     /// <summary>
     /// 
     /// </summary>
-    private float AddBonus(BonusType BonusType, ResourceType ResourceType)
-    {
-        for (int i = 0; i < Bonus.Count; i++)
-        {
-            if (Bonus[i].BonusType == BonusType.DecreasePurchaseCost && BonusType == BonusType.DecreasePurchaseCost)
-            {
-                if (Bonus[i].ResourceType == ResourceType)
-                {
-                    float B_DecreseCost = ItemPercent(Bonus[i].MinValue, Bonus[i].MaxValue);
-                    return B_DecreseCost;
-                }
-            }
-            if (Bonus[i].BonusType == BonusType.DecreseSpeed && BonusType == BonusType.DecreseSpeed)
-            {
-                if (Bonus[i].ResourceType == ResourceType)
-                {
-                    float B_DecreaseTimeToCompleteTask = ItemPercent(Bonus[i].MinValue, Bonus[i].MaxValue);
-                    return B_DecreaseTimeToCompleteTask;
-                }
-            }
-            if (Bonus[i].BonusType == BonusType.IncreaseCurrency && BonusType == BonusType.IncreaseCurrency)
-            {
-                if (Bonus[i].ResourceType == ResourceType)
-                {
-                    float B_IncreaseCurrencyRewardRate = ItemPercent(Bonus[i].MinValue, Bonus[i].MaxValue);
-                    return B_IncreaseCurrencyRewardRate;
-                }
-            }
-            if (Bonus[i].BonusType == BonusType.IncreaseResource && BonusType == BonusType.IncreaseResource)
-            {
-                if (Bonus[i].ResourceType == ResourceType)
-                {
-                    float B_IncreaseResourceReward = ItemPercent(Bonus[i].MinValue, Bonus[i].MaxValue);
-                    return B_IncreaseResourceReward;
-                }
-            }
-
-            if (Bonus[i].BonusType == BonusType.CritChance && BonusType == BonusType.CritChance)
-            {
-                if (Bonus[i].ResourceType == ResourceType)
-                {
-                    float B_IncreaseCritChance = ItemPercent(Bonus[i].MinValue, Bonus[i].MaxValue);
-                    return B_IncreaseCritChance;
-                }
-            }
-
-            if (Bonus[i].BonusType == BonusType.MineNextTeir && BonusType == BonusType.MineNextTeir)
-            {
-                if (Bonus[i].ResourceType == ResourceType)
-                {
-                    float B_MineNextTeir = ItemPercent(Bonus[i].MinValue, Bonus[i].MaxValue);
-                    return B_MineNextTeir;
-                }
-            }
-
-            //if (Bonus[i].BonusType == BonusType.ReduceUpgradeCost && BonusType == BonusType.ReduceUpgradeCost)
-            //{
-            //    if (Bonus[i].ResourceType == ResourceType)
-            //    {
-            //        // = ItemPercent(Bonus[i].MinValue, Bonus[i].MaxValue);
-            //        return;
-            //    }
-            //}
-        }
-
-        return 0;
-    }
-
-    /// <summary>
-    /// 
-    /// </summary>
     public void GenerateModifers(Item item)
     {
         List<int> array = new List<int>();
@@ -293,11 +217,15 @@ public class Crafting
         System.Random rnd = new System.Random();
         Extensions.Shuffle(rnd, array);
 
+        //if we have more stats than bonus
+        if(NumberOfstats > count)
+        {
+            array.RemoveRange(NumberOfstats, count);
+        }
+
         for (int i = 0; i < NumberOfstats; i++)
         {
-            BonusType value = (BonusType)array[i];
-            float amount = AddBonus(value, (ResourceType)DropDownBox2.value);
-            //item.AddBonus(value, amount);
+            item.AddBonus((BonusType)array[i], 50);
         }
     }
 
@@ -369,8 +297,6 @@ public class Crafting
     {
         switch (ItemRarity)
         {
-            default:
-                return 0;
             case ItemRarity.Common:
                 return MinMax(min, max);
             case ItemRarity.Uncommon:
@@ -382,6 +308,8 @@ public class Crafting
             case ItemRarity.Legendary:
                 return MinMax(min, max);
         }
+
+        return 0;
     }
 
     /// <summary>

@@ -15,7 +15,7 @@ public class ItemData : MonoBehaviour,
     /// <summary>
     /// 
     /// </summary>
-    [HideInInspector]
+    //[HideInInspector]
     public Item Item;
 
     /// <summary>

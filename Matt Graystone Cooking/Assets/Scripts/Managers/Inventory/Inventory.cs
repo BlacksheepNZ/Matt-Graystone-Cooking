@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
@@ -84,7 +85,7 @@ public class Inventory : MonoBehaviour
     /// <summary>
     /// 
     /// </summary>
-    [HideInInspector]
+    //[HideInInspector]
     public List<GameObject> slots = new List<GameObject>();
 
     /// <summary>
@@ -147,8 +148,11 @@ public class Inventory : MonoBehaviour
     public void AddSlot(GameObject SlotPanelParent, ItemType slotType)
     {
         slots.Add(Instantiate(InventorySlot));
-        InISlot(SlotPanelParent, (slots.Count() - 1), slotType);
-        SlotsToCheck.Add(slots.Count() - 1);
+
+        int id = slots.Count() - 1;
+
+        InISlot(SlotPanelParent, id, slotType);
+        SlotsToCheck.Add(id);
     }
 
     /// <summary>
@@ -156,7 +160,7 @@ public class Inventory : MonoBehaviour
     /// </summary>
     public void InISlot(GameObject parentObject, int slotID, ItemType slotType)
     {
-        slots[slotID].transform.SetParent(parentObject.transform);
+        slots[slotID].transform.SetParent(parentObject.transform); 
         slots[slotID].transform.localScale = new Vector3(1, 1, 1);
         slots[slotID].transform.position = parentObject.transform.position;
         slots[slotID].GetComponent<Slot>().ItemType = slotType;

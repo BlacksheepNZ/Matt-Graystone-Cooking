@@ -93,7 +93,7 @@ public class SaveLoad : MonoBehaviour
     /// <summary>
     /// 
     /// </summary>
-    public List<Sprite> BorderImages = new List<Sprite>();
+    //public List<Sprite> BorderImages = new List<Sprite>();
 
     /// <summary>
     /// 
@@ -336,7 +336,6 @@ public class SaveLoad : MonoBehaviour
                 purchasablePrefab.transform.SetParent(Parent);
                 purchasablePrefab.transform.localScale = new Vector3(1, 1, 1);
                 purchasablePrefab.transform.position = Parent.position;
-                GameObject parent_Slot = purchasablePrefab.transform.Find("Slot").gameObject;
 
                 Purchasable purchasable_data = purchasablePrefab.GetComponent<PurchasableData>().Purchasable;
                 purchasable_data.ID = purchasable[i].ID;
@@ -349,7 +348,6 @@ public class SaveLoad : MonoBehaviour
                 purchasable_data.Item_ID = purchasable[i].Item_ID;
                 purchasable_data.Time_To_Complete_Task = purchasable[i].Time_To_Complete_Task;
                 purchasable_data.Image = purchasable[i].Image;
-                //Inventory.Instance.AddSlot(parent_Slot, item_Type);
 
                 item.Add(purchasablePrefab);
             }

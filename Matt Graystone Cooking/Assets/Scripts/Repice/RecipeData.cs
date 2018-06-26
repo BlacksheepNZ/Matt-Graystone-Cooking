@@ -52,7 +52,6 @@ public class RecipeData : MonoBehaviour
     /// <summary>
     /// 
     /// </summary>
-    [HideInInspector]
     public Recipe recipe;
 
     /// <summary>

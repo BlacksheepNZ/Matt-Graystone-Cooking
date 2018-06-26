@@ -53,11 +53,24 @@ public class Item
     public ResourceType ResourceType;
 
     /// <summary>
+    /// Bonus
+    /// </summary>
+    public BonusStats BonusStats;
+
+    //[HideInInspector]
+    public List<Tuple<BonusType, float>> BonusAttached;
+    //[HideInInspector]
+    public BonusType BonusType;
+    //[HideInInspector]
+    public float B_Amount;
+
+    /// <summary>
     /// Use this for initialization
     /// </summary>
     public Item()
     {
         ID = 000;
+        BonusStats = new BonusStats();
     }
 
     /// <summary>
@@ -80,6 +93,10 @@ public class Item
         ItemRarity = itemRarity;
         ItemType = itemType;
         ResourceType = resourceType;
+
+        BonusStats = new BonusStats();
+        BonusAttached = new List<Tuple<BonusType, float>>();
+        AddBonus(BonusType, B_Amount);
     }
 
     /// <summary>
@@ -100,6 +117,21 @@ public class Item
         ItemRarity = itemRarity;
         ItemType = itemType;
         ResourceType = resourceType;
+
+        BonusStats = new BonusStats();
+        BonusAttached = new List<Tuple<BonusType, float>>();
+        AddBonus(BonusType, B_Amount);
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="BonusType"></param>
+    /// <param name="amount"></param>
+    public void AddBonus(BonusType BonusType, float amount)
+    {
+        BonusStats.Add(BonusType, amount);
+        BonusAttached.Add(new Tuple<BonusType, float>(BonusType, amount));
     }
 
     /// <summary>

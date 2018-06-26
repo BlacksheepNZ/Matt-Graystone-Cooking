@@ -11,13 +11,13 @@ public class Slot : MonoBehaviour,
     /// <summary>
     /// 
     /// </summary>
-    [HideInInspector]
+    //[HideInInspector]
     public int ID;
 
     /// <summary>
     /// 
     /// </summary>
-    [HideInInspector]
+    //[HideInInspector]
     public ItemType ItemType;
 
     /// <summary>
@@ -106,6 +106,9 @@ public class Slot : MonoBehaviour,
                 case ItemType.Consumable:
                     if (InventoryType(SlotID, droppedItem, ItemType.General)) { SetNewItem(droppedItem); }
                     break;
+                case ItemType.Item:
+                    if (InventoryType(SlotID, droppedItem, ItemType.General)) { SetNewItem(droppedItem); }
+                    break;
             }
             #endregion
         }
@@ -120,6 +123,9 @@ public class Slot : MonoBehaviour,
                 case ItemType.Consumable:
                     if (InventoryType(SlotID, droppedItem, ItemType.General)) { MergItem(droppedItem); }
                     break;
+                case ItemType.Item:
+                    if (InventoryType(SlotID, droppedItem, ItemType.General)) { MergItem(droppedItem); }
+                    break;
             }
         }
         else if (Inventory.Instance.Items[ID].ID != droppedItem.Item.ID)
@@ -128,18 +134,29 @@ public class Slot : MonoBehaviour,
             switch (droppedItem.Item.ItemType)
             {
                 case ItemType.General:
-                    if (InventoryType(SlotID, droppedItem, ItemType.General)) { SwapItem(droppedItem); }
+                    if (InventoryType(SlotID, droppedItem, ItemType.General))
+                    {
+                        SwapItem(droppedItem);
+                    }
                     break;
                 case ItemType.Consumable:
                     if (InventoryType(SlotID, droppedItem, ItemType.General) ||
                         InventoryType(SlotID, droppedItem, ItemType.Consumable))
-                    { SwapItem(droppedItem); }
+                    {
+                        SwapItem(droppedItem);
+                    }
+                    break;
+                case ItemType.Item:
+                    if (InventoryType(SlotID, droppedItem, ItemType.General) ||
+                        InventoryType(SlotID, droppedItem, ItemType.Item))
+                    {
+                        //CheckSlotForItem();
+                        SwapItem(droppedItem);
+                    }
                     break;
             }
         }
         else { }
-
-        
     }
 
     /// <summary>
@@ -155,5 +172,43 @@ public class Slot : MonoBehaviour,
         //        Tabs.Instance.Open_Inventory();
         //    }
         //}
+    }
+
+    public void CheckSlotForItem()
+    {
+        if (this.transform.childCount <= 0)
+        {
+            //get the parent item of the slot
+            GameObject parent = this.gameObject.transform.parent.transform.parent.gameObject;
+            //get the purchasable data from parent so we can modify it.
+            PurchasableData purchasable = parent.GetComponent<PurchasableData>();
+
+            if (purchasable != null)
+            {
+                purchasable.Purchasable.RemoveBonus();
+            }
+            return;
+        }
+        if (this.transform.childCount > 0)
+        {
+            //get the parent item of the slot
+            GameObject parent = this.gameObject.transform.parent.transform.parent.gameObject;
+            //get the purchasable data from parent so we can modify it.
+            PurchasableData purchasable = parent.GetComponent<PurchasableData>();
+            if (purchasable != null)
+            {
+                //get the item in our child
+                GameObject child = this.gameObject.transform.GetChild(0).gameObject;
+
+                //get child item data
+                Item childItem = child.GetComponent<ItemData>().Item;
+
+                //this will throw error for slots that are not part of an parent with Purchasable, ie inventory items
+                purchasable.Purchasable.AddBonus(childItem);
+            }
+            return;
+
+        }
+        else { }
     }
 }

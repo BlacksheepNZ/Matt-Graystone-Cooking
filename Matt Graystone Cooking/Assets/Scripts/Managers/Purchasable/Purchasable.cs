@@ -65,9 +65,14 @@ public class Purchasable
     public Button GUI_Button_FirstTime_Purchase;
 
     /// <summary>
-    /// 
+    /// GUI
     /// </summary>
     public ProgressionBar GUI_Progression_Bar;
+
+    /// <summary>
+    /// GUI
+    /// </summary>
+    public GameObject GUI_Slot;
 
     /// <summary>
     /// Buy Amount Mode (1, 50 , 100);
@@ -171,6 +176,11 @@ public class Purchasable
     public float Current_Time = 0;
 
     /// <summary>
+    /// Bonus
+    /// </summary>
+    public BonusStats BonusStats;
+
+    /// <summary>
     /// Use this for initialization
     /// </summary>
     public Purchasable( int id, 
@@ -195,6 +205,8 @@ public class Purchasable
 
         Cost = Base_Cost;
         Is_Purchased = false;
+
+        BonusStats = new BonusStats();
     }
 
     /// <summary>
@@ -202,7 +214,9 @@ public class Purchasable
     /// </summary>
     public bool Can_Purchase()
     {
-        if (Game.Instance.CanPurchase(Cost))
+        float value = Decrease_Value(Cost, BonusStats.Decrese_Cost);
+
+        if (Game.Instance.CanPurchase(value))
         {
             return true;
         }
@@ -243,19 +257,25 @@ public class Purchasable
         GUI_Text_Sell_Value.text = CurrencyConverter.Instance.GetCurrencyIntoString(
                                    (float)Inventory.Instance.ItemValue(item));
 
-        GUI_Text_Reward.text = "+ " + CurrencyConverter.Instance.GetCurrencyIntoString(Resource_Rate);
-        GUI_Text_Value.text = "x"+CurrencyConverter.Instance.GetCurrencyIntoStringNoSign(Resource_Rate * Count);
-    }
+        float resourceRate = Resource_Rate * Count;
 
-    /// <summary>
-    /// 
-    /// </summary>
-    private string Display_Text(float bonus)
-    {
-        if (bonus != 0)
-            return "<color=#0473f0><b> (" + CurrencyConverter.Instance.GetCurrencyIntoString(bonus) + "%) </b></color>";
-        else
-            return "";
+        //cost to level
+        //resource rate
+        //
+
+        //test reward
+        GUI_Text_Reward.text = BonusStats.ToString();
+            //"Resource Rate: " + CurrencyConverter.Instance.GetCurrencyIntoString(
+            //    Increase_Value(Resource_Rate, BonusStats.Increase_Resource_Rate)) + Display_Text(0) + "\n" +
+
+            //"Resource Rate: " + 
+            //CurrencyConverter.Instance.GetCurrencyIntoStringNoSign((1 + (BonusStats.Increase_Resource_Rate / 100)) * resourceRate) + 
+            //Display_Text(BonusStats.Increase_Resource_Rate) + "\n" +
+
+            //"Speed: " + Display_Text(BonusStats.Decrease_Time_To_Complete_Task);
+
+        //GUI_Text_Reward.text = Display_Text();// "+ " + CurrencyConverter.Instance.GetCurrencyIntoString(Resource_Rate);
+        GUI_Text_Value.text = "x"+CurrencyConverter.Instance.GetCurrencyIntoStringNoSign(Resource_Rate * Count);
     }
 
     /// <summary>
@@ -309,10 +329,12 @@ public class Purchasable
     /// </summary>
     public float Cost_To_Buy()
     {
+        float cost = Decrease_Value(Cost, BonusStats.Decrese_Cost);
+
         float value = 0;
         for (int i = 0; i < Cost_To_Purchase_Amount; i++)
         {
-            value += Cost * Coefficent;
+            value += cost * Coefficent;
         }
 
         return value;
@@ -333,6 +355,7 @@ public class Purchasable
         if (itemData == null)
             return;
 
+        float cost = Decrease_Value(Cost, BonusStats.Decrese_Cost);
         float value = Cost_To_Buy();
 
         if (Game.Instance.CanPurchase(value))
@@ -341,7 +364,7 @@ public class Purchasable
 
             for (int i = 0; i < Cost_To_Purchase_Amount; i++)
             {
-                Cost += Cost * Coefficent;
+                Cost += cost * Coefficent;
             }
 
             Count += Cost_To_Purchase_Amount;
@@ -378,8 +401,27 @@ public class Purchasable
         if (!Inventory.Instance.InventoryFull())
         {
             PlayerManager.Instance.AddExperience(Count * Resource_Rate);
-            Inventory.Instance.AddItem(int.Parse(Item_ID), (int)(Count * Resource_Rate));
+
+            float cost = Increase_Value((Count * Resource_Rate), BonusStats.Increase_Resource_Rate);
+            Inventory.Instance.AddItem(int.Parse(Item_ID), (int)cost);
             On_Complete = true;
         }
+    }
+
+    /// <summary>
+    /// Add Bonus to purchasable
+    /// </summary>
+    public void AddBonus(Item itemToAdd)
+    {
+        for (int i = 0; i < itemToAdd.BonusAttached.Count; i++)
+        {
+            var x = itemToAdd.BonusAttached[i];
+            BonusStats.Add(x.Item1, x.Item2);
+        }
+    }
+
+    public void RemoveBonus()
+    {
+        BonusStats = new BonusStats();
     }
 }

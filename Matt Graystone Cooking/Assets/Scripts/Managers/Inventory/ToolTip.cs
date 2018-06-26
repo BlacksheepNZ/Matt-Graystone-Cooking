@@ -73,7 +73,7 @@ public class ToolTip : MonoBehaviour
             itemColor = "FFA500";
 
         GUI_Text_Name.text = "<color=#" + itemColor + "><b>" + item.Item.Name + "</b></color>";
-        GUI_Text_Decription.text = item.Item.ToString();
+        GUI_Text_Decription.text = item.Item.BonusStats.ToString(); //item.Item.ToString();
     }
 
     /// <summary>
