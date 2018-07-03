@@ -45,7 +45,7 @@ public class Item
     /// <summary>
     /// 
     /// </summary>
-    public ItemType ItemType;
+    public SlotType SlotType;
 
     /// <summary>
     /// 
@@ -82,7 +82,7 @@ public class Item
                 int imageID, 
                 bool stackable, 
                 ItemRarity itemRarity, 
-                ItemType itemType,
+                SlotType slotType,
                 ResourceType resourceType)
     {
         Name = name;
@@ -91,7 +91,7 @@ public class Item
         ImageID = imageID;
         Stackable = stackable;
         ItemRarity = itemRarity;
-        ItemType = itemType;
+        SlotType = slotType;
         ResourceType = resourceType;
 
         BonusStats = new BonusStats();
@@ -107,7 +107,7 @@ public class Item
                 int imageID,
                 bool stackable,
                 ItemRarity itemRarity,
-                ItemType itemType,
+                SlotType slotType,
                 ResourceType resourceType)
     {
         Name = name;
@@ -115,7 +115,7 @@ public class Item
         ImageID = imageID;
         Stackable = stackable;
         ItemRarity = itemRarity;
-        ItemType = itemType;
+        SlotType = slotType;
         ResourceType = resourceType;
 
         BonusStats = new BonusStats();

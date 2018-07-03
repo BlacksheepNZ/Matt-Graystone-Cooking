@@ -56,7 +56,7 @@ public class PurchasableData : MonoBehaviour
 
         Purchasable.GUI_Image_Potrait.sprite = Purchasable.Image;
 
-        Inventory.Instance.AddSlot(Purchasable.GUI_Slot, ItemType.Item);
+        Inventory.Instance.AddSlot(Purchasable.GUI_Slot, SlotType.Item);
 
         Purchasable.BonusStats = new BonusStats();
     }

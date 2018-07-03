@@ -86,7 +86,7 @@ public class CraftingData : MonoBehaviour
     {
         //todo these will change on user input
         Crafting.ItemRarity = ItemRarity.Legendary;
-        Crafting.ItemType = ItemType.Item;
+        Crafting.SlotType = SlotType.Item;
         Crafting.ResourceType = global::ResourceType.Food_1_Pastry;
         ////
 
@@ -95,7 +95,7 @@ public class CraftingData : MonoBehaviour
         Crafting.ItemRarity = Crafting.ChooseItemRarity();
         Crafting.NumberOfstats = Resource.ItemNumberOFStats(Crafting.ItemRarity);
 
-        Crafting.Name = Crafting.ResourceType.ToString() + " " + Crafting.ItemType.ToString() + " of " + Crafting.ItemRarity.ToString();
+        Crafting.Name = Crafting.ResourceType.ToString() + " " + Crafting.SlotType.ToString() + " of " + Crafting.ItemRarity.ToString();
 
         Crafting.BorderImage = Crafting.GetBorderImageFromRarity(SaveLoad.Instance.RarityImages);
 
@@ -106,7 +106,7 @@ public class CraftingData : MonoBehaviour
             Crafting.DropDownBox1.value,
             false,
             Crafting.ItemRarity,
-            Crafting.ItemType,
+            Crafting.SlotType,
             Crafting.ResourceType);
 
         Crafting.GenerateModifers(item);

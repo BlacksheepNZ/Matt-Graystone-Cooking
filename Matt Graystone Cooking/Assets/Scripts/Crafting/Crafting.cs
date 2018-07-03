@@ -56,7 +56,7 @@ public class Crafting
     /// <summary>
     /// 
     /// </summary>
-    public ItemType ItemType;
+    public SlotType SlotType;
 
     /// <summary>
     /// 

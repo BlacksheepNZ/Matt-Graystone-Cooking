@@ -69,7 +69,7 @@ public enum ResourceType
 /// <summary>
 /// 
 /// </summary>
-public enum ItemType
+public enum SlotType
 {
     General = 0,
     Consumable = 1,

@@ -18,7 +18,7 @@ public class Slot : MonoBehaviour,
     /// 
     /// </summary>
     //[HideInInspector]
-    public ItemType ItemType;
+    public SlotType SlotType;
 
     /// <summary>
     /// 
@@ -74,10 +74,10 @@ public class Slot : MonoBehaviour,
     /// <summary>
     /// 
     /// </summary>
-    private bool InventoryType(int slotID, ItemData item, ItemType itemType)
+    private bool InventoryType(int slotID, ItemData item, SlotType slotType)
     {
-        if (item.Item.ItemType == ItemType
-            || ItemType == ItemType.General)
+        if (item.Item.SlotType == SlotType
+            || SlotType == SlotType.General)
         {
             return true;
         }
@@ -98,16 +98,16 @@ public class Slot : MonoBehaviour,
         {
             //add new item
             #region todo
-            switch (droppedItem.Item.ItemType)
+            switch (droppedItem.Item.SlotType)
             {
-                case ItemType.General:
-                    if (InventoryType(SlotID, droppedItem, ItemType.General)) { SetNewItem(droppedItem); }
+                case SlotType.General:
+                    if (InventoryType(SlotID, droppedItem, SlotType.General)) { SetNewItem(droppedItem); }
                     break;
-                case ItemType.Consumable:
-                    if (InventoryType(SlotID, droppedItem, ItemType.General)) { SetNewItem(droppedItem); }
+                case SlotType.Consumable:
+                    if (InventoryType(SlotID, droppedItem, SlotType.General)) { SetNewItem(droppedItem); }
                     break;
-                case ItemType.Item:
-                    if (InventoryType(SlotID, droppedItem, ItemType.General)) { SetNewItem(droppedItem); }
+                case SlotType.Item:
+                    if (InventoryType(SlotID, droppedItem, SlotType.General)) { SetNewItem(droppedItem); }
                     break;
             }
             #endregion
@@ -115,40 +115,40 @@ public class Slot : MonoBehaviour,
         else if (Inventory.Instance.Items[ID].ID == droppedItem.Item.ID)
         {
             //merg item
-            switch (droppedItem.Item.ItemType)
+            switch (droppedItem.Item.SlotType)
             {
-                case ItemType.General:
-                    if (InventoryType(SlotID, droppedItem, ItemType.General)) { MergItem(droppedItem); }
+                case SlotType.General:
+                    if (InventoryType(SlotID, droppedItem, SlotType.General)) { MergItem(droppedItem); }
                     break;
-                case ItemType.Consumable:
-                    if (InventoryType(SlotID, droppedItem, ItemType.General)) { MergItem(droppedItem); }
+                case SlotType.Consumable:
+                    if (InventoryType(SlotID, droppedItem, SlotType.General)) { MergItem(droppedItem); }
                     break;
-                case ItemType.Item:
-                    if (InventoryType(SlotID, droppedItem, ItemType.General)) { MergItem(droppedItem); }
+                case SlotType.Item:
+                    if (InventoryType(SlotID, droppedItem, SlotType.General)) { MergItem(droppedItem); }
                     break;
             }
         }
         else if (Inventory.Instance.Items[ID].ID != droppedItem.Item.ID)
         {
             //Swap item
-            switch (droppedItem.Item.ItemType)
+            switch (droppedItem.Item.SlotType)
             {
-                case ItemType.General:
-                    if (InventoryType(SlotID, droppedItem, ItemType.General))
+                case SlotType.General:
+                    if (InventoryType(SlotID, droppedItem, SlotType.General))
                     {
                         SwapItem(droppedItem);
                     }
                     break;
-                case ItemType.Consumable:
-                    if (InventoryType(SlotID, droppedItem, ItemType.General) ||
-                        InventoryType(SlotID, droppedItem, ItemType.Consumable))
+                case SlotType.Consumable:
+                    if (InventoryType(SlotID, droppedItem, SlotType.General) ||
+                        InventoryType(SlotID, droppedItem, SlotType.Consumable))
                     {
                         SwapItem(droppedItem);
                     }
                     break;
-                case ItemType.Item:
-                    if (InventoryType(SlotID, droppedItem, ItemType.General) ||
-                        InventoryType(SlotID, droppedItem, ItemType.Item))
+                case SlotType.Item:
+                    if (InventoryType(SlotID, droppedItem, SlotType.General) ||
+                        InventoryType(SlotID, droppedItem, SlotType.Item))
                     {
                         //CheckSlotForItem();
                         SwapItem(droppedItem);

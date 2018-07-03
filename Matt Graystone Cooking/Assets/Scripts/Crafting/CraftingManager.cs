@@ -35,7 +35,7 @@ public class CraftingManager : MonoBehaviour
     {
         for (int i = 0; i < slotCount; i++)
         {
-            Inventory.Instance.AddSlot(panel, ItemType.Consumable);
+            Inventory.Instance.AddSlot(panel, SlotType.Consumable);
         }
 
         LastKey = CurrentKey;
@@ -124,7 +124,7 @@ public class CraftingManager : MonoBehaviour
         List<GameObject> item_in_slot = new List<GameObject>();
         for (int i = 0; i < Inventory.Instance.slots.Count; i++)
         {
-            if (Inventory.Instance.slots[i].GetComponent<Slot>().ItemType == ItemType.Consumable)
+            if (Inventory.Instance.slots[i].GetComponent<Slot>().SlotType == SlotType.Consumable)
             {
                 if (Inventory.Instance.slots[i].transform.childCount > 0)
                 {

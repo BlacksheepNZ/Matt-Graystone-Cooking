@@ -38,7 +38,7 @@ public class Crafting_DragDrop : MonoBehaviour
     {
         for (int i = 0; i < Slot_Count; i++)
         {
-            Inventory.Instance.AddSlot(Panel, ItemType.Consumable);
+            Inventory.Instance.AddSlot(Panel, SlotType.Consumable);
             Slot_ID.Add(Inventory.Instance.slots.Count() - 1);
         }
 
@@ -98,7 +98,7 @@ public class Crafting_DragDrop : MonoBehaviour
         List<GameObject> item_in_slot = new List<GameObject>();
         for (int i = 0; i < Inventory.Instance.slots.Count; i++)
         {
-            if (Inventory.Instance.slots[i].GetComponent<Slot>().ItemType == ItemType.Consumable)
+            if (Inventory.Instance.slots[i].GetComponent<Slot>().SlotType == SlotType.Consumable)
             {
                 if (Inventory.Instance.slots[i].transform.childCount > 0)
                 {

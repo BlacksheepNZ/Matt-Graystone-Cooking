@@ -200,14 +200,14 @@ public class SaveLoad : MonoBehaviour
 
         //Purchasable Section
 
-        JsonDataDatabase(Recipe_Data, Recipe_Item, Recipe_Location, Recipe_Json_Data, Recipe_Parent, ItemType.General);
+        JsonDataDatabase(Recipe_Data, Recipe_Item, Recipe_Location, Recipe_Json_Data, Recipe_Parent, SlotType.General);
 
-        JsonDataDatabase(Pastry_Purchasable, Pastry_Item, Pastry_Location, Pastry_Json_Data, Pastry_Parent, ItemType.Consumable);
-        JsonDataDatabase(Larder_Purchasable, Larder_Item, Larder_Location, Larder_Json_Data, Larder_Parent, ItemType.Consumable);
-        JsonDataDatabase(Sauce_Purchasable, Sauce_Item, Sauce_Location, Sauce_Json_Data, Sauce_Parent, ItemType.Consumable);
-        JsonDataDatabase(Fish_Purchasable, Fish_Item, Fish_Location, Fish_Json_Data, Fish_Parent, ItemType.Consumable);
-        JsonDataDatabase(Vegetable_Purchasable, Vegetable_Item, Vegetable_Location, Vegetable_Json_Data, Vegetable_Parent, ItemType.Consumable);
-        JsonDataDatabase(Meat_Purchasable, Meat_Item, Meat_Location, Meat_Json_Data, Meat_Parent, ItemType.Consumable);
+        JsonDataDatabase(Pastry_Purchasable, Pastry_Item, Pastry_Location, Pastry_Json_Data, Pastry_Parent, SlotType.Consumable);
+        JsonDataDatabase(Larder_Purchasable, Larder_Item, Larder_Location, Larder_Json_Data, Larder_Parent, SlotType.Consumable);
+        JsonDataDatabase(Sauce_Purchasable, Sauce_Item, Sauce_Location, Sauce_Json_Data, Sauce_Parent, SlotType.Consumable);
+        JsonDataDatabase(Fish_Purchasable, Fish_Item, Fish_Location, Fish_Json_Data, Fish_Parent, SlotType.Consumable);
+        JsonDataDatabase(Vegetable_Purchasable, Vegetable_Item, Vegetable_Location, Vegetable_Json_Data, Vegetable_Parent, SlotType.Consumable);
+        JsonDataDatabase(Meat_Purchasable, Meat_Item, Meat_Location, Meat_Json_Data, Meat_Parent, SlotType.Consumable);
     }
 
     /// <summary>
@@ -248,7 +248,7 @@ public class SaveLoad : MonoBehaviour
                                   string location,
                                   JsonData data,
                                   Transform Parent,
-                                  ItemType item_Type)
+                                  SlotType slotType)
     {
         try
         {
@@ -310,7 +310,7 @@ public class SaveLoad : MonoBehaviour
                                   string location,
                                   JsonData data,
                                   Transform Parent,
-                                  ItemType item_Type)
+                                  SlotType slotType)
     {
         try
         {
@@ -488,7 +488,7 @@ public class SaveLoad : MonoBehaviour
             int imageId = Function.FindImageID(Item_Images, (string)ItemJsonData[i]["SpriteName"]);
             bool Satackable = (bool)ItemJsonData[i]["Stackable"];
             ItemRarity ItemRarity = (ItemRarity)Enum.Parse(typeof(ItemRarity), (string)ItemJsonData[i]["ItemRarity"]);
-            ItemType ItemType = (ItemType)Enum.Parse(typeof(ItemType), (string)ItemJsonData[i]["ItemType"]);
+            SlotType SlotType = (SlotType)Enum.Parse(typeof(SlotType), (string)ItemJsonData[i]["ItemType"]);
             ResourceType ResourceType = (ResourceType)Enum.Parse(typeof(ResourceType), (string)ItemJsonData[i]["ResourceType"]);
 
             Item_Database.Add(new Item(
@@ -498,7 +498,7 @@ public class SaveLoad : MonoBehaviour
                 imageId,
                 Satackable,
                 ItemRarity,
-                ItemType,
+                SlotType,
                 ResourceType));
         }
     }
@@ -578,7 +578,7 @@ public class SaveLoad : MonoBehaviour
             {
                 ItemData item = slot.transform.GetChild(0).GetComponent<ItemData>();
 
-                if (item.Item.ItemType == ItemType.Consumable)
+                if (item.Item.SlotType == SlotType.Consumable)
                 {
                     Resource_Save_State resourceSave = new Resource_Save_State();
 
@@ -735,7 +735,7 @@ public class SaveLoad : MonoBehaviour
             {
                 Item_Save_State item_Save = load.Item_Save_State[i];
 
-                if (item_Save.Item_Type == ItemType.Consumable)
+                if (item_Save.Slot_Type == SlotType.Consumable)
                 {
                     //create item from save
                     Item item = new Item(
@@ -744,7 +744,7 @@ public class SaveLoad : MonoBehaviour
                     item_Save.Image_ID,
                     item_Save.Stackable,
                     item_Save.Item_Rarity,
-                    item_Save.Item_Type,
+                    item_Save.Slot_Type,
                     item_Save.Resource_Type);
 
                     //for (int x = 0; x < load.Item_Save_State[i].Bonus_Save_State.Count; x++)
@@ -1042,7 +1042,7 @@ public class Item_Save_State
     [SerializeField]
     public ItemRarity Item_Rarity;
     [SerializeField]
-    public ItemType Item_Type;
+    public SlotType Slot_Type;
     [SerializeField]
     public ResourceType Resource_Type;
     [SerializeField]

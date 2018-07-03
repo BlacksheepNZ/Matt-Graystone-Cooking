@@ -47,7 +47,7 @@ namespace ItemBuilder
                 int imageId = 0; //Function.FindImageID(Images, (string)ItemJsonData[i]["SpriteName"]);
                 bool Satackable = (bool)data[i]["Stackable"];
                 ItemRarity ItemRarity = (ItemRarity)Enum.Parse(typeof(ItemRarity), (string)data[i]["ItemRarity"]);
-                ItemType ItemType = (ItemType)Enum.Parse(typeof(ItemType), (string)data[i]["ItemType"]);
+                SlotType ItemType = (SlotType)Enum.Parse(typeof(SlotType), (string)data[i]["ItemType"]);
                 ResourceType ResourceType = (ResourceType)Enum.Parse(typeof(ResourceType), (string)data[i]["ResourceType"]);
 
                 item.Add(new Item(
@@ -66,7 +66,7 @@ namespace ItemBuilder
         private void Form1_Load(object sender, EventArgs e)
         {
             comboBox1.DataSource = Enum.GetNames(typeof(ItemRarity));
-            comboBox2.DataSource = Enum.GetNames(typeof(ItemType));
+            comboBox2.DataSource = Enum.GetNames(typeof(SlotType));
             comboBox3.DataSource = Enum.GetNames(typeof(ResourceType));
 
             BindData(comboBox5);

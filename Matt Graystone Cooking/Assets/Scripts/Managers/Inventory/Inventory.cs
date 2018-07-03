@@ -117,7 +117,7 @@ public class Inventory : MonoBehaviour
         for (int i = 0; i < SlotCount; i++)
         {
             slots.Add(Instantiate(InventorySlot));
-            InISlot(GUI_Panel_Slot, i, ItemType.General);
+            InISlot(GUI_Panel_Slot, i, SlotType.General);
         }
 
         CreateSplitStack();
@@ -126,7 +126,7 @@ public class Inventory : MonoBehaviour
     /// <summary>
     /// 
     /// </summary>
-    public List<int> ReturnSlotIDOfType(ItemType ItemType)
+    public List<int> ReturnSlotIDOfType(SlotType ItemType)
     {
         List<int> value = new List<int>();
 
@@ -134,7 +134,7 @@ public class Inventory : MonoBehaviour
         {
             Slot slot = slots[i].GetComponent<Slot>();
 
-            if (slot.ItemType == ItemType)
+            if (slot.SlotType == ItemType)
             {
                 value.Add(slot.ID);
             }
@@ -145,7 +145,7 @@ public class Inventory : MonoBehaviour
     /// <summary>
     /// 
     /// </summary>
-    public void AddSlot(GameObject SlotPanelParent, ItemType slotType)
+    public void AddSlot(GameObject SlotPanelParent, SlotType slotType)
     {
         slots.Add(Instantiate(InventorySlot));
 
@@ -158,12 +158,12 @@ public class Inventory : MonoBehaviour
     /// <summary>
     /// 
     /// </summary>
-    public void InISlot(GameObject parentObject, int slotID, ItemType slotType)
+    public void InISlot(GameObject parentObject, int slotID, SlotType slotType)
     {
         slots[slotID].transform.SetParent(parentObject.transform); 
         slots[slotID].transform.localScale = new Vector3(1, 1, 1);
         slots[slotID].transform.position = parentObject.transform.position;
-        slots[slotID].GetComponent<Slot>().ItemType = slotType;
+        slots[slotID].GetComponent<Slot>().SlotType = slotType;
         slots[slotID].GetComponent<Slot>().ID = slotID;
         slots[slotID].name = slotID.ToString();
         Items.Add(new Item());
@@ -282,9 +282,9 @@ public class Inventory : MonoBehaviour
 
             if (slot.transform.childCount <= 0)
             {
-                switch (slot.ItemType)
+                switch (slot.SlotType)
                 {
-                    case ItemType.General:
+                    case SlotType.General:
                         return x;
                 }
             }
@@ -296,14 +296,14 @@ public class Inventory : MonoBehaviour
     /// <summary>
     /// 
     /// </summary>
-    public int GetSlotWithItem(ItemType itemType)
+    public int GetSlotWithItem(SlotType itemType)
     {
         //find general slot
         for (int x = 0; x < slots.Count(); x++)
         {
             Slot slot = slots[x].GetComponent<Slot>();
 
-            if (slot.transform.childCount > 0 && slot.ItemType == itemType)
+            if (slot.transform.childCount > 0 && slot.SlotType == itemType)
             {
                 return x;
             }
@@ -315,14 +315,14 @@ public class Inventory : MonoBehaviour
     /// <summary>
     /// 
     /// </summary>
-    public int GetEmptySlot(ItemType itemType)
+    public int GetEmptySlot(SlotType itemType)
     {
         //find general slot
         for (int x = 0; x < slots.Count(); x++)
         {
             Slot slot = slots[x].GetComponent<Slot>();
 
-            if (slot.transform.childCount <= 0 && slot.ItemType == itemType)
+            if (slot.transform.childCount <= 0 && slot.SlotType == itemType)
             {
                 return x;
             }
@@ -462,7 +462,7 @@ public class Inventory : MonoBehaviour
                     //find general slot
                     for (int x = 0; x < slots.Count(); x++)
                     {//Items[i].ItemType
-                        if (slots[x].GetComponent<Slot>().ItemType == ItemType.General && slots[x].GetComponent<Slot>().transform.childCount <= 0)
+                        if (slots[x].GetComponent<Slot>().SlotType == SlotType.General && slots[x].GetComponent<Slot>().transform.childCount <= 0)
                         {
                             refineEmptySlot = x;
                             break;
@@ -517,7 +517,7 @@ public class Inventory : MonoBehaviour
         {
             for (int x = 0; x < slots.Count; x++)
             {
-                if (slots[x].GetComponent<Slot>().ItemType == ItemType.General)
+                if (slots[x].GetComponent<Slot>().SlotType == SlotType.General)
                 {
                     MaxCount++;
 
@@ -787,12 +787,12 @@ public class Inventory : MonoBehaviour
             {
                 GameObject slot = slots[i];
 
-                if (slot.GetComponent<Slot>().ItemType == ItemType.General)
+                if (slot.GetComponent<Slot>().SlotType == SlotType.General)
                 {
                     GameObject item = slot.transform.GetChild(0).gameObject;
                     ItemData itemdata = item.GetComponent<ItemData>();
 
-                    if (itemdata.Item.ItemType == ItemType.Consumable)
+                    if (itemdata.Item.SlotType == SlotType.Consumable)
                     {
                         if (ID == itemdata.Item.ID)
                         {
@@ -862,7 +862,7 @@ public class Inventory : MonoBehaviour
         if (itemData == null)
             return 0;
 
-        ItemType itemType = itemData.Item.ItemType;
+        SlotType slotType = itemData.Item.SlotType;
         ResourceType resourceType = itemData.Item.ResourceType;
 
         for (int i = 0; i < MineralSellValue.Count(); i++)
@@ -930,7 +930,7 @@ public class Inventory : MonoBehaviour
                 count = itemData.count;
             }
 
-            ItemType itemType = itemData.Item.ItemType;
+            SlotType slotType = itemData.Item.SlotType;
             ResourceType resourceType = itemData.Item.ResourceType;
 
             for (int i = 0; i < MineralSellValue.Count(); i++)
@@ -974,7 +974,7 @@ public class Inventory : MonoBehaviour
                 count = itemData.count;
             }
 
-            ItemType itemType = itemData.Item.ItemType;
+            SlotType slotType = itemData.Item.SlotType;
             ResourceType resourceType = itemData.Item.ResourceType;
 
             float v = sellValue * count;

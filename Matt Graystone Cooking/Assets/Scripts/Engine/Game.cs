@@ -27,7 +27,12 @@ public class Game : MonoBehaviour
     /// <summary>
     /// GUI
     /// </summary>
-    public Text GUI_Text_TotalGold;
+    public Text GUI_Text_Total_Gold;
+
+    /// <summary>
+    /// GUI
+    /// </summary>
+    public Text GUI_Text_Total_Gem;
 
     /// <summary>
     /// GUI
@@ -52,8 +57,8 @@ public class Game : MonoBehaviour
     /// </summary>
     private void Update()
     {
-        if (GUI_Text_TotalGold != null)
-            GUI_Text_TotalGold.text =
+        if (GUI_Text_Total_Gold != null)
+            GUI_Text_Total_Gold.text =
                 CurrencyConverter.Instance.GetCurrencyIntoStringNoSign(totalGold);
 
         //unlock all
