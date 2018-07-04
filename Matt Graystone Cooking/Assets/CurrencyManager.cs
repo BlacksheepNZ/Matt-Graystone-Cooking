@@ -56,15 +56,29 @@ public class CurrencyManager : MonoBehaviour
 
     }
 
-    public Currency currentCurreny = Currency.S;
+    public Int currentIndex = 0;
 
     private void OnClick()
     {
         float x = float.Parse(input.text);
-        Add(currentCurreny, x);
+        
+        if(x > 1000 && x < 999999)
+        {
+            x = x / 1000;
+            currentIndex += 1;
+        }
+        else if (x > 1000000)
+        {
+           x = x / 1000000;
+           currentIndex += 2;
+        }
+        
+        Add(CurrencyTier[currentIndex], x);
     }
 
     // Update is called once per frame
+    // Add +1 to next tier when we have reached 1000
+    // Reset to 0
     void Update ()
     {
         for (int i = 0; i < CurrencyValue.Count(); i++)
@@ -97,17 +111,18 @@ public class CurrencyManager : MonoBehaviour
         {
             if(CurrencyValue[i].Item1 == currency)
             {
-                CurrencyValue[i].Item2 += amount;
+                CurrencyValue[currentIndex
+.Item2 += amount;
             }
         }
     }
 
-    public void Remove(Currency currency, float amount)
+    public void Remove(Currencyurrency, float amount)
     {
         for (int i = 0; i < CurrencyValue.Count(); i++)
         {
-            if (CurrencyValue[i].Item1 == currency)
-            {
+           if (CurrencyValue[i].Item1 == currency)
+        {
                 CurrencyValue[i].Item2 -= amount;
                 break;
             }
