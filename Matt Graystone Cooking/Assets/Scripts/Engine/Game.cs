@@ -93,9 +93,12 @@ public class Game : MonoBehaviour
 
     /// <summary>
     /// Add gold to total.
+    /// need to revamp
     /// </summary>
-    public void AddGold(float amount)
+    public void AddGold(Currency currency, float amount)
     {
+    	CurrencyManager.instance.AddGold(currency, amount);
+    	
         PlayerManager.Instance.AddExperience(amount);
         totalGold += amount;
     }
